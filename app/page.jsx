@@ -20,7 +20,7 @@ export default function IntroPage() {
         className="relative z-10 flex h-full w-full items-center justify-center"
         aria-label="Go to home"
       >
-        <img src="/xatomlogo.png" alt="xatom logo" className="h-[200px] w-[200px]" />
+        <img src="/xatomlogo.png" alt="xatom logo" className="h-[80px] w-[80px]" />
       </Link>
     </main>
   );
