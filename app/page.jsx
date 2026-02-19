@@ -17,6 +17,6 @@
     className="relative z-20 flex h-full w-full items-center justify-center"
     aria-label="Go to home"
   >
-    <img src="/xatomlogo.png" alt="xatom logo" className="h-[150px] w-[150px]" />
+    <img src="/xatomlogo-v2.png" alt="xatom logo" className="h-[150px] w-[150px]" />
   </Link>
 </main>
