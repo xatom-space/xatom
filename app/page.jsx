@@ -1,27 +1,22 @@
-import Link from 'next/link';
+<main className="relative h-screen w-screen overflow-hidden bg-white">
+  <video
+    className="absolute inset-0 h-full w-full object-cover z-0"
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="auto"
+  >
+    <source src="/intro.mp4" type="video/mp4" />
+  </video>
 
-export default function IntroPage() {
-  return (
-    <main className="relative h-screen w-screen overflow-hidden bg-white text-offwhite">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/intro.mp4" type="video/mp4" />
-      </video>
+  <div className="absolute inset-0 bg-black/35 z-10" />
 
-      <div className="absolute inset-0 bg-black/35" />
-
-      <Link
-        href="/home"
-        className="relative z-10 flex h-full w-full items-center justify-center"
-        aria-label="Go to home"
-      >
-        <img src="/xatomlogo.png" alt="xatom logo" className="h-[80px] w-[80px]" />
-      </Link>
-    </main>
-  );
-}
+  <Link
+    href="/home"
+    className="relative z-20 flex h-full w-full items-center justify-center"
+    aria-label="Go to home"
+  >
+    <img src="/xatomlogo.png" alt="xatom logo" className="h-[150px] w-[150px]" />
+  </Link>
+</main>
