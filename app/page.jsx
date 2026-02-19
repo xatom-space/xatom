@@ -10,7 +10,7 @@ export default function IntroPage() {
         muted
         playsInline
       >
-        <source src="/intro-1.mp4" type="video/mp4" />
+        <source src="/intro.mp4" type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-black/35" />
