@@ -104,6 +104,9 @@ export default function HomePage() {
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
+  // ✅ About 펼치기/접기
+  const [aboutExpanded, setAboutExpanded] = useState(false);
+
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
 
   async function handleBuy() {
@@ -161,6 +164,23 @@ export default function HomePage() {
     }
   }
 
+  const aboutEn = `Space is never empty. It carries tension, light, silence, and density. xatom views space not as a passive backdrop, but as a textured field shaped by balance. We believe the atmosphere of a space can shift from a single object — through form, material, and light. A form divides the air. Light passes through matter. Density emerges. Our objects are not decoration. They are structures that recalibrate atmosphere. They hold plants, contain light, attach to walls, or rest quietly on surfaces — always entering into dialogue with the surrounding space. It is within that relationship that spatial character is formed. We do not imitate nature. We interpret its texture. Like ripples on water, subtle but undeniable, we work with material and luminosity to create measured shifts in perception. Cool surfaces meet warmth. Geometry meets growth. Structure meets sensibility. An object placed with intention can alter balance. It can redefine how a space is felt. That is where density begins. That is xatom.`;
+
+  const aboutKo = `Space is never empty.
+It carries tension, light, silence, and density.
+xatom은 공간을 단순한 배경이 아닌, 결을 가진 존재로 바라봅니다. 우리는 공간이 보이지 않는 공기와 빛, 물성의 균형 위에서 완성된다고 믿습니다. 그리고 그 균형은 하나의 오브제로부터 시작될 수 있습니다.
+하나의 형태는 공기를 가르고,
+빛은 물성을 통과하며,
+공간은 새로운 밀도를 갖습니다.
+xatom의 오브제는 장식이 아닙니다. 기능을 넘어, 공간의 분위기를 조율하는 구조체입니다. 식물을 담고, 빛을 머금고, 벽에 고정되거나 테이블 위에 놓이며, 그것은 주변의 공기와 관계를 맺습니다. 우리는 그 관계가 공간의 인상을 결정한다고 생각합니다.
+우리는 자연을 모방하지 않습니다. 대신 자연의 결을 이해하고, 그것을 형태로 번역합니다. 물의 파동처럼 미세하지만 분명한 변화를 만들기 위해, 물성과 빛의 흐름을 다룹니다.
+공간은 비어 있지 않습니다.
+오브제는 그 밀도를 드러내는 매개입니다.
+xatom은 공간의 감도를 높이는 물성을 탐구합니다. 구조적인 형태 위에 감각을 얹고, 차가운 재료 속에 온도를 남깁니다. 우리는 과장하지 않고, 설명하지 않으며, 존재로 말합니다.
+하나의 오브제가 놓이는 순간,
+공간의 균형은 다시 정의됩니다.
+That is where density begins.`;
+
   return (
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
@@ -190,44 +210,64 @@ export default function HomePage() {
         <ProductCarousel images={productImages} />
       </section>
 
+      {/* ✅ About: 4줄 미리보기 + Read more + 아래 2줄 실루엣 */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl">
-          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
-            xatom
-          </h2>
+          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          <div className="mt-6 space-y-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
-            <p>
-              Space is never empty. It carries tension, light, silence, and density. xatom views space not as a passive
-              backdrop, but as a textured field shaped by balance. We believe the atmosphere of a space can shift from a
-              single object — through form, material, and light. A form divides the air. Light passes through matter.
-              Density emerges. Our objects are not decoration. They are structures that recalibrate atmosphere. They
-              hold plants, contain light, attach to walls, or rest quietly on surfaces — always entering into dialogue
-              with the surrounding space. It is within that relationship that spatial character is formed. We do not
-              imitate nature. We interpret its texture. Like ripples on water, subtle but undeniable, we work with
-              material and luminosity to create measured shifts in perception. Cool surfaces meet warmth. Geometry meets
-              growth. Structure meets sensibility. An object placed with intention can alter balance. It can redefine
-              how a space is felt. That is where density begins. That is xatom.
+          {/* 본문 */}
+          <div className="mt-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
+            {/* English */}
+            <p
+              className={aboutExpanded ? '' : 'overflow-hidden'}
+              style={
+                aboutExpanded
+                  ? undefined
+                  : {
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      WebkitLineClamp: 4, // ✅ 4줄만
+                    }
+              }
+            >
+              {aboutEn}
             </p>
 
-            <p>
-              Space is never empty.
-              It carries tension, light, silence, and density.
-              xatom은 공간을 단순한 배경이 아닌, 결을 가진 존재로 바라봅니다. 우리는 공간이 보이지 않는 공기와 빛, 물성의 균형 위에서 완성된다고 믿습니다. 그리고 그 균형은 하나의 오브제로부터 시작될 수 있습니다.
-              하나의 형태는 공기를 가르고,
-              빛은 물성을 통과하며,
-              공간은 새로운 밀도를 갖습니다.
-              xatom의 오브제는 장식이 아닙니다. 기능을 넘어, 공간의 분위기를 조율하는 구조체입니다. 식물을 담고, 빛을 머금고, 벽에 고정되거나 테이블 위에 놓이며, 그것은 주변의 공기와 관계를 맺습니다. 우리는 그 관계가 공간의 인상을 결정한다고 생각합니다.
-              우리는 자연을 모방하지 않습니다. 대신 자연의 결을 이해하고, 그것을 형태로 번역합니다. 물의 파동처럼 미세하지만 분명한 변화를 만들기 위해, 물성과 빛의 흐름을 다룹니다.
-              공간은 비어 있지 않습니다.
-              오브제는 그 밀도를 드러내는 매개입니다.
-              xatom은 공간의 감도를 높이는 물성을 탐구합니다. 구조적인 형태 위에 감각을 얹고, 차가운 재료 속에 온도를 남깁니다. 우리는 과장하지 않고, 설명하지 않으며, 존재로 말합니다.
-              하나의 오브제가 놓이는 순간,
-              공간의 균형은 다시 정의됩니다.
-              That is where density begins.
-            </p>
+            {/* Read more / Read less */}
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={() => setAboutExpanded((v) => !v)}
+                className="text-xs uppercase tracking-[0.22em] text-emerald-700 transition hover:text-black"
+              >
+                {aboutExpanded ? 'Read less' : 'Read more'}
+              </button>
+            </div>
+
+            {/* 아래 실루엣(2줄) + 페이드: 펼치기 전만 보임 */}
+            {!aboutExpanded ? (
+              <div className="relative mt-4">
+                <p
+                  className="overflow-hidden text-black/35 blur-[0.6px]"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                    WebkitLineClamp: 2, // ✅ 2줄만 살짝
+                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
+                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
+                  }}
+                >
+                  {aboutKo}
+                </p>
+              </div>
+            ) : (
+              <div className="mt-8 space-y-6">
+                {/* Korean (full) */}
+                <p className="whitespace-pre-line">{aboutKo}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -258,6 +298,7 @@ export default function HomePage() {
 
       <section id="contact" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
+
         <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 p-6 md:p-10">
           <input
             name="name"
@@ -290,11 +331,9 @@ export default function HomePage() {
         </form>
       </section>
 
-      {/* ✅ Footer 추가 (이미지처럼) */}
       <footer className="mt-32 pb-16 text-center text-sm font-light leading-relaxed text-neutral-400">
         <p>
-          © xatom – Contact.{' '}
-          <span className="text-emerald-600">xatom.space@gmail.com</span> {' '}|{' '}
+          © xatom – Contact. <span className="text-emerald-600">xatom.space@gmail.com</span> |{' '}
           <span className="text-emerald-600">1800–2300</span>
         </p>
         <p className="mt-3">No Images may be reproduced without the permission of the company</p>
