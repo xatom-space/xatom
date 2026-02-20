@@ -174,7 +174,6 @@ export default function HomePage() {
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
             <a href="#contact">Contact</a>
-
             <a
               href="https://instagram.com/xatom.space"
               target="_blank"
@@ -193,32 +192,52 @@ export default function HomePage() {
 
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
-        <p className="mt-6 max-w-3xl text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
-          xatom.space is a material-first studio exploring minimal objects at the boundary of
-          architecture and product design. Every surface is reduced to essential form, while detail
-          is tuned for tactile clarity.
-        </p>
+
+        <div className="mt-8 max-w-4xl">
+          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
+            xatom
+          </h2>
+
+          <div className="mt-6 space-y-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
+            <p>
+              Space is never empty. It carries tension, light, silence, and density. xatom views space not as a passive
+              backdrop, but as a textured field shaped by balance. We believe the atmosphere of a space can shift from a
+              single object — through form, material, and light. A form divides the air. Light passes through matter.
+              Density emerges. Our objects are not decoration. They are structures that recalibrate atmosphere. They
+              hold plants, contain light, attach to walls, or rest quietly on surfaces — always entering into dialogue
+              with the surrounding space. It is within that relationship that spatial character is formed. We do not
+              imitate nature. We interpret its texture. Like ripples on water, subtle but undeniable, we work with
+              material and luminosity to create measured shifts in perception. Cool surfaces meet warmth. Geometry meets
+              growth. Structure meets sensibility. An object placed with intention can alter balance. It can redefine
+              how a space is felt. That is where density begins. That is xatom.
+            </p>
+
+            <p>
+              Space is never empty. It carries tension, light, silence, and density. xatom은 공간을 단순한 배경이 아닌,
+              결을 가진 존재로 바라봅니다. 우리는 공간이 보이지 않는 공기와 빛, 물성의 균형 위에서 완성된다고 믿습니다. 그리고
+              그 균형은 하나의 오브제로부터 시작될 수 있습니다. 하나의 형태는 공기를 가르고, 빛은 물성을 통과하며, 공간은 새로운
+              밀도를 갖습니다. xatom의 오브제는 장식이 아닙니다. 기능을 넘어, 공간의 분위기를 조율하는 구조체입니다. 식물을 담고,
+              빛을 머금고, 벽에 고정되거나 테이블 위에 놓이며, 그것은 주변의 공기와 관계를 맺습니다. 우리는 그 관계가 공간의 인상을
+              결정한다고 생각합니다. 우리는 자연을 모방하지 않습니다. 대신 자연의 결을 이해하고, 그것을 형태로 번역합니다. 물의
+              파동처럼 미세하지만 분명한 변화를 만들기 위해, 물성과 빛의 흐름을 다룹니다. 공간은 비어 있지 않습니다. 오브제는 그
+              밀도를 드러내는 매개입니다. xatom은 공간의 감도를 높이는 물성을 탐구합니다. 구조적인 형태 위에 감각을 얹고, 차가운
+              재료 속에 온도를 남깁니다. 우리는 과장하지 않고, 설명하지 않으며, 존재로 말합니다. 하나의 오브제가 놓이는 순간, 공간의
+              균형은 다시 정의됩니다. That is where density begins.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section id="shop" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
 
         <div className="mt-8 grid gap-8 border border-black/10 p-6 md:grid-cols-2 md:p-10">
-          <img
-            src="/p6.jpg"
-            alt="Verumé"
-            className="h-[320px] w-full object-cover"
-          />
+          <img src="/p6.jpg" alt="Verumé" className="h-[320px] w-full object-cover" />
 
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-extralight tracking-[0.1em] md:text-4xl">
-                Verumé
-              </h2>
-
-              <p className="mt-4 text-black/60">
-                Precision-built centerpiece in anodized finish.
-              </p>
+              <h2 className="text-2xl font-extralight tracking-[0.1em] md:text-4xl">Verumé</h2>
+              <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
             </div>
 
             <button
@@ -235,16 +254,32 @@ export default function HomePage() {
 
       <section id="contact" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
-
         <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 border border-black/10 p-6 md:p-10">
-          <input name="name" required placeholder="Name"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
-          <input name="email" required type="email" placeholder="Email"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
-          <textarea name="message" required rows={5} placeholder="Message"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
-          <button type="submit" disabled={sending}
-            className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60">
+          <input
+            name="name"
+            required
+            placeholder="Name"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
+          />
+          <input
+            name="email"
+            required
+            type="email"
+            placeholder="Email"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
+          />
+          <textarea
+            name="message"
+            required
+            rows={5}
+            placeholder="Message"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
+          />
+          <button
+            type="submit"
+            disabled={sending}
+            className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60"
+          >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
