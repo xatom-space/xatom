@@ -79,9 +79,8 @@ function ProductCarousel({ images }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* ✅ 사진 느낌의 높이/폭: 16:9 비율 고정 */}
+      {/* ✅ 사진 느낌: 16:9 비율 고정 */}
       <div className="relative w-full aspect-video">
-        {/* track */}
         <div
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -99,55 +98,6 @@ function ProductCarousel({ images }) {
             </div>
           ))}
         </div>
-
-        {/* 텍스트/그라데이션 (원하면 삭제 가능) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-white/90">Engineered calm</p>
-          <h1 className="mt-3 text-3xl font-extralight tracking-[0.12em] text-white md:text-6xl">
-            XATOM OBJECT 01
-          </h1>
-        </div>
-
-        {/* buttons */}
-        {slides.length > 1 ? (
-          <>
-            <button
-              type="button"
-              onClick={prev}
-              aria-label="Previous slide"
-              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-black/30 px-3 py-2 text-sm text-white backdrop-blur hover:bg-black/45"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next slide"
-              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-black/30 px-3 py-2 text-sm text-white backdrop-blur hover:bg-black/45"
-            >
-              →
-            </button>
-          </>
-        ) : null}
-
-        {/* dots */}
-        {slides.length > 1 ? (
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={[
-                  'h-2 w-2 rounded-full border border-white/40 transition',
-                  i === index ? 'bg-white' : 'bg-white/40',
-                ].join(' ')}
-              />
-            ))}
-          </div>
-        ) : null}
       </div>
     </div>
   );
@@ -158,13 +108,8 @@ export default function HomePage() {
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
-  const productImages = [
-    '/p1.jpg',
-    '/p2.jpg',
-    '/p3.jpg',
-    '/p4.jpg',
-    '/p5.jpg',
-  ];
+  // ✅ 네 public 폴더 구조에 맞는 경로
+  const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
 
   async function handleBuy() {
     try {
@@ -222,17 +167,14 @@ export default function HomePage() {
   }
 
   return (
-    // ✅ 배경 흰색으로 (검정 배경 문제 해결)
     <main className="bg-white text-black">
-      {/* ✅ 경계선 제거 + 헤더 높이 2배(h-50) + 흰색 헤더 */}
+      {/* 헤더: 경계선 없음 + 높이 2배 */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
-          {/* ✅ 좌측 로고 xatom-v1 */}
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          {/* 메뉴 유지 */}
           <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
@@ -245,12 +187,12 @@ export default function HomePage() {
         </nav>
       </header>
 
-      {/* ✅ 제품 이미지는 좌우 여백 없이 풀폭 */}
+      {/* ✅ 풀폭 캐러셀(좌우 여백 없음) */}
       <section id="hero" className="w-full py-14 md:py-24">
         <ProductCarousel images={productImages} />
       </section>
 
-      {/* 아래 섹션들은 기존 유지 */}
+      {/* 기존 섹션 유지 */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
         <p className="mt-6 max-w-3xl text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
