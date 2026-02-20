@@ -14,15 +14,15 @@ function InstagramIcon() {
   );
 }
 
-function ProductCarousel({ images }) {
+function ProductCarousel({ images }: { images: string[] }) {
   const slides = useMemo(() => images.slice(0, 5), [images]);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  const touchStartX = useRef(null);
+  const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
 
-  const goTo = (i) => setIndex((i + slides.length) % slides.length);
+  const goTo = (i: number) => setIndex((i + slides.length) % slides.length);
   const next = () => goTo(index + 1);
   const prev = () => goTo(index - 1);
 
@@ -35,7 +35,7 @@ function ProductCarousel({ images }) {
   }, [paused, slides.length]);
 
   useEffect(() => {
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     };
@@ -44,13 +44,13 @@ function ProductCarousel({ images }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  const onTouchStart = (e) => {
+  const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchDeltaX.current = 0;
     setPaused(true);
   };
 
-  const onTouchMove = (e) => {
+  const onTouchMove = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
   };
@@ -83,14 +83,7 @@ function ProductCarousel({ images }) {
         >
           {slides.map((src, i) => (
             <div key={src} className="relative h-full w-full shrink-0">
-              <Image
-                src={src}
-                alt={`product-${i + 1}`}
-                fill
-                sizes="100vw"
-                priority={i === 0}
-                className="object-cover"
-              />
+              <Image src={src} alt={`product-${i + 1}`} fill sizes="100vw" priority={i === 0} className="object-cover" />
             </div>
           ))}
         </div>
@@ -103,11 +96,11 @@ export default function HomePage() {
   const [sending, setSending] = useState(false);
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
-
-  // ✅ About 펼치기/접기
   const [aboutExpanded, setAboutExpanded] = useState(false);
 
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
+
+  const CONTACT_TO = 'xatom_space@naver.com';
 
   async function handleBuy() {
     try {
@@ -120,23 +113,23 @@ export default function HomePage() {
       }
 
       window.location.href = data.url;
-    } catch (error) {
-      setStatus(error.message || 'Checkout failed.');
+    } catch (error: any) {
+      setStatus(error?.message || 'Checkout failed.');
     } finally {
       setBuying(false);
     }
   }
 
-  async function handleContactSubmit(event) {
+  async function handleContactSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSending(true);
     setStatus('');
 
     const formData = new FormData(event.currentTarget);
     const payload = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      message: String(formData.get('message') || ''),
     };
 
     try {
@@ -154,17 +147,19 @@ export default function HomePage() {
 
       event.currentTarget.reset();
       setStatus(data?.message || 'Message sent.');
-    } catch (error) {
+    } catch (error: any) {
+      // ✅ 서버 전송 실패 시 mailto fallback (수신: 네이버)
+      const to = encodeURIComponent(CONTACT_TO);
       const subject = encodeURIComponent('[xatom.space] Contact');
       const body = encodeURIComponent(`${payload.name}\n${payload.email}\n\n${payload.message}`);
-      window.location.href = `mailto:${process.env.NEXT_PUBLIC_CONTACT_TO || 'hello@xatom.space'}?subject=${subject}&body=${body}`;
-      setStatus(error.message || 'Contact fallback opened.');
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      setStatus(error?.message || 'Contact fallback opened.');
     } finally {
       setSending(false);
     }
   }
 
-  // ✅ 텍스트를 더 길게(한 문단) + 영문/한글 사이 한 줄 띄움
+  // ✅ 길게(한 문단) + 영문/한글 사이 한 줄 띄움 (aboutKo 내부에 문단 줄바꿈 포함)
   const aboutEn = `Space is never empty; it carries tension, light, silence, and density, and xatom approaches that invisibility as material rather than absence. We do not treat a room as a passive container for objects, but as a textured field whose character is shaped by balance—between weight and openness, brightness and shadow, proximity and distance. A single form can divide the air, redirect attention, and shift the way light settles on surfaces; when light passes through matter, a new sense of density emerges, subtle but unmistakable. xatom objects are not ornaments and not afterthoughts. They are structures that recalibrate atmosphere: they hold plants, contain light, attach to walls, or rest quietly on surfaces, always entering into dialogue with what surrounds them. That dialogue is where spatial character is formed. We do not imitate nature; we interpret its texture, translating growth, tension, and rhythm into measured geometry. Like ripples on water—fine, controlled, and undeniable—our work uses material, finish, and luminosity to create precise shifts in perception. Cool surfaces meet warmth, geometry meets growth, structure meets sensibility, and the space responds in kind. When an object is placed with intention, balance changes; the room feels newly aligned, as if the air has been tuned. That is where density begins, and that is xatom.`;
 
   const aboutKo = `공간은 결코 비어 있지 않습니다. 그 안에는 긴장, 빛, 침묵, 그리고 밀도가 함께 존재합니다. xatom은 공간을 단순한 배경이 아니라 물성과 감도가 겹겹이 쌓인 ‘장(場)’으로 바라봅니다. 우리는 공간의 분위기가 보이지 않는 공기와 빛, 재료의 균형으로 만들어진다고 믿으며, 그 균형은 때로 하나의 오브제로부터 시작될 수 있다고 생각합니다. 하나의 형태는 공기를 가르고 시선을 정렬하며, 빛은 물성을 통과하거나 머금는 방식으로 표면 위에 새로운 질서를 남깁니다. 그 순간 공간은 이전과 다른 밀도를 갖게 됩니다. xatom의 오브제는 장식이 아닙니다. 기능을 넘어, 공간의 분위기를 조율하는 구조체입니다. 식물을 담고, 빛을 품고, 벽에 고정되거나 테이블 위에 놓이며, 오브제는 언제나 주변의 공기와 관계를 맺습니다. 우리는 그 관계가 공간의 인상을 결정한다고 믿습니다. 우리는 자연을 모방하지 않습니다. 대신 자연이 가진 결—성장과 긴장, 흐름과 리듬—을 이해하고, 그것을 형태로 번역합니다. 물의 파동처럼 미세하지만 분명한 변화를 만들기 위해, 재료의 온도와 표면의 마감, 빛의 방향과 투과를 정교하게 다룹니다. 차가운 재료 속에 온도를 남기고, 구조적인 형태 위에 감각을 얹으며, 과장하지 않고 설명하지 않고 존재로 말합니다. 하나의 오브제가 놓이는 순간 공간의 균형은 다시 정의되고, 그때 비로소 밀도는 드러납니다. That is where density begins.`;
@@ -182,12 +177,7 @@ export default function HomePage() {
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
             <a href="#contact">Contact</a>
-            <a
-              href="https://instagram.com/xatom.space"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
             </a>
           </div>
@@ -198,14 +188,12 @@ export default function HomePage() {
         <ProductCarousel images={productImages} />
       </section>
 
-      {/* ✅ About: 4줄 미리보기 + Read more + 아래 2줄 실루엣 */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          {/* 본문 */}
           <div
             className="mt-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl text-justify"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
@@ -219,14 +207,13 @@ export default function HomePage() {
                   : {
                       display: '-webkit-box',
                       WebkitBoxOrient: 'vertical',
-                      WebkitLineClamp: 4, // ✅ 4줄만
+                      WebkitLineClamp: 4,
                     }
               }
             >
               {aboutEn}
             </p>
 
-            {/* Read more / Read less */}
             <div className="mt-6">
               <button
                 type="button"
@@ -237,7 +224,6 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* 아래 실루엣(2줄) + 페이드: 펼치기 전만 보임 */}
             {!aboutExpanded ? (
               <div className="relative mt-4">
                 <p
@@ -245,7 +231,7 @@ export default function HomePage() {
                   style={{
                     display: '-webkit-box',
                     WebkitBoxOrient: 'vertical',
-                    WebkitLineClamp: 2, // ✅ 2줄만 살짝
+                    WebkitLineClamp: 2,
                     WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
                     maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
                     textAlign: 'justify',
@@ -326,8 +312,11 @@ export default function HomePage() {
 
       <footer className="mt-32 pb-16 text-center text-sm font-light leading-relaxed text-neutral-400">
         <p>
-          © xatom – Contact. <span className="text-emerald-600">xatom.space@gmail.com</span> |{' '}
-          <span className="text-emerald-600">1800–2300</span>
+          © xatom – Contact.{' '}
+          <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
+            {CONTACT_TO}
+          </a>{' '}
+          | <span className="text-emerald-600">1800–2300</span>
         </p>
         <p className="mt-3">No Images may be reproduced without the permission of the company</p>
         <p className="mt-6">
