@@ -190,12 +190,13 @@ export default function HomePage() {
         <ProductCarousel images={productImages} />
       </section>
 
-      {/* ✅ About (영문 → 한 칸 띄움 → 한글 그대로) */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl">
-          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
+          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
+            xatom
+          </h2>
 
           <div className="mt-6 space-y-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
             <p>
@@ -231,7 +232,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ✅ Shop (border 제거 유지) */}
       <section id="shop" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
 
@@ -244,7 +244,6 @@ export default function HomePage() {
               <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
             </div>
 
-            {/* ✅ Order 텍스트 emerald */}
             <button
               type="button"
               onClick={handleBuy}
@@ -257,10 +256,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ✅ Contact (border 제거 유지) */}
       <section id="contact" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
-
         <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 p-6 md:p-10">
           <input
             name="name"
@@ -282,8 +279,6 @@ export default function HomePage() {
             placeholder="Message"
             className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
           />
-
-          {/* ✅ Send Message 텍스트 emerald */}
           <button
             type="submit"
             disabled={sending}
@@ -291,10 +286,22 @@ export default function HomePage() {
           >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
-
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
         </form>
       </section>
+
+      {/* ✅ Footer 추가 (이미지처럼) */}
+      <footer className="mt-32 pb-16 text-center text-sm font-light leading-relaxed text-neutral-400">
+        <p>
+          © xatom – Contact.{' '}
+          <span className="text-emerald-600">xatom.space@gmail.com</span> {' '}|{' '}
+          <span className="text-emerald-600">1800–2300</span>
+        </p>
+        <p className="mt-3">No Images may be reproduced without the permission of the company</p>
+        <p className="mt-6">
+          <span className="font-medium text-neutral-500">2026</span> © All rights reserved
+        </p>
+      </footer>
     </main>
   );
 }
