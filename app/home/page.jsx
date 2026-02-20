@@ -26,7 +26,6 @@ function ProductCarousel({ images }) {
   const next = () => goTo(index + 1);
   const prev = () => goTo(index - 1);
 
-  // auto-play
   useEffect(() => {
     if (paused || slides.length <= 1) return;
     const t = setInterval(() => {
@@ -35,7 +34,6 @@ function ProductCarousel({ images }) {
     return () => clearInterval(t);
   }, [paused, slides.length]);
 
-  // keyboard
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === 'ArrowRight') next();
@@ -46,7 +44,6 @@ function ProductCarousel({ images }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  // swipe
   const onTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     touchDeltaX.current = 0;
@@ -79,7 +76,6 @@ function ProductCarousel({ images }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* ✅ 사진 느낌: 16:9 비율 고정 */}
       <div className="relative w-full aspect-video">
         <div
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
@@ -108,7 +104,6 @@ export default function HomePage() {
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
-  // ✅ 네 public 폴더 구조에 맞는 경로
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
 
   async function handleBuy() {
@@ -168,7 +163,6 @@ export default function HomePage() {
 
   return (
     <main className="bg-white text-black">
-      {/* 헤더: 경계선 없음 + 높이 2배 */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -187,12 +181,10 @@ export default function HomePage() {
         </nav>
       </header>
 
-      {/* ✅ 풀폭 캐러셀(좌우 여백 없음) */}
       <section id="hero" className="w-full py-14 md:py-24">
         <ProductCarousel images={productImages} />
       </section>
 
-      {/* 기존 섹션 유지 */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
         <p className="mt-6 max-w-3xl text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
@@ -204,21 +196,32 @@ export default function HomePage() {
 
       <section id="shop" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
+
         <div className="mt-8 grid gap-8 border border-black/10 p-6 md:grid-cols-2 md:p-10">
-          <img src="/images/product.svg" alt="xatom product" className="h-[320px] w-full object-cover" />
+          <img
+            src="/p6.jpg"
+            alt="Verumé"
+            className="h-[320px] w-full object-cover"
+          />
+
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-extralight tracking-[0.1em] md:text-4xl">Object 01</h2>
-              <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
-              <p className="mt-8 text-3xl font-thin tracking-[0.08em]">$290</p>
+              <h2 className="text-2xl font-extralight tracking-[0.1em] md:text-4xl">
+                Verumé
+              </h2>
+
+              <p className="mt-4 text-black/60">
+                Precision-built centerpiece in anodized finish.
+              </p>
             </div>
+
             <button
               type="button"
               onClick={handleBuy}
               disabled={buying}
               className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60"
             >
-              {buying ? 'Processing...' : 'Buy'}
+              {buying ? 'Processing...' : 'Order'}
             </button>
           </div>
         </div>
@@ -226,6 +229,7 @@ export default function HomePage() {
 
       <section id="contact" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
+
         <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 border border-black/10 p-6 md:p-10">
           <input
             name="name"
@@ -254,6 +258,7 @@ export default function HomePage() {
           >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
+
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
         </form>
       </section>
