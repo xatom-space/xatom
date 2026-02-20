@@ -71,7 +71,7 @@ function HeroCarousel({ images, heightClass = 'h-[58vh] md:h-[72vh]' }) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-sm border border-black/10"
+      className="relative overflow-hidden">
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={onTouchStart}
@@ -224,7 +224,7 @@ export default function HomePage() {
     // ✅ 배경 흰색으로 변경 + 텍스트 블랙
     <main className="bg-white text-black">
       {/* ✅ 헤더: 좌측 상단 로고 + (원하면 기존 메뉴 유지 가능) */}
-      <header className="sticky top-0 z-30 border-b border-black/10 bg-white/90 backdrop-blur">
+      <header className="sticky top-0 z-30 bg-white backdrop-blur">
         <nav className="mx-auto flex h-50 max-w-6xl items-center justify-between px-6">
           {/* ✅ 로고를 좌측 상단에 */}
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -245,7 +245,7 @@ export default function HomePage() {
       </header>
 
       {/* ✅ HERO: 기존 hero 이미지를 캐러셀로 교체 */}
-      <section id="hero" className="mx-auto max-w-6xl px-6 py-14 md:py-24">
+      <section id="hero" className="w-full py-14 md:py-24">
         <HeroCarousel images={productImages} />
       </section>
 
