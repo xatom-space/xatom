@@ -159,11 +159,11 @@ export default function HomePage() {
   const [status, setStatus] = useState('');
 
   const productImages = [
-    '/products/p1.jpg',
-    '/products/p2.jpg',
-    '/products/p3.jpg',
-    '/products/p4.jpg',
-    '/products/p5.jpg',
+    '/p1.jpg',
+    '/p2.jpg',
+    '/p3.jpg',
+    '/p4.jpg',
+    '/p5.jpg',
   ];
 
   async function handleBuy() {
