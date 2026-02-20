@@ -26,7 +26,8 @@ export default function IntroPage() {
         <img
           src="/xatomlogo-v2.png"
           alt="xatom logo"
-          className="h-[150px] w-[150px]"
+          className="h-[150px] w-auto"
+          style={{ objectFit: 'contain' }}
         />
       </Link>
     </main>
