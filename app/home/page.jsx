@@ -225,7 +225,7 @@ export default function HomePage() {
     <main className="bg-white text-black">
       {/* ✅ 헤더: 좌측 상단 로고 + (원하면 기존 메뉴 유지 가능) */}
       <header className="sticky top-0 z-30 border-b border-black/10 bg-white/90 backdrop-blur">
-        <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+        <nav className="mx-auto flex h-50 max-w-6xl items-center justify-between px-6">
           {/* ✅ 로고를 좌측 상단에 */}
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={140} height={50} priority />
