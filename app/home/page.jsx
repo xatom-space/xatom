@@ -174,7 +174,13 @@ export default function HomePage() {
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
             <a href="#contact">Contact</a>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+
+            <a
+              href="https://instagram.com/xatom.space"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
               <InstagramIcon />
             </a>
           </div>
@@ -231,34 +237,16 @@ export default function HomePage() {
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
 
         <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 border border-black/10 p-6 md:p-10">
-          <input
-            name="name"
-            required
-            placeholder="Name"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
-          />
-          <input
-            name="email"
-            required
-            type="email"
-            placeholder="Email"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
-          />
-          <textarea
-            name="message"
-            required
-            rows={5}
-            placeholder="Message"
-            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
-          />
-          <button
-            type="submit"
-            disabled={sending}
-            className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60"
-          >
+          <input name="name" required placeholder="Name"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
+          <input name="email" required type="email" placeholder="Email"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
+          <textarea name="message" required rows={5} placeholder="Message"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black" />
+          <button type="submit" disabled={sending}
+            className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60">
             {sending ? 'Sending...' : 'Send Message'}
           </button>
-
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
         </form>
       </section>
