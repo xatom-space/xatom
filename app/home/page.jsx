@@ -14,7 +14,6 @@ function InstagramIcon() {
   );
 }
 
-/** ✅ Hero를 제품 캐러셀(최대 5장)로 */
 function ProductCarousel({ images }) {
   const slides = useMemo(() => images.slice(0, 5), [images]);
   const [index, setIndex] = useState(0);
@@ -80,8 +79,8 @@ function ProductCarousel({ images }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* ✅ 한 영역(창) 높이 */}
-      <div className="relative h-[58vh] w-full md:h-[72vh]">
+      {/* ✅ 사진 느낌의 높이/폭: 16:9 비율 고정 */}
+      <div className="relative w-full aspect-video">
         {/* track */}
         <div
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
@@ -101,14 +100,16 @@ function ProductCarousel({ images }) {
           ))}
         </div>
 
-        {/* 기존 hero 느낌 유지: 그라데이션 + 텍스트 */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+        {/* 텍스트/그라데이션 (원하면 삭제 가능) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
         <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
-          <p className="thin-title text-[10px] text-accent">Engineered calm</p>
-          <h1 className="mt-3 text-3xl font-extralight tracking-[0.12em] md:text-6xl">XATOM OBJECT 01</h1>
+          <p className="text-[10px] tracking-[0.35em] uppercase text-white/90">Engineered calm</p>
+          <h1 className="mt-3 text-3xl font-extralight tracking-[0.12em] text-white md:text-6xl">
+            XATOM OBJECT 01
+          </h1>
         </div>
 
-        {/* 좌/우 버튼 */}
+        {/* buttons */}
         {slides.length > 1 ? (
           <>
             <button
@@ -130,7 +131,7 @@ function ProductCarousel({ images }) {
           </>
         ) : null}
 
-        {/* 도트 */}
+        {/* dots */}
         {slides.length > 1 ? (
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
             {slides.map((_, i) => (
@@ -221,16 +222,17 @@ export default function HomePage() {
   }
 
   return (
-    <main className="bg-ink text-offwhite">
-      {/* ✅ 회색 경계선 제거: border-b 삭제 */}
-      <header className="sticky top-0 z-30 bg-ink/90 backdrop-blur">
-        {/* ✅ 로고 공간 높이 2배: h-20 -> h-50 */}
+    // ✅ 배경 흰색으로 (검정 배경 문제 해결)
+    <main className="bg-white text-black">
+      {/* ✅ 경계선 제거 + 헤더 높이 2배(h-50) + 흰색 헤더 */}
+      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
-          {/* ✅ 좌측 로고를 xatom-v1로 교체 */}
+          {/* ✅ 좌측 로고 xatom-v1 */}
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
+          {/* 메뉴 유지 */}
           <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
@@ -243,15 +245,15 @@ export default function HomePage() {
         </nav>
       </header>
 
-      {/* ✅ 좌우 여백 제거: section-shell 제거하고 w-full로 */}
+      {/* ✅ 제품 이미지는 좌우 여백 없이 풀폭 */}
       <section id="hero" className="w-full py-14 md:py-24">
         <ProductCarousel images={productImages} />
       </section>
 
-      {/* 아래는 기존 섹션 그대로 유지 */}
+      {/* 아래 섹션들은 기존 유지 */}
       <section id="about" className="section-shell py-20 md:py-28">
-        <p className="thin-title text-[10px] text-accent">About</p>
-        <p className="mt-6 max-w-3xl text-lg font-extralight leading-relaxed text-offwhite/90 md:text-2xl">
+        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
+        <p className="mt-6 max-w-3xl text-lg font-extralight leading-relaxed text-black/80 md:text-2xl">
           xatom.space is a material-first studio exploring minimal objects at the boundary of
           architecture and product design. Every surface is reduced to essential form, while detail
           is tuned for tactile clarity.
@@ -259,20 +261,20 @@ export default function HomePage() {
       </section>
 
       <section id="shop" className="section-shell py-20 md:py-28">
-        <p className="thin-title text-[10px] text-accent">Shop</p>
-        <div className="mt-8 grid gap-8 border border-white/10 p-6 md:grid-cols-2 md:p-10">
+        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
+        <div className="mt-8 grid gap-8 border border-black/10 p-6 md:grid-cols-2 md:p-10">
           <img src="/images/product.svg" alt="xatom product" className="h-[320px] w-full object-cover" />
           <div className="flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-extralight tracking-[0.1em] md:text-4xl">Object 01</h2>
-              <p className="mt-4 text-offwhite/70">Precision-built centerpiece in anodized finish.</p>
+              <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
               <p className="mt-8 text-3xl font-thin tracking-[0.08em]">$290</p>
             </div>
             <button
               type="button"
               onClick={handleBuy}
               disabled={buying}
-              className="mt-10 w-fit border border-accent px-8 py-3 text-xs uppercase tracking-[0.2em] text-accent transition hover:bg-accent hover:text-black disabled:opacity-60"
+              className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60"
             >
               {buying ? 'Processing...' : 'Buy'}
             </button>
@@ -281,36 +283,36 @@ export default function HomePage() {
       </section>
 
       <section id="contact" className="section-shell py-20 md:py-28">
-        <p className="thin-title text-[10px] text-accent">Contact</p>
-        <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 border border-white/10 p-6 md:p-10">
+        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
+        <form onSubmit={handleContactSubmit} className="mt-8 grid gap-5 border border-black/10 p-6 md:p-10">
           <input
             name="name"
             required
             placeholder="Name"
-            className="w-full border border-white/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-accent"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
           />
           <input
             name="email"
             required
             type="email"
             placeholder="Email"
-            className="w-full border border-white/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-accent"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
           />
           <textarea
             name="message"
             required
             rows={5}
             placeholder="Message"
-            className="w-full border border-white/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-accent"
+            className="w-full border border-black/20 bg-transparent px-4 py-3 text-sm outline-none transition focus:border-black"
           />
           <button
             type="submit"
             disabled={sending}
-            className="w-fit border border-accent px-8 py-3 text-xs uppercase tracking-[0.2em] text-accent transition hover:bg-accent hover:text-black disabled:opacity-60"
+            className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white disabled:opacity-60"
           >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
-          {status ? <p className="text-sm text-offwhite/70">{status}</p> : null}
+          {status ? <p className="text-sm text-black/60">{status}</p> : null}
         </form>
       </section>
     </main>
