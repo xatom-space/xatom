@@ -109,10 +109,7 @@ export default function HomePage() {
       const res = await fetch('/api/checkout', { method: 'POST' });
       const data = await res.json();
 
-      if (!res.ok || !data?.url) {
-        throw new Error(data?.error || 'Checkout failed.');
-      }
-
+      if (!res.ok || !data?.url) throw new Error(data?.error || 'Checkout failed.');
       window.location.href = data.url;
     } catch (error: any) {
       setStatus(error?.message || 'Checkout failed.');
@@ -145,16 +142,16 @@ export default function HomePage() {
       const data = await res.json();
 
       if (!res.ok) {
+        // ✅ 서버에서 내려준 에러가 있으면 그대로 보여주기
         throw new Error(data?.error || 'Message send failed.');
       }
 
+      // ✅ 성공: 폼 초기화 + Thank You 😄
       formRef.current?.reset();
-
-      // ✅ 성공 메시지: Thank You + 웃음 이모티콘
       setStatus('Thank You 😄');
     } catch (error: any) {
-      // ✅ 실패 시에도 사용자에게 안내
-      setStatus('Send failed. Please try again.');
+      // ❌ mailto로 절대 보내지 않음 (메일 앱 창 안 뜸)
+      setStatus(error?.message || 'Send failed. Please try again.');
     } finally {
       setSending(false);
     }
