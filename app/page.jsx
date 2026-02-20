@@ -37,7 +37,7 @@ export default function IntroPage() {
           <img
             src="/xatomlogo-v2.png"
             alt="xatom logo"
-            className="h-[120px] w-auto object-contain"
+            className="h-[80px] w-auto object-contain"
           />
         </Link>
 
