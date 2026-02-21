@@ -83,7 +83,14 @@ function ProductCarousel({ images }: { images: string[] }) {
         >
           {slides.map((src, i) => (
             <div key={src} className="relative h-full w-full shrink-0">
-              <Image src={src} alt={`product-${i + 1}`} fill sizes="100vw" priority={i === 0} className="object-cover" />
+              <Image
+                src={src}
+                alt={`product-${i + 1}`}
+                fill
+                sizes="100vw"
+                priority={i === 0}
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
@@ -188,9 +195,9 @@ export default function HomePage() {
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          {/* ✅ About 본문만 30% 축소: text-lg/md:text-xl → text-base/md:text-lg */}
+          {/* ✅ About 본문만 약 30% 축소 (제목/가로폭 유지) */}
           <div
-            className="mt-6 text-base font-extralight leading-relaxed text-black/80 md:text-lg text-justify"
+            className="mt-6 text-xs font-extralight leading-relaxed text-black/80 md:text-sm text-justify"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
