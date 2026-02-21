@@ -7,31 +7,49 @@ import Link from 'next/link';
 const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
+function InstagramIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.25" y="2.25" width="19.5" height="19.5" rx="5.5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
 function formatKRW(n: number) {
   return new Intl.NumberFormat('ko-KR').format(n);
 }
 
 export default function VerumeProductPage() {
+  // · Pieces
   const [qty, setQty] = useState(1);
+
+  // Light Module
   const [lightModule, setLightModule] = useState(false);
+  const [lightQty, setLightQty] = useState(1);
 
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
   const total = useMemo(() => {
     const objectTotal = OBJECT_PRICE * qty;
-    const lightTotal = lightModule ? LIGHT_MODULE_PRICE * qty : 0;
+    const lightTotal = lightModule ? LIGHT_MODULE_PRICE * lightQty : 0;
     return objectTotal + lightTotal;
-  }, [qty, lightModule]);
+  }, [qty, lightModule, lightQty]);
 
   const decQty = () => setQty((v) => Math.max(1, v - 1));
   const incQty = () => setQty((v) => Math.min(99, v + 1));
+
+  const decLightQty = () => setLightQty((v) => Math.max(1, v - 1));
+  const incLightQty = () => setLightQty((v) => Math.min(99, v + 1));
 
   async function handleBuy() {
     try {
       setBuying(true);
       setStatus('');
 
+      // ✅ checkout으로 옵션 전달 (백엔드에서도 lightQty 반영 필요)
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -39,6 +57,7 @@ export default function VerumeProductPage() {
           productId: 'verume',
           qty,
           lightModule,
+          lightQty: lightModule ? lightQty : 0,
         }),
       });
 
@@ -54,24 +73,24 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
-      {/* ✅ 헤더
-          - 모바일: 로고 가운데
-          - PC(md+): 로고 좌측 + 우측 여백 (home 리듬 유지)
-      */}
+      {/* ✅ 1) 구매페이지 상단: home과 같은 메뉴 버튼 */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell relative flex h-50 items-center justify-center md:justify-between">
-          {/* PC(md+): 좌측 로고 */}
-          <Link href="/" aria-label="Go to intro" className="hidden items-center md:flex">
+        <nav className="section-shell flex h-50 items-center justify-between">
+          {/* 로고(좌측) */}
+          <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          {/* 모바일: 가운데 로고 */}
-          <Link href="/" aria-label="Go to intro (mobile)" className="flex items-center md:hidden">
-            <Image src="/xatom-v1.png" alt="xatom logo" width={140} height={52} priority />
-          </Link>
-
-          {/* PC(md+): 우측 여백 */}
-          <div className="hidden w-[160px] md:block" />
+          {/* 메뉴(우측) - 구매페이지에는 섹션이 없으니 /home#... 으로 이동 */}
+          <div className="flex items-center gap-4 text-[10px] tracking-[0.22em] uppercase md:gap-8 md:text-xs">
+            <Link href="/home#hero">Home</Link>
+            <Link href="/home#about">About</Link>
+            <Link href="/home#shop">Shop</Link>
+            <Link href="/home#contact">Contact</Link>
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <InstagramIcon />
+            </a>
+          </div>
         </nav>
       </header>
 
@@ -110,11 +129,10 @@ export default function VerumeProductPage() {
                 </div>
               </div>
 
-              {/* · Light Module + 체크박스(선택) */}
+              {/* · Light Module + 체크박스 + (NEW) 수량 */}
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Light Module</p>
 
-                {/* ✅ 체크박스 + '선택' 라벨 */}
                 <label className="flex items-center gap-3 cursor-pointer select-none">
                   <input
                     type="checkbox"
@@ -123,9 +141,20 @@ export default function VerumeProductPage() {
                   />
                   <span>선택</span>
                 </label>
+
+                {/* ✅ 2) 체크박스 밑에 Light Module 수량 선택 */}
+                <div className={`mt-4 flex items-center gap-4 ${lightModule ? '' : 'opacity-40 pointer-events-none'}`}>
+                  <button type="button" onClick={decLightQty} className="border border-black/20 px-3 py-1">
+                    -
+                  </button>
+                  <span className="min-w-[24px] text-center">{lightQty}</span>
+                  <button type="button" onClick={incLightQty} className="border border-black/20 px-3 py-1">
+                    +
+                  </button>
+                </div>
               </div>
 
-              {/* ✅ ₩ 248,000 (총 금액) -> ₩ 248,000 */}
+              {/* ₩ 총액 */}
               <div className="border-t border-black/20 pt-6 text-base font-medium">
                 ₩ {formatKRW(total)}
               </div>
