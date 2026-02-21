@@ -195,9 +195,9 @@ export default function HomePage() {
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          {/* ✅ About 본문 글자 크기만 약 30% 축소 (가로폭/제목 유지) */}
+          {/* ✅ About 본문 폰트: 기본 8px / md 이상 10px (가로폭/제목 유지) */}
           <div
-            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify text-[11px] md:text-[13px]"
+            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify text-[8px] md:text-[10px]"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
