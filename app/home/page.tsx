@@ -296,7 +296,7 @@ export default function HomePage() {
 
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Verumé</h2>
+              <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
               <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
             </div>
 
