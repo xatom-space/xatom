@@ -192,7 +192,7 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 text-lg font-extralight leading-relaxed text-black/80 md:text-2xl text-justify"
+            className="mt-6 text-lg font-extralight leading-relaxed text-black/80 md:text-xl text-justify"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
