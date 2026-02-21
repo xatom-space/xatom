@@ -8,14 +8,11 @@ const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
 function formatKRW(n: number) {
-  return new Intl.NumberFormat('ko-KR').format(n) + '원';
+  return new Intl.NumberFormat('ko-KR').format(n);
 }
 
 export default function VerumeProductPage() {
-  // 옵션 A: 수량
   const [qty, setQty] = useState(1);
-
-  // 옵션 B: 라이트 모듈 선택/비선택
   const [lightModule, setLightModule] = useState(false);
 
   const [buying, setBuying] = useState(false);
@@ -35,7 +32,6 @@ export default function VerumeProductPage() {
       setBuying(true);
       setStatus('');
 
-      // ✅ checkout으로 옵션 전달
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,17 +54,24 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
+      {/* ✅ 헤더: PC(md 이상)에서만 home처럼 로고 좌측 */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
-          <Link href="/home" className="text-xs tracking-[0.22em] uppercase text-black/60 hover:text-black">
+          {/* 모바일: Back 링크만 */}
+          <Link
+            href="/home"
+            className="text-xs tracking-[0.22em] uppercase text-black/60 hover:text-black md:hidden"
+          >
             ← Back
           </Link>
 
-          <Link href="/home" aria-label="Go to home" className="flex items-center">
+          {/* PC: home과 동일한 좌측 로고 */}
+          <Link href="/" aria-label="Go to intro" className="hidden items-center md:flex">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          <div className="w-[60px]" />
+          {/* PC에서 우측 여백 */}
+          <div className="hidden w-[160px] md:block" />
         </nav>
       </header>
 
@@ -77,21 +80,26 @@ export default function VerumeProductPage() {
 
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
           <div className="relative aspect-[4/5] w-full overflow-hidden">
-            <Image src="/p6.jpg" alt="verumé" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" priority />
+            <Image
+              src="/p6.jpg"
+              alt="verumé"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
           </div>
 
           <div>
             <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
 
-            <div className="mt-6 space-y-2 text-sm text-black/70">
-              <p>오브제 {formatKRW(OBJECT_PRICE)}</p>
-              <p className="text-black/50">옵션 B · 라이트 모듈 {formatKRW(LIGHT_MODULE_PRICE)} (선택 시 수량만큼 추가)</p>
-            </div>
+            {/* ✅ 1) 오브제 248,000원 -> 문구로 교체 */}
+            <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
 
             <div className="mt-10 space-y-8 text-sm">
-              {/* 옵션 A - 수량 */}
+              {/* ✅ 3) 옵션 A · 수량 -> · Pieces */}
               <div className="border-t border-black/10 pt-6">
-                <p className="mb-3 text-black/60">옵션 A · 수량</p>
+                <p className="mb-3 text-black/60">· Pieces</p>
                 <div className="flex items-center gap-4">
                   <button type="button" onClick={decQty} className="border border-black/20 px-3 py-1">
                     -
@@ -103,9 +111,10 @@ export default function VerumeProductPage() {
                 </div>
               </div>
 
-              {/* 옵션 B - 라이트 모듈 */}
+              {/* ✅ 2) 옵션 B 가격 안내 문장 삭제 */}
+              {/* ✅ 4) 옵션 B -> · Light Module + 체크박스 */}
               <div className="border-t border-black/10 pt-6">
-                <p className="mb-3 text-black/60">옵션 B · 라이트 모듈</p>
+                <p className="mb-3 text-black/60">· Light Module</p>
 
                 <label className="flex items-center gap-3 cursor-pointer select-none">
                   <input
@@ -117,12 +126,11 @@ export default function VerumeProductPage() {
                 </label>
               </div>
 
-              {/* 총 금액 */}
+              {/* ✅ 5) 총 금액 -> ₩ (총 금액) */}
               <div className="border-t border-black/20 pt-6 text-base font-medium">
-                총 금액 · {formatKRW(total)}
+                ₩ {formatKRW(total)} <span className="text-black/40">(총 금액)</span>
               </div>
 
-              {/* 결제 버튼 */}
               <div className="pt-2">
                 <button
                   type="button"
