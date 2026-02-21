@@ -83,14 +83,7 @@ function ProductCarousel({ images }: { images: string[] }) {
         >
           {slides.map((src, i) => (
             <div key={src} className="relative h-full w-full shrink-0">
-              <Image
-                src={src}
-                alt={`product-${i + 1}`}
-                fill
-                sizes="100vw"
-                priority={i === 0}
-                className="object-cover"
-              />
+              <Image src={src} alt={`product-${i + 1}`} fill sizes="100vw" priority={i === 0} className="object-cover" />
             </div>
           ))}
         </div>
@@ -189,19 +182,21 @@ export default function HomePage() {
         <ProductCarousel images={productImages} />
       </section>
 
+      {/* ABOUT */}
       <section id="about" className="section-shell py-20 md:py-28">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          {/* ✅ About 본문 폰트: 기본 10px / md 이상 12px (가로폭/제목 유지) */}
+          {/* ✅ 핵심 수정: 글자크기를 부모 div가 아니라 실제 텍스트 <p>들에 직접 줌 */}
           <div
-            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify !text-[10px] md:!text-[12px]"
+            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
+            {/* 영어 본문 */}
             <p
-              className={aboutExpanded ? '' : 'overflow-hidden'}
+              className={`${aboutExpanded ? '' : 'overflow-hidden'} text-[30px] md:text-[32px]`}
               style={
                 aboutExpanded
                   ? undefined
@@ -225,10 +220,11 @@ export default function HomePage() {
               </button>
             </div>
 
+            {/* 한국어 본문 */}
             {!aboutExpanded ? (
               <div className="relative mt-4">
                 <p
-                  className="overflow-hidden text-black/35 blur-[0.6px]"
+                  className="overflow-hidden text-black/35 blur-[0.6px] text-[30px] md:text-[32px]"
                   style={{
                     display: '-webkit-box',
                     WebkitBoxOrient: 'vertical',
@@ -244,7 +240,7 @@ export default function HomePage() {
               </div>
             ) : (
               <div className="mt-8 space-y-6">
-                <p className="whitespace-pre-line">{aboutKo}</p>
+                <p className="whitespace-pre-line text-[30px] md:text-[32px]">{aboutKo}</p>
               </div>
             )}
           </div>
