@@ -54,23 +54,23 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
-      {/* ✅ 헤더: PC(md 이상)에서만 home처럼 로고 좌측 */}
+      {/* ✅ 헤더
+          - 모바일: 로고 가운데
+          - PC(md+): 로고 좌측 + 우측 여백 (home 리듬 유지)
+      */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex h-50 items-center justify-between">
-          {/* 모바일: Back 링크만 */}
-          <Link
-            href="/home"
-            className="text-xs tracking-[0.22em] uppercase text-black/60 hover:text-black md:hidden"
-          >
-            ← Back
-          </Link>
-
-          {/* PC: home과 동일한 좌측 로고 */}
+        <nav className="section-shell relative flex h-50 items-center justify-center md:justify-between">
+          {/* PC(md+): 좌측 로고 */}
           <Link href="/" aria-label="Go to intro" className="hidden items-center md:flex">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          {/* PC에서 우측 여백 */}
+          {/* 모바일: 가운데 로고 */}
+          <Link href="/" aria-label="Go to intro (mobile)" className="flex items-center md:hidden">
+            <Image src="/xatom-v1.png" alt="xatom logo" width={140} height={52} priority />
+          </Link>
+
+          {/* PC(md+): 우측 여백 */}
           <div className="hidden w-[160px] md:block" />
         </nav>
       </header>
@@ -93,11 +93,10 @@ export default function VerumeProductPage() {
           <div>
             <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
 
-            {/* ✅ 1) 오브제 248,000원 -> 문구로 교체 */}
             <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
 
             <div className="mt-10 space-y-8 text-sm">
-              {/* ✅ 3) 옵션 A · 수량 -> · Pieces */}
+              {/* · Pieces */}
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Pieces</p>
                 <div className="flex items-center gap-4">
@@ -111,24 +110,24 @@ export default function VerumeProductPage() {
                 </div>
               </div>
 
-              {/* ✅ 2) 옵션 B 가격 안내 문장 삭제 */}
-              {/* ✅ 4) 옵션 B -> · Light Module + 체크박스 */}
+              {/* · Light Module + 체크박스(선택) */}
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Light Module</p>
 
+                {/* ✅ 체크박스 + '선택' 라벨 */}
                 <label className="flex items-center gap-3 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={lightModule}
                     onChange={(e) => setLightModule(e.target.checked)}
                   />
-                  <span>{lightModule ? '선택' : '미선택'}</span>
+                  <span>선택</span>
                 </label>
               </div>
 
-              {/* ✅ 5) 총 금액 -> ₩ (총 금액) */}
+              {/* ✅ ₩ 248,000 (총 금액) -> ₩ 248,000 */}
               <div className="border-t border-black/20 pt-6 text-base font-medium">
-                ₩ {formatKRW(total)} <span className="text-black/40">(총 금액)</span>
+                ₩ {formatKRW(total)}
               </div>
 
               <div className="pt-2">
