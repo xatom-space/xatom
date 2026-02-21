@@ -22,27 +22,50 @@ function ProductCarousel({ images }: { images: string[] }) {
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
 
-  const goTo = (i: number) => setIndex((i + slides.length) % slides.length);
-  const next = () => goTo(index + 1);
-  const prev = () => goTo(index - 1);
+  // ✅ index 클로저 문제 방지: 항상 현재값(cur)로 계산
+  const goTo = (i: number) => {
+    setIndex(() => {
+      const len = slides.length || 1;
+      return ((i % len) + len) % len;
+    });
+  };
 
+  const next = () => {
+    setIndex((cur) => {
+      const len = slides.length || 1;
+      return (cur + 1) % len;
+    });
+  };
+
+  const prev = () => {
+    setIndex((cur) => {
+      const len = slides.length || 1;
+      return (cur - 1 + len) % len;
+    });
+  };
+
+  // ✅ 자동 슬라이드
   useEffect(() => {
     if (paused || slides.length <= 1) return;
+
     const t = setInterval(() => {
       setIndex((cur) => (cur + 1) % slides.length);
     }, 3500);
+
     return () => clearInterval(t);
   }, [paused, slides.length]);
 
+  // ✅ 키보드 이벤트: index 의존성 제거 (리스너 재등록/꼬임 방지)
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     };
+
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+  }, [slides.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -67,6 +90,8 @@ function ProductCarousel({ images }: { images: string[] }) {
     setPaused(false);
   };
 
+  if (slides.length === 0) return null;
+
   return (
     <div
       className="relative w-full overflow-hidden"
@@ -82,7 +107,7 @@ function ProductCarousel({ images }: { images: string[] }) {
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {slides.map((src, i) => (
-            <div key={src} className="relative h-full w-full shrink-0">
+            <div key={`${src}-${i}`} className="relative h-full w-full shrink-0">
               <Image
                 src={src}
                 alt={`product-${i + 1}`}
@@ -94,6 +119,19 @@ function ProductCarousel({ images }: { images: string[] }) {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ✅ 점(인디케이터) - 필요 없으면 이 블록 삭제해도 됨 */}
+      <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`go-to-${i + 1}`}
+            onClick={() => goTo(i)}
+            className={`h-1.5 w-1.5 rounded-full ${i === index ? 'bg-black' : 'bg-black/30'}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -195,7 +233,6 @@ export default function HomePage() {
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
-          {/* ✅ About 본문 폰트: 기본 8px / md 이상 10px (가로폭/제목 유지) */}
           <div
             className="mt-6 font-extralight leading-relaxed text-black/80 text-justify !text-[8px] md:!text-[10px]"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
