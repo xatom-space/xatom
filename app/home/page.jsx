@@ -142,15 +142,12 @@ export default function HomePage() {
       const data = await res.json();
 
       if (!res.ok) {
-        // ✅ 서버에서 내려준 에러가 있으면 그대로 보여주기
         throw new Error(data?.error || 'Message send failed.');
       }
 
-      // ✅ 성공: 폼 초기화 + Thank You 😄
       formRef.current?.reset();
       setStatus('Thank You 😄');
     } catch (error: any) {
-      // ❌ mailto로 절대 보내지 않음 (메일 앱 창 안 뜸)
       setStatus(error?.message || 'Send failed. Please try again.');
     } finally {
       setSending(false);
@@ -191,8 +188,9 @@ export default function HomePage() {
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
+          {/* ✅ About 본문만 30% 축소: text-lg/md:text-xl → text-base/md:text-lg */}
           <div
-            className="mt-6 text-lg font-extralight leading-relaxed text-black/80 md:text-xl text-justify"
+            className="mt-6 text-base font-extralight leading-relaxed text-black/80 md:text-lg text-justify"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
