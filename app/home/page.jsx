@@ -197,7 +197,7 @@ export default function HomePage() {
 
           {/* ✅ About 본문 폰트: 기본 8px / md 이상 10px (가로폭/제목 유지) */}
           <div
-            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify text-[8px] md:text-[10px]"
+            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify !text-[8px] md:!text-[10px]"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
