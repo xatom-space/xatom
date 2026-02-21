@@ -22,7 +22,6 @@ function ProductCarousel({ images }: { images: string[] }) {
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
 
-  // ✅ index 클로저 문제 방지: 항상 현재값(cur)로 계산
   const goTo = (i: number) => {
     setIndex(() => {
       const len = slides.length || 1;
@@ -44,7 +43,6 @@ function ProductCarousel({ images }: { images: string[] }) {
     });
   };
 
-  // ✅ 자동 슬라이드
   useEffect(() => {
     if (paused || slides.length <= 1) return;
 
@@ -55,7 +53,6 @@ function ProductCarousel({ images }: { images: string[] }) {
     return () => clearInterval(t);
   }, [paused, slides.length]);
 
-  // ✅ 키보드 이벤트: index 의존성 제거 (리스너 재등록/꼬임 방지)
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') next();
@@ -121,7 +118,6 @@ function ProductCarousel({ images }: { images: string[] }) {
         </div>
       </div>
 
-      {/* ✅ 점(인디케이터) - 필요 없으면 이 블록 삭제해도 됨 */}
       <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
         {slides.map((_, i) => (
           <button
@@ -139,7 +135,6 @@ function ProductCarousel({ images }: { images: string[] }) {
 
 export default function HomePage() {
   const [sending, setSending] = useState(false);
-  const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
   const [aboutExpanded, setAboutExpanded] = useState(false);
 
@@ -147,21 +142,6 @@ export default function HomePage() {
 
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
   const CONTACT_TO = 'xatom_space@naver.com';
-
-  async function handleBuy() {
-    try {
-      setBuying(true);
-      const res = await fetch('/api/checkout', { method: 'POST' });
-      const data = await res.json();
-
-      if (!res.ok || !data?.url) throw new Error(data?.error || 'Checkout failed.');
-      window.location.href = data.url;
-    } catch (error: any) {
-      setStatus(error?.message || 'Checkout failed.');
-    } finally {
-      setBuying(false);
-    }
-  }
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -292,7 +272,7 @@ export default function HomePage() {
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
 
         <div className="mt-8 grid gap-8 p-6 md:grid-cols-2 md:p-10">
-          <img src="/p6.jpg" alt="Verumé" className="h-[320px] w-full object-cover" />
+          <img src="/p6.jpg" alt="verumé" className="h-[320px] w-full object-cover" />
 
           <div className="flex flex-col justify-between">
             <div>
@@ -300,14 +280,13 @@ export default function HomePage() {
               <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
             </div>
 
-            <button
-              type="button"
-              onClick={handleBuy}
-              disabled={buying}
-              className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white disabled:opacity-60"
+            {/* ✅ Order 클릭 -> 상세페이지로 이동 */}
+            <Link
+              href="/products/verume"
+              className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white"
             >
-              {buying ? 'Processing...' : 'Order'}
-            </button>
+              Order
+            </Link>
           </div>
         </div>
       </section>
