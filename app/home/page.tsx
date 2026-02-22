@@ -141,7 +141,9 @@ export default function HomePage() {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
-  const CONTACT_TO = 'xatom_space@naver.com';
+
+  // ✅ 이메일 변경
+  const CONTACT_TO = 'xatom.space@gmail.com';
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -327,7 +329,13 @@ export default function HomePage() {
         </form>
       </section>
 
-      <footer className="mt-32 pb-16 text-center text-sm font-light leading-relaxed text-neutral-400">
+      {/* ✅ Footer 수정 */}
+      <footer className="mt-32 pb-16 text-center text-sm font-light leading-snug text-neutral-400">
+        {/* ✅ 로고 추가 */}
+        <div className="mb-6 flex justify-center">
+          <Image src="/xatom-v3.png" alt="xatom footer logo" width={220} height={80} priority />
+        </div>
+
         <p>
           © xatom – Contact.{' '}
           <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
@@ -335,10 +343,11 @@ export default function HomePage() {
           </a>{' '}
           | <span className="text-emerald-600">1800–2300</span>
         </p>
+
         <p className="mt-3">No Images may be reproduced without the permission of the company</p>
-        <p className="mt-6">
-          <span className="font-medium text-neutral-500">2026</span> © All rights reserved
-        </p>
+
+        {/* ✅ bold 제거: font-medium 제거 */}
+        <p className="mt-6 text-neutral-500">2026 © All rights reserved</p>
       </footer>
     </main>
   );
