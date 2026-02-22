@@ -181,15 +181,16 @@ export default function VerumeProductPage() {
           </div>
         </div>
 
-        {/* ✅ p7: p6/결제 블록 다음에 나오게 (모바일에서도 자연스럽게 맨 아래) */}
-        {/* ✅ p6와 더 넓은 여백 */}
+        {/* ✅ p7 (용량 최적화: webp + quality 유지 + lazy) */}
         <div className="mt-24 md:mt-32">
           <Image
-            src="/p7.jpg"
+            src="/p7.webp"
             alt="verumé detail"
-            width={2400}
-            height={1400}
+            width={2000}
+            height={1167}
             sizes="100vw"
+            quality={90}
+            loading="lazy"
             className="h-auto w-full"
             priority={false}
           />
