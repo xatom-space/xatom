@@ -68,6 +68,9 @@ export default function VerumeProductPage() {
     }
   }
 
+  // ✅ Footer 연락처 (Home과 동일)
+  const CONTACT_TO = 'xatom.space@gmail.com';
+
   return (
     <main className="bg-white text-black">
       {/* ✅ Home과 동일한 Header */}
@@ -192,6 +195,27 @@ export default function VerumeProductPage() {
           />
         </div>
       </section>
+
+      {/* ✅ Home과 동일한 Footer 추가 */}
+      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
+        <div className="mb-5 flex justify-center">
+          <Image src="/xatom-v3.png" alt="xatom footer logo" width={220} height={80} priority />
+        </div>
+
+        <div className="space-y-2">
+          <p>
+            © xatom – Contact.{' '}
+            <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
+              {CONTACT_TO}
+            </a>{' '}
+            | <span className="text-emerald-600">1800–2300</span>
+          </p>
+
+          <p>No Images may be reproduced without the permission of the company</p>
+
+          <p className="text-neutral-500">2026 © All rights reserved</p>
+        </div>
+      </footer>
     </main>
   );
 }
