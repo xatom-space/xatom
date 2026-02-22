@@ -97,10 +97,14 @@ export default function VerumeProductPage() {
       <section className="section-shell py-16 md:py-24">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Product</p>
 
+        {/* 
+          ✅ 모바일 순서 요구:
+          p6(이미지) -> 결제/옵션 -> p7
+          order로 제어
+        */}
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
-          {/* ✅ 왼쪽 컬럼: 메인 이미지(p6) + 아래 p7 전체 이미지 */}
-          <div>
-            {/* 메인 이미지(p6) */}
+          {/* 1) p6 이미지 (항상 첫 번째) */}
+          <div className="order-1">
             <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
                 src="/p6.jpg"
@@ -111,22 +115,10 @@ export default function VerumeProductPage() {
                 priority
               />
             </div>
-
-            {/* ✅ p7: 왼쪽 메인 이미지 밑 + 여백 + 전체 보이게(크롭 없음) */}
-            <div className="mt-10">
-              <Image
-                src="/p7.jpg"
-                alt="verumé detail"
-                width={1600}
-                height={900}
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="h-auto w-full"
-              />
-            </div>
           </div>
 
-          {/* 오른쪽 컬럼: 옵션/구매 */}
-          <div>
+          {/* 2) 결제/옵션 (모바일에서 p7보다 먼저 나오게) */}
+          <div className="order-2">
             <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
 
             <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
@@ -186,6 +178,30 @@ export default function VerumeProductPage() {
                 </button>
 
                 {status ? <p className="mt-3 text-sm text-black/60">{status}</p> : null}
+              </div>
+            </div>
+          </div>
+
+          {/* 3) p7 이미지 (모바일에서는 결제/옵션 뒤에 나오게) */}
+          <div className="order-3 md:col-start-1 md:col-span-1">
+            {/* ✅ p6와 더 넓은 여백 */}
+            <div className="mt-16 md:mt-20">
+              {/* 
+                ✅ 샘플 비율/위치:
+                - 넓은 프레임: aspect-[16/9]
+                - 이미지 전체가 보이게: object-contain
+                - 오브제가 아래쪽에 붙게: object-bottom + objectPosition 미세조정
+                - 배경은 살짝 톤(샘플처럼 보이게): bg-neutral-100
+              */}
+              <div className="relative w-full aspect-[16/9] overflow-hidden bg-neutral-100">
+                <Image
+                  src="/p7.jpg"
+                  alt="verumé detail"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-contain object-bottom"
+                  style={{ objectPosition: 'center 85%' }}
+                />
               </div>
             </div>
           </div>
