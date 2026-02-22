@@ -61,7 +61,6 @@ function ProductCarousel({ images }: { images: string[] }) {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -141,8 +140,6 @@ export default function HomePage() {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
-
-  // ✅ 이메일 변경
   const CONTACT_TO = 'xatom.space@gmail.com';
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -282,7 +279,6 @@ export default function HomePage() {
               <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
             </div>
 
-            {/* ✅ Order 클릭 -> 상세페이지로 이동 */}
             <Link
               href="/products/verume"
               className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white"
@@ -329,25 +325,26 @@ export default function HomePage() {
         </form>
       </section>
 
-      {/* ✅ Footer 수정 */}
-      <footer className="mt-32 pb-16 text-center text-sm font-light leading-snug text-neutral-400">
-        {/* ✅ 로고 추가 */}
-        <div className="mb-6 flex justify-center">
+      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
+        <div className="mb-5 flex justify-center">
           <Image src="/xatom-v3.png" alt="xatom footer logo" width={220} height={80} priority />
         </div>
 
-        <p>
-          © xatom – Contact.{' '}
-          <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
-            {CONTACT_TO}
-          </a>{' '}
-          | <span className="text-emerald-600">1800–2300</span>
-        </p>
+        <div className="space-y-2">
+          <p>
+            © xatom – Contact.{' '}
+            <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
+              {CONTACT_TO}
+            </a>{' '}
+            | <span className="text-emerald-600">1800–2300</span>
+          </p>
 
-        <p className="mt-3">No Images may be reproduced without the permission of the company</p>
+          <p>No Images may be reproduced without the permission of the company</p>
 
-        {/* ✅ bold 제거: font-medium 제거 */}
-        <p className="mt-6 text-neutral-500">2026 © All rights reserved</p>
+          <p className="text-neutral-500">
+            2026 © All rights reserved
+          </p>
+        </div>
       </footer>
     </main>
   );
