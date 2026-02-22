@@ -23,10 +23,8 @@ function formatKRW(n: number) {
 
 export default function VerumeProductPage() {
   const [qty, setQty] = useState(1);
-
   const [lightModule, setLightModule] = useState(false);
   const [lightQty, setLightQty] = useState(1);
-
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -38,7 +36,6 @@ export default function VerumeProductPage() {
 
   const decQty = () => setQty((v) => Math.max(1, v - 1));
   const incQty = () => setQty((v) => Math.min(99, v + 1));
-
   const decLightQty = () => setLightQty((v) => Math.max(1, v - 1));
   const incLightQty = () => setLightQty((v) => Math.min(99, v + 1));
 
@@ -68,12 +65,11 @@ export default function VerumeProductPage() {
     }
   }
 
-  // ✅ Footer 연락처 (Home과 동일)
   const CONTACT_TO = 'xatom.space@gmail.com';
 
   return (
     <main className="bg-white text-black">
-      {/* ✅ Home과 동일한 Header */}
+      {/* Header */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -97,12 +93,11 @@ export default function VerumeProductPage() {
         </nav>
       </header>
 
+      {/* Product Section */}
       <section className="section-shell py-16 md:py-24">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Product</p>
 
-        {/* ✅ 상단: p6(좌) + 결제(우) */}
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
-          {/* p6 */}
           <div>
             <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
@@ -116,30 +111,26 @@ export default function VerumeProductPage() {
             </div>
           </div>
 
-          {/* 결제/옵션 */}
           <div>
-            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
-            <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
+            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
+              verumé
+            </h1>
+            <p className="mt-6 text-sm text-black/70">
+              Objects for Spatial Density
+            </p>
 
             <div className="mt-10 space-y-8 text-sm">
-              {/* · Pieces */}
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Pieces</p>
                 <div className="flex items-center gap-4">
-                  <button type="button" onClick={decQty} className="border border-black/20 px-3 py-1">
-                    -
-                  </button>
+                  <button onClick={decQty} className="border border-black/20 px-3 py-1">-</button>
                   <span className="min-w-[24px] text-center">{qty}</span>
-                  <button type="button" onClick={incQty} className="border border-black/20 px-3 py-1">
-                    +
-                  </button>
+                  <button onClick={incQty} className="border border-black/20 px-3 py-1">+</button>
                 </div>
               </div>
 
-              {/* · Light Module */}
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Light Module</p>
-
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
@@ -149,58 +140,56 @@ export default function VerumeProductPage() {
                   <span>선택</span>
                 </label>
 
-                {/* 체크박스 밑 수량 */}
                 <div className={`mt-4 flex items-center gap-4 ${lightModule ? '' : 'opacity-40 pointer-events-none'}`}>
-                  <button type="button" onClick={decLightQty} className="border border-black/20 px-3 py-1">
-                    -
-                  </button>
+                  <button onClick={decLightQty} className="border border-black/20 px-3 py-1">-</button>
                   <span className="min-w-[24px] text-center">{lightQty}</span>
-                  <button type="button" onClick={incLightQty} className="border border-black/20 px-3 py-1">
-                    +
-                  </button>
+                  <button onClick={incLightQty} className="border border-black/20 px-3 py-1">+</button>
                 </div>
               </div>
 
-              {/* 총 금액 */}
-              <div className="border-t border-black/20 pt-6 text-base font-medium">₩ {formatKRW(total)}</div>
+              <div className="border-t border-black/20 pt-6 text-base font-medium">
+                ₩ {formatKRW(total)}
+              </div>
 
-              {/* Pay now */}
               <div className="pt-2">
                 <button
-                  type="button"
                   onClick={handleBuy}
                   disabled={buying}
                   className="border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white disabled:opacity-60"
                 >
                   {buying ? 'Processing...' : 'Pay now'}
                 </button>
-
-                {status ? <p className="mt-3 text-sm text-black/60">{status}</p> : null}
+                {status && <p className="mt-3 text-sm text-black/60">{status}</p>}
               </div>
             </div>
           </div>
         </div>
 
-        {/* ✅ p7 (용량 최적화: webp + quality 유지 + lazy) */}
         <div className="mt-24 md:mt-32">
           <Image
-            src="/p7.webp"
+            src="/p7.jpg"
             alt="verumé detail"
             width={2000}
             height={1167}
             sizes="100vw"
-            quality={90}
             loading="lazy"
             className="h-auto w-full"
-            priority={false}
           />
         </div>
       </section>
 
-      {/* ✅ Home과 동일한 Footer 추가 */}
+      {/* Footer */}
       <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
         <div className="mb-5 flex justify-center">
-          <Image src="/xatom-v3.png" alt="xatom footer logo" width={220} height={80} priority />
+          <Image
+            src="/xatom-v3.png"
+            alt="xatom footer logo"
+            width={220}
+            height={80}
+            sizes="(max-width: 768px) 140px, 220px"
+            className="h-auto w-[140px] md:w-[220px]"
+            priority
+          />
         </div>
 
         <div className="space-y-2">
