@@ -327,7 +327,15 @@ export default function HomePage() {
 
       <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
         <div className="mb-5 flex justify-center">
-          <Image src="/xatom-v3.png" alt="xatom footer logo" width={220} height={80} priority />
+          <Image
+            src="/xatom-v3.png"
+            alt="xatom footer logo"
+            width={220}
+            height={80}
+            sizes="(max-width: 768px) 140px, 220px"
+            className="h-auto w-[140px] md:w-[220px]"
+            priority
+          />
         </div>
 
         <div className="space-y-2">
@@ -341,9 +349,7 @@ export default function HomePage() {
 
           <p>No Images may be reproduced without the permission of the company</p>
 
-          <p className="text-neutral-500">
-            2026 © All rights reserved
-          </p>
+          <p className="text-neutral-500">2026 © All rights reserved</p>
         </div>
       </footer>
     </main>
