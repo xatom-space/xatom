@@ -7,6 +7,15 @@ import Link from 'next/link';
 const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
+const galleryItems = [
+  { type: 'image', src: '/p7.jpg', alt: 'verume detail 1' },
+  { type: 'image', src: '/p8.jpg', alt: 'verume detail 2' },
+  { type: 'video', src: '/m1.mp4', poster: '/p8.jpg' },
+  { type: 'image', src: '/p9.jpg', alt: 'verume detail 3' },
+  { type: 'image', src: '/p10.jpg', alt: 'verume detail 4' },
+  { type: 'image', src: '/p11.jpg', alt: 'verume detail 5' },
+] as const;
+
 declare global {
   interface Window {
     TossPayments?: (clientKey: string) => {
@@ -135,12 +144,12 @@ export default function VerumeProductPage() {
   return (
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex h-50 items-center justify-between">
+        <nav className="section-shell flex h-24 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
+          <div className="flex items-center gap-5 text-[10px] uppercase tracking-[0.22em] md:gap-8 md:text-xs">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
             <Link href="/home#shop">Shop</Link>
@@ -157,27 +166,26 @@ export default function VerumeProductPage() {
         </nav>
       </header>
 
-      <section className="section-shell py-16 md:py-24">
-        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Product</p>
+      <section className="section-shell py-12 md:py-24">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Product</p>
 
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
           <div>
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
               <Image
                 src="/p6.jpg"
                 alt="verumé"
                 fill
+                priority
+                quality={80}
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover"
-                priority
               />
             </div>
           </div>
 
           <div>
-            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
-              verumé
-            </h1>
+            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
             <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
 
             <div className="mt-10 space-y-8 text-sm">
@@ -234,70 +242,38 @@ export default function VerumeProductPage() {
           </div>
         </div>
 
-        <div className="mt-24 space-y-8 md:mt-32">
-          <Image
-            src="/p7.jpg"
-            alt="verumé detail 1"
-            width={2000}
-            height={1167}
-            sizes="100vw"
-            loading="lazy"
-            className="h-auto w-full"
-          />
-
-          <Image
-            src="/p8.jpg"
-            alt="verumé detail 2"
-            width={2000}
-            height={1167}
-            sizes="100vw"
-            loading="lazy"
-            className="h-auto w-full"
-          />
-
-          <video
-            src="/m1.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-            className="h-auto w-full"
-          />
-
-          <Image
-            src="/p9.jpg"
-            alt="verumé detail 3"
-            width={2000}
-            height={1167}
-            sizes="100vw"
-            loading="lazy"
-            className="h-auto w-full"
-          />
-
-          <Image
-            src="/p10.jpg"
-            alt="verumé detail 4"
-            width={2000}
-            height={1167}
-            sizes="100vw"
-            loading="lazy"
-            className="h-auto w-full"
-          />
-
-          <Image
-            src="/p11.jpg"
-            alt="verumé detail 5"
-            width={2000}
-            height={1167}
-            sizes="100vw"
-            loading="lazy"
-            className="h-auto w-full"
-          />
+        <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
+          {galleryItems.map((item) =>
+            item.type === 'image' ? (
+              <div key={item.src} className="relative w-full overflow-hidden bg-black/[0.03]">
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={1600}
+                  height={1000}
+                  sizes="100vw"
+                  quality={72}
+                  loading="lazy"
+                  className="h-auto w-full"
+                />
+              </div>
+            ) : (
+              <div key={item.src} className="w-full overflow-hidden bg-black">
+                <video
+                  src={item.src}
+                  poster={item.poster}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="h-auto w-full"
+                />
+              </div>
+            )
+          )}
         </div>
       </section>
 
-      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
+      <footer className="mt-24 pb-16 text-center text-sm font-light leading-tight text-neutral-400 md:mt-32">
         <div className="mb-5 flex justify-center">
           <Image
             src="/xatom-v3.png"
@@ -318,7 +294,6 @@ export default function VerumeProductPage() {
             </a>{' '}
             | <span className="text-emerald-600">1800-2300</span>
           </p>
-
           <p>No Images may be reproduced without the permission of the company</p>
           <p className="text-neutral-500">2026 © All rights reserved</p>
         </div>
