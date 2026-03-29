@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,12 +8,12 @@ const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
 const galleryItems = [
-  { type: 'image', src: '/p7.jpg', alt: 'verume detail 1', eager: true },
-  { type: 'image', src: '/p8.jpg', alt: 'verume detail 2', eager: true },
+  { type: 'image', src: '/p7.jpg', alt: 'verume detail 1' },
+  { type: 'image', src: '/p8.jpg', alt: 'verume detail 2' },
   { type: 'video', src: '/m1.mp4', poster: '/p8.jpg' },
-  { type: 'image', src: '/p9.jpg', alt: 'verume detail 3', eager: true },
-  { type: 'image', src: '/p10.jpg', alt: 'verume detail 4', eager: false },
-  { type: 'image', src: '/p11.jpg', alt: 'verume detail 5', eager: false },
+  { type: 'image', src: '/p9.jpg', alt: 'verume detail 3' },
+  { type: 'image', src: '/p10.jpg', alt: 'verume detail 4' },
+  { type: 'image', src: '/p11.jpg', alt: 'verume detail 5' },
 ] as const;
 
 declare global {
@@ -71,6 +71,67 @@ function loadTossScript() {
     script.onerror = () => reject(new Error('Failed to load Toss SDK.'));
     document.body.appendChild(script);
   });
+}
+
+function LazyGalleryMedia({
+  item,
+  eager = false,
+}: {
+  item: (typeof galleryItems)[number];
+  eager?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(eager);
+
+  useEffect(() => {
+    if (visible || !ref.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '900px 0px' }
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [visible]);
+
+  return (
+    <div
+      ref={ref}
+      className="w-full overflow-hidden bg-neutral-100"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1200px' }}
+    >
+      {visible ? (
+        item.type === 'image' ? (
+          <img
+            src={item.src}
+            alt={item.alt}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={eager ? 'high' : 'low'}
+            className="block h-auto w-full"
+          />
+        ) : (
+          <video
+            src={item.src}
+            poster={item.poster}
+            controls
+            playsInline
+            preload="none"
+            className="block h-auto w-full"
+          />
+        )
+      ) : (
+        <div className="aspect-[4/5] w-full bg-neutral-100" aria-hidden="true" />
+      )}
+    </div>
+  );
 }
 
 export default function VerumeProductPage() {
@@ -242,31 +303,13 @@ export default function VerumeProductPage() {
         </div>
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
-          {galleryItems.map((item) =>
-            item.type === 'image' ? (
-              <div key={item.src} className="w-full bg-black/[0.03]">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading={item.eager ? 'eager' : 'lazy'}
-                  fetchPriority={item.eager ? 'high' : 'auto'}
-                  decoding="async"
-                  className="block h-auto w-full"
-                />
-              </div>
-            ) : (
-              <div key={item.src} className="w-full bg-black">
-                <video
-                  src={item.src}
-                  poster={item.poster}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="block h-auto w-full"
-                />
-              </div>
-            )
-          )}
+          {galleryItems.map((item, index) => (
+            <LazyGalleryMedia
+              key={item.src}
+              item={item}
+              eager={index === 0}
+            />
+          ))}
         </div>
       </section>
 
