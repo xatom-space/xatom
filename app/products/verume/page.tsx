@@ -94,11 +94,10 @@ function LazyImageBlock({
           observer.disconnect();
         }
       },
-      { rootMargin: '700px 0px' }
+      { rootMargin: '400px 0px' }
     );
 
     observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, [visible]);
 
@@ -106,7 +105,7 @@ function LazyImageBlock({
     <div
       ref={ref}
       className="w-full overflow-hidden bg-neutral-100"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '1200px' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}
     >
       {visible ? (
         <img
@@ -120,6 +119,67 @@ function LazyImageBlock({
       ) : (
         <div className="aspect-[4/5] w-full bg-neutral-100" aria-hidden="true" />
       )}
+    </div>
+  );
+}
+
+function ManagedVideoBlock({
+  src,
+  poster,
+}: {
+  src: string;
+  poster: string;
+}) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (!wrapRef.current || !videoRef.current) return;
+
+    const video = videoRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.15);
+        if (!inView) {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.15, 0.5] }
+    );
+
+    observer.observe(wrapRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleEnded = () => {
+      video.pause();
+      video.currentTime = 0;
+      video.load();
+    };
+
+    video.addEventListener('ended', handleEnded);
+    return () => video.removeEventListener('ended', handleEnded);
+  }, []);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="w-full overflow-hidden bg-black"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        controls
+        playsInline
+        preload="metadata"
+        className="block h-auto w-full"
+      />
     </div>
   );
 }
@@ -294,19 +354,9 @@ export default function VerumeProductPage() {
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <LazyImageBlock src={imageItems[0].src} alt={imageItems[0].alt} eager />
-
           <LazyImageBlock src={imageItems[1].src} alt={imageItems[1].alt} />
 
-          <div className="w-full overflow-hidden bg-black">
-            <video
-              src="/m1.mp4"
-              poster="/p8.jpg"
-              controls
-              playsInline
-              preload="metadata"
-              className="block h-auto w-full"
-            />
-          </div>
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
 
           <LazyImageBlock src={imageItems[2].src} alt={imageItems[2].alt} />
           <LazyImageBlock src={imageItems[3].src} alt={imageItems[3].alt} />
