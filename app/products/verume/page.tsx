@@ -191,6 +191,10 @@ export default function VerumeProductPage() {
   const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
+  useEffect(() => {
+    setLightQty((current) => Math.min(current, qty));
+  }, [qty]);
+
   const total = useMemo(() => {
     const objectTotal = OBJECT_PRICE * qty;
     const lightTotal = lightModule ? LIGHT_MODULE_PRICE * lightQty : 0;
@@ -200,7 +204,14 @@ export default function VerumeProductPage() {
   const decQty = () => setQty((v) => Math.max(1, v - 1));
   const incQty = () => setQty((v) => Math.min(99, v + 1));
   const decLightQty = () => setLightQty((v) => Math.max(1, v - 1));
-  const incLightQty = () => setLightQty((v) => Math.min(99, v + 1));
+  const incLightQty = () => setLightQty((v) => Math.min(qty, v + 1));
+
+  const toggleLightModule = (checked: boolean) => {
+    setLightModule(checked);
+    if (checked) {
+      setLightQty((current) => Math.min(Math.max(current, 1), qty));
+    }
+  };
 
   async function handleBuy() {
     try {
@@ -318,7 +329,7 @@ export default function VerumeProductPage() {
                   <input
                     type="checkbox"
                     checked={lightModule}
-                    onChange={(e) => setLightModule(e.target.checked)}
+                    onChange={(e) => toggleLightModule(e.target.checked)}
                   />
                   <span>선택</span>
                 </label>
@@ -331,6 +342,7 @@ export default function VerumeProductPage() {
                   <button onClick={incLightQty} className="border border-black/20 px-3 py-1">
                     +
                   </button>
+                  <span className="text-xs text-black/50">0-{qty}개까지 선택 가능</span>
                 </div>
               </div>
 
