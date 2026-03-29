@@ -143,7 +143,7 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
-      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
+      <header className="sticky top-0 z-30 bg-white">
         <nav className="section-shell flex h-24 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
@@ -177,7 +177,6 @@ export default function VerumeProductPage() {
                 alt="verumé"
                 fill
                 priority
-                quality={80}
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover"
               />
@@ -245,27 +244,24 @@ export default function VerumeProductPage() {
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           {galleryItems.map((item) =>
             item.type === 'image' ? (
-              <div key={item.src} className="relative w-full overflow-hidden bg-black/[0.03]">
-                <Image
+              <div key={item.src} className="w-full bg-black/[0.03]">
+                <img
                   src={item.src}
                   alt={item.alt}
-                  width={1600}
-                  height={1000}
-                  sizes="100vw"
-                  quality={72}
                   loading="lazy"
-                  className="h-auto w-full"
+                  decoding="async"
+                  className="block h-auto w-full"
                 />
               </div>
             ) : (
-              <div key={item.src} className="w-full overflow-hidden bg-black">
+              <div key={item.src} className="w-full bg-black">
                 <video
                   src={item.src}
                   poster={item.poster}
                   controls
                   playsInline
                   preload="metadata"
-                  className="h-auto w-full"
+                  className="block h-auto w-full"
                 />
               </div>
             )
