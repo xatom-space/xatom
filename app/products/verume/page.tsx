@@ -134,6 +134,14 @@ function ManagedVideoBlock({
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+  }, []);
+
+  useEffect(() => {
     if (!wrapRef.current || !videoRef.current) return;
 
     const video = videoRef.current;
@@ -172,12 +180,13 @@ function ManagedVideoBlock({
       style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}
     >
       <video
+        key={src}
         ref={videoRef}
         src={src}
         poster={poster}
         controls
         playsInline
-        preload="metadata"
+        preload="none"
         className="block h-auto w-full"
       />
     </div>
@@ -265,13 +274,13 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
-      <header className="sticky top-0 z-30 bg-white">
-        <nav className="section-shell flex h-24 items-center justify-between">
+      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
+        <nav className="section-shell flex h-50 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          <div className="flex items-center gap-5 text-[10px] uppercase tracking-[0.22em] md:gap-8 md:text-xs">
+          <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
             <Link href="/home#shop">Shop</Link>
@@ -366,16 +375,14 @@ export default function VerumeProductPage() {
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <LazyImageBlock src={imageItems[0].src} alt={imageItems[0].alt} eager />
           <LazyImageBlock src={imageItems[1].src} alt={imageItems[1].alt} />
-
           <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
-
           <LazyImageBlock src={imageItems[2].src} alt={imageItems[2].alt} />
           <LazyImageBlock src={imageItems[3].src} alt={imageItems[3].alt} />
           <LazyImageBlock src={imageItems[4].src} alt={imageItems[4].alt} />
         </div>
       </section>
 
-      <footer className="mt-24 pb-16 text-center text-sm font-light leading-tight text-neutral-400 md:mt-32">
+      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
         <div className="mb-5 flex justify-center">
           <Image
             src="/xatom-v3.png"
@@ -390,11 +397,11 @@ export default function VerumeProductPage() {
 
         <div className="space-y-2">
           <p>
-            © xatom - Contact.{' '}
+            © xatom – Contact.{' '}
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            | <span className="text-emerald-600">1800-2300</span>
+            | <span className="text-emerald-600">1800–2300</span>
           </p>
           <p>No Images may be reproduced without the permission of the company</p>
           <p className="text-neutral-500">2026 © All rights reserved</p>
