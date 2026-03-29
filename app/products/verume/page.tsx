@@ -342,7 +342,6 @@ export default function VerumeProductPage() {
                   <button onClick={incLightQty} className="border border-black/20 px-3 py-1">
                     +
                   </button>
-                  <span className="text-xs text-black/50">0-{qty}개까지 선택 가능</span>
                 </div>
               </div>
 
