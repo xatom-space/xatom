@@ -102,11 +102,7 @@ function LazyImageBlock({
   }, [visible]);
 
   return (
-    <div
-      ref={ref}
-      className="w-full overflow-hidden bg-neutral-100"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}
-    >
+    <div ref={ref} className="w-full overflow-hidden bg-neutral-100">
       {visible ? (
         <img
           src={src}
@@ -123,13 +119,7 @@ function LazyImageBlock({
   );
 }
 
-function ManagedVideoBlock({
-  src,
-  poster,
-}: {
-  src: string;
-  poster: string;
-}) {
+function ManagedVideoBlock({ src }: { src: string }) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -137,9 +127,30 @@ function ManagedVideoBlock({
     const video = videoRef.current;
     if (!video) return;
 
-    video.pause();
-    video.currentTime = 0;
-  }, []);
+    const resetToStartFrame = () => {
+      video.pause();
+      try {
+        video.currentTime = 0.01;
+      } catch {}
+    };
+
+    const handleEnded = () => {
+      resetToStartFrame();
+    };
+
+    const handleLoadedData = () => {
+      resetToStartFrame();
+    };
+
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('ended', handleEnded);
+    resetToStartFrame();
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, [src]);
 
   useEffect(() => {
     if (!wrapRef.current || !videoRef.current) return;
@@ -159,34 +170,15 @@ function ManagedVideoBlock({
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleEnded = () => {
-      video.pause();
-      video.currentTime = 0;
-      video.load();
-    };
-
-    video.addEventListener('ended', handleEnded);
-    return () => video.removeEventListener('ended', handleEnded);
-  }, []);
-
   return (
-    <div
-      ref={wrapRef}
-      className="w-full overflow-hidden bg-black"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}
-    >
+    <div ref={wrapRef} className="w-full overflow-hidden bg-black">
       <video
         key={src}
         ref={videoRef}
         src={src}
-        poster={poster}
         controls
         playsInline
-        preload="none"
+        preload="metadata"
         className="block h-auto w-full"
       />
     </div>
@@ -375,7 +367,7 @@ export default function VerumeProductPage() {
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <LazyImageBlock src={imageItems[0].src} alt={imageItems[0].alt} eager />
           <LazyImageBlock src={imageItems[1].src} alt={imageItems[1].alt} />
-          <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
+          <ManagedVideoBlock src="/m1.mp4" />
           <LazyImageBlock src={imageItems[2].src} alt={imageItems[2].alt} />
           <LazyImageBlock src={imageItems[3].src} alt={imageItems[3].alt} />
           <LazyImageBlock src={imageItems[4].src} alt={imageItems[4].alt} />
