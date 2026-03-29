@@ -11,7 +11,7 @@
   - 상단 네비게이션 (Home/About/Shop/Contact + Instagram 아이콘)
   - 히어로 섹션
   - About 섹션
-  - Shop 섹션 (`Buy` 버튼 -> Stripe Checkout)
+  - Shop 섹션 (`Buy` 버튼 -> 국내 결제창)
   - Contact 섹션 (폼 -> `/api/contact`)
 - 결제 결과 페이지
   - `/success`
@@ -27,7 +27,7 @@ npm install
 ```bash
 cp .env.example .env.local
 ```
-`.env.local`에 Stripe/SMTP 값을 채워주세요.
+`.env.local`에 결제/SMTP 값을 채워주세요.
 
 3. 개발 서버 실행
 ```bash
@@ -39,8 +39,8 @@ npm run dev
 
 ## 환경변수 설명
 - `NEXT_PUBLIC_SITE_URL`: 앱 기본 URL
-- `STRIPE_SECRET_KEY`: Stripe Secret Key
-- `STRIPE_PRICE_ID`: Stripe Price ID
+- `NEXT_PUBLIC_TOSS_CLIENT_KEY`: 토스페이먼츠 클라이언트 키
+- `TOSS_SECRET_KEY`: 토스페이먼츠 시크릿 키
 - `SMTP_*`, `CONTACT_TO`: Contact 메일 전송 설정
 
 SMTP가 없으면 `/api/contact`는 서버 콘솔 로그로 폴백 동작합니다.

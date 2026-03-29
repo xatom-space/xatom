@@ -7,6 +7,25 @@ import Link from 'next/link';
 const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
+declare global {
+  interface Window {
+    TossPayments?: (clientKey: string) => {
+      requestPayment: (
+        method: 'CARD' | '카드',
+        request: {
+          amount: number;
+          orderId: string;
+          orderName: string;
+          successUrl: string;
+          failUrl: string;
+          customerName?: string;
+          customerEmail?: string;
+        }
+      ) => Promise<void> | void;
+    };
+  }
+}
+
 function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -19,6 +38,30 @@ function InstagramIcon() {
 
 function formatKRW(n: number) {
   return new Intl.NumberFormat('ko-KR').format(n);
+}
+
+function loadTossScript() {
+  return new Promise<void>((resolve, reject) => {
+    if (window.TossPayments) {
+      resolve();
+      return;
+    }
+
+    const existing = document.querySelector('script[data-toss-sdk="true"]') as HTMLScriptElement | null;
+    if (existing) {
+      existing.addEventListener('load', () => resolve());
+      existing.addEventListener('error', () => reject(new Error('Failed to load Toss SDK.')));
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://js.tosspayments.com/v1/payment';
+    script.async = true;
+    script.dataset.tossSdk = 'true';
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Toss SDK.'));
+    document.body.appendChild(script);
+  });
 }
 
 export default function VerumeProductPage() {
@@ -44,6 +87,11 @@ export default function VerumeProductPage() {
       setBuying(true);
       setStatus('');
 
+      const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
+      if (!clientKey) {
+        throw new Error('NEXT_PUBLIC_TOSS_CLIENT_KEY is not configured.');
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -56,11 +104,28 @@ export default function VerumeProductPage() {
       });
 
       const data = await res.json();
-      if (!res.ok || !data?.url) throw new Error(data?.error || 'Checkout failed.');
-      window.location.href = data.url;
+      if (!res.ok) throw new Error(data?.error || 'Checkout preparation failed.');
+
+      await loadTossScript();
+      if (!window.TossPayments) throw new Error('Toss SDK is not available.');
+
+      const tossPayments = window.TossPayments(clientKey);
+      const request = {
+        amount: data.amount,
+        orderId: data.orderId,
+        orderName: data.orderName,
+        successUrl: data.successUrl,
+        failUrl: data.failUrl,
+        customerName: 'xatom customer',
+      };
+
+      try {
+        await tossPayments.requestPayment('CARD', request);
+      } catch {
+        await tossPayments.requestPayment('카드', request);
+      }
     } catch (e: any) {
       setStatus(e?.message || 'Checkout failed.');
-    } finally {
       setBuying(false);
     }
   }
@@ -69,7 +134,6 @@ export default function VerumeProductPage() {
 
   return (
     <main className="bg-white text-black">
-      {/* Header */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -93,7 +157,6 @@ export default function VerumeProductPage() {
         </nav>
       </header>
 
-      {/* Product Section */}
       <section className="section-shell py-16 md:py-24">
         <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Product</p>
 
@@ -115,23 +178,25 @@ export default function VerumeProductPage() {
             <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
               verumé
             </h1>
-            <p className="mt-6 text-sm text-black/70">
-              Objects for Spatial Density
-            </p>
+            <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
 
             <div className="mt-10 space-y-8 text-sm">
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Pieces</p>
                 <div className="flex items-center gap-4">
-                  <button onClick={decQty} className="border border-black/20 px-3 py-1">-</button>
+                  <button onClick={decQty} className="border border-black/20 px-3 py-1">
+                    -
+                  </button>
                   <span className="min-w-[24px] text-center">{qty}</span>
-                  <button onClick={incQty} className="border border-black/20 px-3 py-1">+</button>
+                  <button onClick={incQty} className="border border-black/20 px-3 py-1">
+                    +
+                  </button>
                 </div>
               </div>
 
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Light Module</p>
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex cursor-pointer items-center gap-3">
                   <input
                     type="checkbox"
                     checked={lightModule}
@@ -140,10 +205,14 @@ export default function VerumeProductPage() {
                   <span>선택</span>
                 </label>
 
-                <div className={`mt-4 flex items-center gap-4 ${lightModule ? '' : 'opacity-40 pointer-events-none'}`}>
-                  <button onClick={decLightQty} className="border border-black/20 px-3 py-1">-</button>
+                <div className={`mt-4 flex items-center gap-4 ${lightModule ? '' : 'pointer-events-none opacity-40'}`}>
+                  <button onClick={decLightQty} className="border border-black/20 px-3 py-1">
+                    -
+                  </button>
                   <span className="min-w-[24px] text-center">{lightQty}</span>
-                  <button onClick={incLightQty} className="border border-black/20 px-3 py-1">+</button>
+                  <button onClick={incLightQty} className="border border-black/20 px-3 py-1">
+                    +
+                  </button>
                 </div>
               </div>
 
@@ -165,10 +234,60 @@ export default function VerumeProductPage() {
           </div>
         </div>
 
-        <div className="mt-24 md:mt-32">
+        <div className="mt-24 space-y-8 md:mt-32">
           <Image
             src="/p7.jpg"
-            alt="verumé detail"
+            alt="verumé detail 1"
+            width={2000}
+            height={1167}
+            sizes="100vw"
+            loading="lazy"
+            className="h-auto w-full"
+          />
+
+          <Image
+            src="/p8.jpg"
+            alt="verumé detail 2"
+            width={2000}
+            height={1167}
+            sizes="100vw"
+            loading="lazy"
+            className="h-auto w-full"
+          />
+
+          <video
+            src="/m1.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            className="h-auto w-full"
+          />
+
+          <Image
+            src="/p9.jpg"
+            alt="verumé detail 3"
+            width={2000}
+            height={1167}
+            sizes="100vw"
+            loading="lazy"
+            className="h-auto w-full"
+          />
+
+          <Image
+            src="/p10.jpg"
+            alt="verumé detail 4"
+            width={2000}
+            height={1167}
+            sizes="100vw"
+            loading="lazy"
+            className="h-auto w-full"
+          />
+
+          <Image
+            src="/p11.jpg"
+            alt="verumé detail 5"
             width={2000}
             height={1167}
             sizes="100vw"
@@ -178,7 +297,6 @@ export default function VerumeProductPage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
         <div className="mb-5 flex justify-center">
           <Image
@@ -194,15 +312,14 @@ export default function VerumeProductPage() {
 
         <div className="space-y-2">
           <p>
-            © xatom – Contact.{' '}
+            © xatom - Contact.{' '}
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            | <span className="text-emerald-600">1800–2300</span>
+            | <span className="text-emerald-600">1800-2300</span>
           </p>
 
           <p>No Images may be reproduced without the permission of the company</p>
-
           <p className="text-neutral-500">2026 © All rights reserved</p>
         </div>
       </footer>
