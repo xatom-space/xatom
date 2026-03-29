@@ -8,12 +8,12 @@ const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
 const galleryItems = [
-  { type: 'image', src: '/p7.jpg', alt: 'verume detail 1' },
-  { type: 'image', src: '/p8.jpg', alt: 'verume detail 2' },
+  { type: 'image', src: '/p7.jpg', alt: 'verume detail 1', eager: true },
+  { type: 'image', src: '/p8.jpg', alt: 'verume detail 2', eager: true },
   { type: 'video', src: '/m1.mp4', poster: '/p8.jpg' },
-  { type: 'image', src: '/p9.jpg', alt: 'verume detail 3' },
-  { type: 'image', src: '/p10.jpg', alt: 'verume detail 4' },
-  { type: 'image', src: '/p11.jpg', alt: 'verume detail 5' },
+  { type: 'image', src: '/p9.jpg', alt: 'verume detail 3', eager: true },
+  { type: 'image', src: '/p10.jpg', alt: 'verume detail 4', eager: false },
+  { type: 'image', src: '/p11.jpg', alt: 'verume detail 5', eager: false },
 ] as const;
 
 declare global {
@@ -248,7 +248,8 @@ export default function VerumeProductPage() {
                 <img
                   src={item.src}
                   alt={item.alt}
-                  loading="lazy"
+                  loading={item.eager ? 'eager' : 'lazy'}
+                  fetchPriority={item.eager ? 'high' : 'auto'}
                   decoding="async"
                   className="block h-auto w-full"
                 />
