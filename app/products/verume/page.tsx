@@ -94,7 +94,7 @@ function LazyImageBlock({
           observer.disconnect();
         }
       },
-      { rootMargin: '400px 0px' }
+      { rootMargin: '600px 0px' }
     );
 
     observer.observe(ref.current);
@@ -119,7 +119,13 @@ function LazyImageBlock({
   );
 }
 
-function ManagedVideoBlock({ src }: { src: string }) {
+function ManagedVideoBlock({
+  src,
+  poster,
+}: {
+  src: string;
+  poster: string;
+}) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -127,27 +133,27 @@ function ManagedVideoBlock({ src }: { src: string }) {
     const video = videoRef.current;
     if (!video) return;
 
-    const resetToStartFrame = () => {
+    const resetToStart = () => {
       video.pause();
       try {
-        video.currentTime = 0.01;
+        video.currentTime = 0;
       } catch {}
     };
 
+    const handleLoadedMetadata = () => {
+      resetToStart();
+    };
+
     const handleEnded = () => {
-      resetToStartFrame();
+      resetToStart();
     };
 
-    const handleLoadedData = () => {
-      resetToStartFrame();
-    };
-
-    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('ended', handleEnded);
-    resetToStartFrame();
+    resetToStart();
 
     return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('ended', handleEnded);
     };
   }, [src]);
@@ -158,7 +164,9 @@ function ManagedVideoBlock({ src }: { src: string }) {
     const video = videoRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
-        const inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.15);
+        const inView = entries.some(
+          (entry) => entry.isIntersecting && entry.intersectionRatio > 0.15
+        );
         if (!inView) {
           video.pause();
         }
@@ -171,11 +179,12 @@ function ManagedVideoBlock({ src }: { src: string }) {
   }, []);
 
   return (
-    <div ref={wrapRef} className="w-full overflow-hidden bg-black">
+    <div ref={wrapRef} className="w-full overflow-hidden bg-neutral-100">
       <video
         key={src}
         ref={videoRef}
         src={src}
+        poster={poster}
         controls
         playsInline
         preload="metadata"
@@ -367,7 +376,7 @@ export default function VerumeProductPage() {
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <LazyImageBlock src={imageItems[0].src} alt={imageItems[0].alt} eager />
           <LazyImageBlock src={imageItems[1].src} alt={imageItems[1].alt} />
-          <ManagedVideoBlock src="/m1.mp4" />
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
           <LazyImageBlock src={imageItems[2].src} alt={imageItems[2].alt} />
           <LazyImageBlock src={imageItems[3].src} alt={imageItems[3].alt} />
           <LazyImageBlock src={imageItems[4].src} alt={imageItems[4].alt} />
