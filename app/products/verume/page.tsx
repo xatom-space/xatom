@@ -82,7 +82,7 @@ function GalleryImage({
   eager?: boolean;
 }) {
   return (
-    <div className="w-full overflow-hidden bg-neutral-100">
+    <div className="w-full overflow-hidden bg-white">
       <img
         src={src}
         alt={alt}
@@ -155,7 +155,7 @@ function ManagedVideoBlock({
   }, []);
 
   return (
-    <div ref={wrapRef} className="w-full overflow-hidden bg-neutral-100">
+    <div ref={wrapRef} className="w-full overflow-hidden bg-white">
       <video
         key={src}
         ref={videoRef}
@@ -292,7 +292,9 @@ export default function VerumeProductPage() {
           </div>
 
           <div>
-            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h1>
+            <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
+              verumé
+            </h1>
             <p className="mt-6 text-sm text-black/70">Objects for Spatial Density</p>
 
             <div className="mt-10 space-y-8 text-sm">
@@ -320,7 +322,11 @@ export default function VerumeProductPage() {
                   <span>선택</span>
                 </label>
 
-                <div className={`mt-4 flex items-center gap-4 ${lightModule ? '' : 'pointer-events-none opacity-40'}`}>
+                <div
+                  className={`mt-4 flex items-center gap-4 ${
+                    lightModule ? '' : 'pointer-events-none opacity-40'
+                  }`}
+                >
                   <button onClick={decLightQty} className="border border-black/20 px-3 py-1">
                     -
                   </button>
@@ -374,11 +380,11 @@ export default function VerumeProductPage() {
 
         <div className="space-y-2">
           <p>
-            © xatom – Contact.{' '}
+            © xatom - Contact.{' '}
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            | <span className="text-emerald-600">1800–2300</span>
+            | <span className="text-emerald-600">1800-2300</span>
           </p>
           <p>No Images may be reproduced without the permission of the company</p>
           <p className="text-neutral-500">2026 © All rights reserved</p>
