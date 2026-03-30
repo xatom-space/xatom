@@ -72,7 +72,7 @@ function loadTossScript() {
   });
 }
 
-function LazyImageBlock({
+function GalleryImage({
   src,
   alt,
   eager = false,
@@ -81,40 +81,16 @@ function LazyImageBlock({
   alt: string;
   eager?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(eager);
-
-  useEffect(() => {
-    if (visible || !ref.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '600px 0px' }
-    );
-
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [visible]);
-
   return (
-    <div ref={ref} className="w-full overflow-hidden bg-neutral-100">
-      {visible ? (
-        <img
-          src={src}
-          alt={alt}
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-          fetchPriority={eager ? 'high' : 'auto'}
-          className="block h-auto w-full"
-        />
-      ) : (
-        <div className="aspect-[4/5] w-full bg-neutral-100" aria-hidden="true" />
-      )}
+    <div className="w-full overflow-hidden bg-neutral-100">
+      <img
+        src={src}
+        alt={alt}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={eager ? 'high' : 'auto'}
+        className="block h-auto w-full"
+      />
     </div>
   );
 }
@@ -374,12 +350,12 @@ export default function VerumeProductPage() {
         </div>
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
-          <LazyImageBlock src={imageItems[0].src} alt={imageItems[0].alt} eager />
-          <LazyImageBlock src={imageItems[1].src} alt={imageItems[1].alt} />
+          <GalleryImage src={imageItems[0].src} alt={imageItems[0].alt} eager />
+          <GalleryImage src={imageItems[1].src} alt={imageItems[1].alt} />
           <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
-          <LazyImageBlock src={imageItems[2].src} alt={imageItems[2].alt} />
-          <LazyImageBlock src={imageItems[3].src} alt={imageItems[3].alt} />
-          <LazyImageBlock src={imageItems[4].src} alt={imageItems[4].alt} />
+          <GalleryImage src={imageItems[2].src} alt={imageItems[2].alt} />
+          <GalleryImage src={imageItems[3].src} alt={imageItems[3].alt} />
+          <GalleryImage src={imageItems[4].src} alt={imageItems[4].alt} />
         </div>
       </section>
 
