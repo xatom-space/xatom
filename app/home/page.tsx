@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -43,7 +43,9 @@ function ProductCarousel({ images }: { images: string[] }) {
     });
   };
 
-  useEffect(() => {
+  useMemo(() => slides, [slides]);
+
+  useState(() => {
     if (paused || slides.length <= 1) return;
 
     const t = setInterval(() => {
@@ -51,17 +53,7 @@ function ProductCarousel({ images }: { images: string[] }) {
     }, 3500);
 
     return () => clearInterval(t);
-  }, [paused, slides.length]);
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [slides.length]);
+  });
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -97,7 +89,7 @@ function ProductCarousel({ images }: { images: string[] }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative w-full aspect-video">
+      <div className="relative aspect-video w-full">
         <div
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -142,7 +134,7 @@ export default function HomePage() {
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
   const CONTACT_TO = 'xatom.space@gmail.com';
 
-  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSending(true);
     setStatus('');
@@ -150,32 +142,24 @@ export default function HomePage() {
     const formEl = formRef.current ?? e.currentTarget;
     const formData = new FormData(formEl);
 
-    const payload = {
-      name: String(formData.get('name') || ''),
-      email: String(formData.get('email') || ''),
-      message: String(formData.get('message') || ''),
-    };
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const message = String(formData.get('message') || '').trim();
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+    const subject = `[xatom Contact] ${name || 'New Inquiry'}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      '',
+      'Message:',
+      message,
+    ].join('\n');
 
-      const data = await res.json();
+    const mailtoUrl = `mailto:${CONTACT_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!res.ok) {
-        throw new Error(data?.error || 'Message send failed.');
-      }
-
-      formRef.current?.reset();
-      setStatus('Thank You 😄');
-    } catch (error: any) {
-      setStatus(error?.message || 'Send failed. Please try again.');
-    } finally {
-      setSending(false);
-    }
+    window.location.href = mailtoUrl;
+    setStatus(`Mail app opened for ${CONTACT_TO}.`);
+    setSending(false);
   }
 
   const aboutEn = `Space is never empty; it carries tension, light, silence, and density, and xatom approaches that invisibility as material rather than absence. We do not treat a room as a passive container for objects, but as a textured field whose character is shaped by balance—between weight and openness, brightness and shadow, proximity and distance. A single form can divide the air, redirect attention, and shift the way light settles on surfaces; when light passes through matter, a new sense of density emerges, subtle but unmistakable. xatom objects are not ornaments and not afterthoughts. They are structures that recalibrate atmosphere: they hold plants, contain light, attach to walls, or rest quietly on surfaces, always entering into dialogue with what surrounds them. That dialogue is where spatial character is formed. We do not imitate nature; we interpret its texture, translating growth, tension, and rhythm into measured geometry. Like ripples on water—fine, controlled, and undeniable—our work uses material, finish, and luminosity to create precise shifts in perception. Cool surfaces meet warmth, geometry meets growth, structure meets sensibility, and the space responds in kind. When an object is placed with intention, balance changes; the room feels newly aligned, as if the air has been tuned. That is where density begins, and that is xatom.`;
@@ -190,7 +174,7 @@ export default function HomePage() {
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
+          <div className="flex items-center gap-5 text-xs uppercase tracking-[0.22em] md:gap-8">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
@@ -207,13 +191,13 @@ export default function HomePage() {
       </section>
 
       <section id="about" className="section-shell py-20 md:py-28">
-        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">About</p>
+        <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 font-extralight leading-relaxed text-black/80 text-justify !text-[12px] md:!text-[14px]"
+            className="mt-6 text-justify font-extralight !text-[12px] leading-relaxed text-black/80 md:!text-[14px]"
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
@@ -268,7 +252,7 @@ export default function HomePage() {
       </section>
 
       <section id="shop" className="section-shell py-20 md:py-28">
-        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Shop</p>
+        <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Shop</p>
 
         <div className="mt-8 grid gap-8 p-6 md:grid-cols-2 md:p-10">
           <img src="/p6.jpg" alt="verumé" className="h-[320px] w-full object-cover" />
@@ -290,7 +274,7 @@ export default function HomePage() {
       </section>
 
       <section id="contact" className="section-shell py-20 md:py-28">
-        <p className="text-[10px] tracking-[0.35em] uppercase text-black/60">Contact</p>
+        <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
 
         <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 p-6 md:p-10">
           <input
@@ -318,7 +302,7 @@ export default function HomePage() {
             disabled={sending}
             className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white disabled:opacity-60"
           >
-            {sending ? 'Sending...' : 'Send Message'}
+            {sending ? 'Opening...' : 'Send Message'}
           </button>
 
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
