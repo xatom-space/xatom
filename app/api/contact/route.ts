@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 const CONTACT_TO = 'xatom.space@gmail.com';
 
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
 
@@ -13,7 +13,10 @@ export async function POST(req) {
     const message = String(body?.message || '').trim();
 
     if (!name || !email || !message) {
-      return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'All fields are required.' },
+        { status: 400 }
+      );
     }
 
     await resend.emails.send({
@@ -27,6 +30,9 @@ export async function POST(req) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('contact send error', error);
-    return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to send message.' },
+      { status: 500 }
+    );
   }
 }
