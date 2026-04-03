@@ -1,32 +1,32 @@
-import nodemailer from 'nodemailer';
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
-export async function POST(request) {
+const resend = new Resend(process.env.RESEND_API_KEY);
+const CONTACT_TO = 'xatom.space@gmail.com';
+
+export async function POST(req: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const body = await req.json();
+
+    const name = String(body?.name || '').trim();
+    const email = String(body?.email || '').trim();
+    const message = String(body?.message || '').trim();
 
     if (!name || !email || !message) {
-      return Response.json({ error: 'All fields are required.' }, { status: 400 });
+      return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"xatom.space Contact" <${process.env.EMAIL_USER}>`,
-      to: 'xatom_space@naver.com',
+    await resend.emails.send({
+      from: process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev',
+      to: CONTACT_TO,
       replyTo: email,
       subject: `[xatom Contact] ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
-    return Response.json({ message: 'ok' });
-  } catch (err) {
-    console.error(err);
-    return Response.json({ error: 'Failed to send message.' }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('contact send error', error);
+    return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
   }
 }
