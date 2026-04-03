@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -43,9 +43,7 @@ function ProductCarousel({ images }: { images: string[] }) {
     });
   };
 
-  useMemo(() => slides, [slides]);
-
-  useState(() => {
+  useEffect(() => {
     if (paused || slides.length <= 1) return;
 
     const t = setInterval(() => {
@@ -53,7 +51,17 @@ function ProductCarousel({ images }: { images: string[] }) {
     }, 3500);
 
     return () => clearInterval(t);
-  });
+  }, [paused, slides.length]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [slides.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -89,7 +97,7 @@ function ProductCarousel({ images }: { images: string[] }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative aspect-video w-full">
+      <div className="relative w-full aspect-video">
         <div
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -134,7 +142,7 @@ export default function HomePage() {
   const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
   const CONTACT_TO = 'xatom.space@gmail.com';
 
-  function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSending(true);
     setStatus('');
@@ -142,24 +150,32 @@ export default function HomePage() {
     const formEl = formRef.current ?? e.currentTarget;
     const formData = new FormData(formEl);
 
-    const name = String(formData.get('name') || '').trim();
-    const email = String(formData.get('email') || '').trim();
-    const message = String(formData.get('message') || '').trim();
+    const payload = {
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      message: String(formData.get('message') || ''),
+    };
 
-    const subject = `[xatom Contact] ${name || 'New Inquiry'}`;
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      '',
-      'Message:',
-      message,
-    ].join('\n');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    const mailtoUrl = `mailto:${CONTACT_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const data = await res.json();
 
-    window.location.href = mailtoUrl;
-    setStatus(`Mail app opened for ${CONTACT_TO}.`);
-    setSending(false);
+      if (!res.ok) {
+        throw new Error(data?.error || 'Message send failed.');
+      }
+
+      formRef.current?.reset();
+      setStatus(`Message sent to ${CONTACT_TO}.`);
+    } catch (error: any) {
+      setStatus(error?.message || 'Send failed. Please try again.');
+    } finally {
+      setSending(false);
+    }
   }
 
   const aboutEn = `Space is never empty; it carries tension, light, silence, and density, and xatom approaches that invisibility as material rather than absence. We do not treat a room as a passive container for objects, but as a textured field whose character is shaped by balance—between weight and openness, brightness and shadow, proximity and distance. A single form can divide the air, redirect attention, and shift the way light settles on surfaces; when light passes through matter, a new sense of density emerges, subtle but unmistakable. xatom objects are not ornaments and not afterthoughts. They are structures that recalibrate atmosphere: they hold plants, contain light, attach to walls, or rest quietly on surfaces, always entering into dialogue with what surrounds them. That dialogue is where spatial character is formed. We do not imitate nature; we interpret its texture, translating growth, tension, and rhythm into measured geometry. Like ripples on water—fine, controlled, and undeniable—our work uses material, finish, and luminosity to create precise shifts in perception. Cool surfaces meet warmth, geometry meets growth, structure meets sensibility, and the space responds in kind. When an object is placed with intention, balance changes; the room feels newly aligned, as if the air has been tuned. That is where density begins, and that is xatom.`;
@@ -302,7 +318,7 @@ export default function HomePage() {
             disabled={sending}
             className="w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white disabled:opacity-60"
           >
-            {sending ? 'Opening...' : 'Send Message'}
+            {sending ? 'Sending...' : 'Send Message'}
           </button>
 
           {status ? <p className="text-sm text-black/60">{status}</p> : null}
@@ -338,4 +354,35 @@ export default function HomePage() {
       </footer>
     </main>
   );
+}
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const CONTACT_TO = 'xatom.space@gmail.com';
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const name = String(body?.name || '').trim();
+    const email = String(body?.email || '').trim();
+    const message = String(body?.message || '').trim();
+
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
+    }
+
+    await resend.emails.send({
+      from: process.env.CONTACT_FROM_EMAIL || 'xatom contact <onboarding@resend.dev>',
+      to: CONTACT_TO,
+      replyTo: email,
+      subject: `[xatom Contact] ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('contact send error', error);
+    return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
+  }
 }
