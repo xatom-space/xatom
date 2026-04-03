@@ -344,7 +344,7 @@ export default function HomePage() {
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            | <span className="text-emerald-600">1800–2300</span>
+            | <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
           <p>No Images may be reproduced without the permission of the company</p>
