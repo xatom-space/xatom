@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 const CONTACT_TO = 'xatom.space@gmail.com';
 
-export async function POST(req: Request) {
+export async function POST(req) {
   try {
     const body = await req.json();
 
