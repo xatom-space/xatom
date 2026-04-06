@@ -19,15 +19,28 @@ export async function POST(req: Request) {
       );
     }
 
-    await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev',
+    const result = await resend.emails.send({
+      from: process.env.CONTACT_FROM_EMAIL || 'contact@xatom.space',
       to: CONTACT_TO,
       replyTo: email,
       subject: `[xatom Contact] ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
-    return NextResponse.json({ ok: true });
+    if (result.error) {
+      console.error('resend send error', result.error);
+      return NextResponse.json(
+        { error: result.error.message || 'Failed to send message.' },
+        { status: 500 }
+      );
+    }
+
+    console.log('resend send success', result.data);
+
+    return NextResponse.json({
+      ok: true,
+      id: result.data?.id ?? null,
+    });
   } catch (error) {
     console.error('contact send error', error);
     return NextResponse.json(
