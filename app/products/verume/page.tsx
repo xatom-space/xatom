@@ -7,6 +7,11 @@ import Link from 'next/link';
 const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
+const BANK_NAME = '국민은행';
+const BANK_ACCOUNT = '000000-00-000000';
+const ACCOUNT_HOLDER = 'xatom';
+const CONTACT_TO = 'xatom.space@gmail.com';
+
 const imageItems = [
   { src: '/p7.jpg', alt: 'verume detail 1' },
   { src: '/p8.jpg', alt: 'verume detail 2' },
@@ -14,25 +19,6 @@ const imageItems = [
   { src: '/p10.jpg', alt: 'verume detail 4' },
   { src: '/p11.jpg', alt: 'verume detail 5' },
 ] as const;
-
-declare global {
-  interface Window {
-    TossPayments?: (clientKey: string) => {
-      requestPayment: (
-        method: 'CARD' | '카드',
-        request: {
-          amount: number;
-          orderId: string;
-          orderName: string;
-          successUrl: string;
-          failUrl: string;
-          customerName?: string;
-          customerEmail?: string;
-        }
-      ) => Promise<void> | void;
-    };
-  }
-}
 
 function InstagramIcon() {
   return (
@@ -46,30 +32,6 @@ function InstagramIcon() {
 
 function formatKRW(n: number) {
   return new Intl.NumberFormat('ko-KR').format(n);
-}
-
-function loadTossScript() {
-  return new Promise<void>((resolve, reject) => {
-    if (window.TossPayments) {
-      resolve();
-      return;
-    }
-
-    const existing = document.querySelector('script[data-toss-sdk="true"]') as HTMLScriptElement | null;
-    if (existing) {
-      existing.addEventListener('load', () => resolve());
-      existing.addEventListener('error', () => reject(new Error('Failed to load Toss SDK.')));
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://js.tosspayments.com/v1/payment';
-    script.async = true;
-    script.dataset.tossSdk = 'true';
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error('Failed to load Toss SDK.'));
-    document.body.appendChild(script);
-  });
 }
 
 function GalleryImage({
@@ -174,7 +136,6 @@ export default function VerumeProductPage() {
   const [qty, setQty] = useState(1);
   const [lightModule, setLightModule] = useState(false);
   const [lightQty, setLightQty] = useState(1);
-  const [buying, setBuying] = useState(false);
   const [status, setStatus] = useState('');
 
   useEffect(() => {
@@ -199,55 +160,32 @@ export default function VerumeProductPage() {
     }
   };
 
-  async function handleBuy() {
+  const handleCopy = async (value: string, label: string) => {
     try {
-      setBuying(true);
-      setStatus('');
-
-      const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
-      if (!clientKey) {
-        throw new Error('NEXT_PUBLIC_TOSS_CLIENT_KEY is not configured.');
-      }
-
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId: 'verume',
-          qty,
-          lightModule,
-          lightQty: lightModule ? lightQty : 0,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || 'Checkout preparation failed.');
-
-      await loadTossScript();
-      if (!window.TossPayments) throw new Error('Toss SDK is not available.');
-
-      const tossPayments = window.TossPayments(clientKey);
-      const request = {
-        amount: data.amount,
-        orderId: data.orderId,
-        orderName: data.orderName,
-        successUrl: data.successUrl,
-        failUrl: data.failUrl,
-        customerName: 'xatom customer',
-      };
-
-      try {
-        await tossPayments.requestPayment('CARD', request);
-      } catch {
-        await tossPayments.requestPayment('카드', request);
-      }
-    } catch (e: any) {
-      setStatus(e?.message || 'Checkout failed.');
-      setBuying(false);
+      await navigator.clipboard.writeText(value);
+      setStatus(`${label} copied.`);
+    } catch {
+      setStatus(`Failed to copy ${label.toLowerCase()}.`);
     }
-  }
+  };
 
-  const CONTACT_TO = 'xatom.space@gmail.com';
+  const handleNaverPay = () => {
+    const naverPayUrl = process.env.NEXT_PUBLIC_NAVER_PAY_ORDER_URL;
+
+    if (!naverPayUrl) {
+      setStatus('NEXT_PUBLIC_NAVER_PAY_ORDER_URL is not configured.');
+      return;
+    }
+
+    const url = new URL(naverPayUrl);
+    url.searchParams.set('productId', 'verume');
+    url.searchParams.set('qty', String(qty));
+    url.searchParams.set('lightModule', String(lightModule));
+    url.searchParams.set('lightQty', String(lightModule ? lightQty : 0));
+    url.searchParams.set('totalAmount', String(total));
+
+    window.location.href = url.toString();
+  };
 
   return (
     <main className="bg-white text-black">
@@ -301,11 +239,11 @@ export default function VerumeProductPage() {
               <div className="border-t border-black/10 pt-6">
                 <p className="mb-3 text-black/60">· Pieces</p>
                 <div className="flex items-center gap-4">
-                  <button onClick={decQty} className="border border-black/20 px-3 py-1">
+                  <button type="button" onClick={decQty} className="border border-black/20 px-3 py-1">
                     -
                   </button>
                   <span className="min-w-[24px] text-center">{qty}</span>
-                  <button onClick={incQty} className="border border-black/20 px-3 py-1">
+                  <button type="button" onClick={incQty} className="border border-black/20 px-3 py-1">
                     +
                   </button>
                 </div>
@@ -327,11 +265,11 @@ export default function VerumeProductPage() {
                     lightModule ? '' : 'pointer-events-none opacity-40'
                   }`}
                 >
-                  <button onClick={decLightQty} className="border border-black/20 px-3 py-1">
+                  <button type="button" onClick={decLightQty} className="border border-black/20 px-3 py-1">
                     -
                   </button>
                   <span className="min-w-[24px] text-center">{lightQty}</span>
-                  <button onClick={incLightQty} className="border border-black/20 px-3 py-1">
+                  <button type="button" onClick={incLightQty} className="border border-black/20 px-3 py-1">
                     +
                   </button>
                 </div>
@@ -341,19 +279,92 @@ export default function VerumeProductPage() {
                 ₩ {formatKRW(total)}
               </div>
 
-              <div className="pt-2">
+              <div className="space-y-3 pt-2">
                 <button
-                  onClick={handleBuy}
-                  disabled={buying}
-                  className="border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white disabled:opacity-60"
+                  type="button"
+                  onClick={handleNaverPay}
+                  className="w-full border border-[#03c75a] bg-[#03c75a] px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
                 >
-                  {buying ? 'Processing...' : 'Pay now'}
+                  Naver Pay
                 </button>
-                {status && <p className="mt-3 text-sm text-black/60">{status}</p>}
+
+                <a
+                  href="#bank-transfer"
+                  className="block w-full border border-black/20 px-8 py-3 text-center text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
+                >
+                  Bank Transfer Guide
+                </a>
+
+                {status ? <p className="text-sm text-black/60">{status}</p> : null}
               </div>
             </div>
           </div>
         </div>
+
+        <section id="bank-transfer" className="mt-20 border-t border-black/10 pt-10 md:mt-28">
+          <div className="grid gap-10 md:grid-cols-[1fr_1fr]">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Bank Transfer</p>
+              <h2 className="mt-4 text-lg font-semibold tracking-[0.04em]">Manual Transfer Guide</h2>
+              <div className="mt-6 space-y-4 text-sm leading-relaxed text-black/70">
+                <p>계좌이체로 주문하실 경우 아래 계좌로 입금해 주세요.</p>
+                <p>입금자명은 주문자명과 동일하게 맞춰 주세요.</p>
+                <p>입금 후 확인이 필요할 경우 아래 이메일로 주문 정보와 함께 연락해 주세요.</p>
+              </div>
+            </div>
+
+            <div className="space-y-4 border border-black/10 p-6">
+              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Bank</p>
+                  <p className="mt-1 text-sm font-medium">{BANK_NAME}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(BANK_NAME, 'Bank name')}
+                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Account</p>
+                  <p className="mt-1 text-sm font-medium">{BANK_ACCOUNT}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(BANK_ACCOUNT, 'Account number')}
+                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Account Holder</p>
+                  <p className="mt-1 text-sm font-medium">{ACCOUNT_HOLDER}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(ACCOUNT_HOLDER, 'Account holder')}
+                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Contact</p>
+                <a href={`mailto:${CONTACT_TO}`} className="mt-1 block text-sm font-medium text-emerald-700">
+                  {CONTACT_TO}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <GalleryImage src={imageItems[0].src} alt={imageItems[0].alt} eager />
