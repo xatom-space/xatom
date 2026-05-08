@@ -146,7 +146,6 @@ export default function VerumeProductPage() {
   const [qty, setQty] = useState(1);
   const [lightModule, setLightModule] = useState(false);
   const [lightQty, setLightQty] = useState(1);
-  const [status, setStatus] = useState('');
   const [bankOrderOpen, setBankOrderOpen] = useState(false);
   const [bankOrderForm, setBankOrderForm] = useState(initialBankOrderForm);
   const [bankOrderStatus, setBankOrderStatus] = useState('');
@@ -181,33 +180,6 @@ export default function VerumeProductPage() {
     setBankOrderForm((current) => ({ ...current, [field]: value }));
   };
 
-  const handleCopy = async (value: string, label: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setStatus(`${label} copied.`);
-    } catch {
-      setStatus(`Failed to copy ${label.toLowerCase()}.`);
-    }
-  };
-
-  const handleNaverPay = () => {
-    const naverPayUrl = process.env.NEXT_PUBLIC_NAVER_PAY_ORDER_URL;
-
-    if (!naverPayUrl) {
-      setStatus('NEXT_PUBLIC_NAVER_PAY_ORDER_URL is not configured.');
-      return;
-    }
-
-    const url = new URL(naverPayUrl);
-    url.searchParams.set('productId', 'verume');
-    url.searchParams.set('qty', String(qty));
-    url.searchParams.set('lightModule', String(lightModule));
-    url.searchParams.set('lightQty', String(lightModule ? lightQty : 0));
-    url.searchParams.set('totalAmount', String(total));
-
-    window.location.href = url.toString();
-  };
-
   const handleBankOrderSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setBankOrderStatus('');
@@ -237,7 +209,6 @@ export default function VerumeProductPage() {
       }
 
       setBankOrderStatus('주문 정보가 접수되었습니다. 입금 확인 후 안내드리겠습니다.');
-      setStatus('Bank transfer order submitted.');
       setBankOrderForm(initialBankOrderForm);
     } catch (error) {
       setBankOrderStatus(
@@ -345,14 +316,6 @@ export default function VerumeProductPage() {
               <div className="space-y-3 pt-2">
                 <button
                   type="button"
-                  onClick={handleNaverPay}
-                  className="w-full border border-[#03c75a] bg-[#03c75a] px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
-                >
-                  Naver Pay
-                </button>
-
-                <button
-                  type="button"
                   onClick={() => {
                     setBankOrderOpen(true);
                     setBankOrderStatus('');
@@ -361,8 +324,6 @@ export default function VerumeProductPage() {
                 >
                   Bank Transfer Order
                 </button>
-
-                {status ? <p className="text-sm text-black/60">{status}</p> : null}
               </div>
             </div>
           </div>
