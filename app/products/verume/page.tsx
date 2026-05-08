@@ -534,7 +534,7 @@ export default function VerumeProductPage() {
           </p>
 
           <p>
-            <span className="mx-3">통신판매신고번호 00-000-00</span>
+            <span className="mx-3">통신판매신고번호 제 2026-부산남구-0305 호</span>
             <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
             <Link href="/terms" className="mx-3">
               TERMS OF USE
