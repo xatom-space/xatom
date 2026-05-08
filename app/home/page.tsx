@@ -340,14 +340,26 @@ export default function HomePage() {
 
         <div className="space-y-2">
           <p>
-            © xatom – Contact.{' '}
+            © xatom - Contact.{' '}
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            | <span className="text-emerald-600">+82 10-4894-8030</span>
+            <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
-          <p>No Images may be reproduced without the permission of the company</p>
+          <p>
+            엑스아톰 xatom
+            <span className="mx-3">대표자 김대영</span>
+            <span className="mx-3">사업자등록번호 107-29-32712</span>
+          </p>
+
+          <p>
+            <span className="mx-3">통신판매신고번호 제 2026-부산남구-0305 호</span>
+            <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
+            <Link href="/terms" className="mx-3">
+              TERMS OF USE
+            </Link>
+          </p>
 
           <p className="text-neutral-500">2026 © All rights reserved</p>
         </div>
