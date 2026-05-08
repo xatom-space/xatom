@@ -466,6 +466,18 @@ export default function VerumeProductPage() {
 
               {bankOrderComplete ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-white px-6 text-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setBankOrderOpen(false);
+                      setBankOrderComplete(false);
+                      setBankOrderStatus('');
+                    }}
+                    className="absolute right-6 top-6 border border-black/20 px-3 py-1 text-xs tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
+                  >
+                    확인
+                  </button>
+
                   <div>
                     <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
                       <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
@@ -475,7 +487,7 @@ export default function VerumeProductPage() {
                     <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
                       주문이 완료되었습니다
                     </p>
-                    <p className="mt-3 text-xs uppercase tracking-[0.35em] text-black/50">
+                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.35em] text-black">
                       xatom
                     </p>
                   </div>
