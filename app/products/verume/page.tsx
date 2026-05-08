@@ -150,6 +150,7 @@ export default function VerumeProductPage() {
   const [bankOrderForm, setBankOrderForm] = useState(initialBankOrderForm);
   const [bankOrderStatus, setBankOrderStatus] = useState('');
   const [bankOrderSubmitting, setBankOrderSubmitting] = useState(false);
+  const [bankOrderComplete, setBankOrderComplete] = useState(false);
 
   useEffect(() => {
     setLightQty((current) => Math.min(current, qty));
@@ -183,6 +184,7 @@ export default function VerumeProductPage() {
   const handleBankOrderSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setBankOrderStatus('');
+    setBankOrderComplete(false);
     setBankOrderSubmitting(true);
 
     try {
@@ -209,6 +211,7 @@ export default function VerumeProductPage() {
       }
 
       setBankOrderStatus('주문 정보가 접수되었습니다. 입금 확인 후 안내드리겠습니다.');
+      setBankOrderComplete(true);
       setBankOrderForm(initialBankOrderForm);
     } catch (error) {
       setBankOrderStatus(
@@ -319,6 +322,7 @@ export default function VerumeProductPage() {
                   onClick={() => {
                     setBankOrderOpen(true);
                     setBankOrderStatus('');
+                    setBankOrderComplete(false);
                   }}
                   className="block w-full border border-black/20 px-8 py-3 text-center text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
                 >
@@ -331,7 +335,7 @@ export default function VerumeProductPage() {
 
         {bankOrderOpen ? (
           <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 px-4 py-6 backdrop-blur-sm md:py-10">
-            <div className="mx-auto max-w-2xl bg-white p-6 shadow-2xl md:p-8">
+            <div className="relative mx-auto max-w-2xl bg-white p-6 shadow-2xl md:p-8">
               <div className="flex items-start justify-between gap-6 border-b border-black/10 pb-5">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.35em] text-black/50">
@@ -459,6 +463,24 @@ export default function VerumeProductPage() {
                   ) : null}
                 </div>
               </form>
+
+              {bankOrderComplete ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-white px-6 text-center">
+                  <div>
+                    <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
+                      <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
+                      <span className="absolute right-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
+                      <span className="absolute left-1/2 top-[43px] h-5 w-9 -translate-x-1/2 rounded-b-full border-b-2 border-l-2 border-r-2 border-black" />
+                    </div>
+                    <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
+                      주문이 완료되었습니다
+                    </p>
+                    <p className="mt-3 text-xs uppercase tracking-[0.35em] text-black/50">
+                      xatom
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         ) : null}
