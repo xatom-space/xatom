@@ -395,7 +395,6 @@ export default function VerumeProductPage() {
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
             </a>{' '}
-            <span className="mx-3 text-neutral-300">|</span>
             <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
@@ -408,7 +407,7 @@ export default function VerumeProductPage() {
           <p>
             <span className="mx-3">통신판매신고번호 00-000-00</span>
             <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
-            <Link href="/terms" className="mx-3 text-emerald-600">
+            <Link href="/terms" className="mx-3">
               TERMS OF USE
             </Link>
           </p>
