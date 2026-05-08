@@ -465,31 +465,35 @@ export default function VerumeProductPage() {
               </form>
 
               {bankOrderComplete ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-white px-6 text-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setBankOrderOpen(false);
-                      setBankOrderComplete(false);
-                      setBankOrderStatus('');
-                    }}
-                    className="absolute right-6 top-6 border border-black/20 px-3 py-1 text-xs tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
-                  >
-                    확인
-                  </button>
+                <div className="absolute inset-0 bg-white p-6 text-center md:p-8">
+                  <div className="flex items-start justify-end border-b border-black/10 pb-5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBankOrderOpen(false);
+                        setBankOrderComplete(false);
+                        setBankOrderStatus('');
+                      }}
+                      className="border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.2em]"
+                    >
+                      확인
+                    </button>
+                  </div>
 
-                  <div>
-                    <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
-                      <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
-                      <span className="absolute right-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
-                      <span className="absolute left-1/2 top-[43px] h-5 w-9 -translate-x-1/2 rounded-b-full border-b-2 border-l-2 border-r-2 border-black" />
+                  <div className="flex min-h-[420px] items-center justify-center">
+                    <div>
+                      <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
+                        <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
+                        <span className="absolute right-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
+                        <span className="absolute left-1/2 top-[43px] h-5 w-9 -translate-x-1/2 rounded-b-full border-b-2 border-l-2 border-r-2 border-black" />
+                      </div>
+                      <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
+                        주문이 완료되었습니다
+                      </p>
+                      <p className="mt-3 text-xs font-bold uppercase tracking-[0.35em] text-black">
+                        xatom
+                      </p>
                     </div>
-                    <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
-                      주문이 완료되었습니다
-                    </p>
-                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.35em] text-black">
-                      xatom
-                    </p>
                   </div>
                 </div>
               ) : null}
