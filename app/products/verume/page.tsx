@@ -397,7 +397,11 @@ export default function VerumeProductPage() {
             </a>{' '}
             | <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
-          <p>No Images may be reproduced without the permission of the company</p>
+          <p>엑스아톰 xatom</p>
+          <p>대표자 김대영</p>
+          <p>사업자등록번호 107-29-32712</p>
+          <p>통신판매신고번호 00-000-00</p>
+          <p>부산광역시 남구 전포대로 133, 11층 101(DD-17)</p>
           <p className="text-neutral-500">2026 © All rights reserved</p>
         </div>
       </footer>
