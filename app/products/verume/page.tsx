@@ -8,8 +8,8 @@ const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
 
 const BANK_NAME = '국민은행';
-const BANK_ACCOUNT = '000000-00-000000';
-const ACCOUNT_HOLDER = 'xatom';
+const BANK_ACCOUNT = '891237-00-004097';
+const ACCOUNT_HOLDER = '엑스아톰 (XATOM)';
 const CONTACT_TO = 'xatom.space@gmail.com';
 
 const imageItems = [
