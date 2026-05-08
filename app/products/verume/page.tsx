@@ -394,25 +394,20 @@ export default function VerumeProductPage() {
             © xatom - Contact.{' '}
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
-            </a>
-          </p>
-
-          <p>
+            </a>{' '}
+            <span className="mx-3 text-neutral-300">|</span>
             <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
           <p>
             엑스아톰 xatom
-            <span className="mx-3 text-neutral-300">|</span>
-            대표자 김대영
-            <span className="mx-3 text-neutral-300">|</span>
-            사업자등록번호 107-29-32712
+            <span className="mx-3">대표자 김대영</span>
+            <span className="mx-3">사업자등록번호 107-29-32712</span>
           </p>
 
           <p>
-            통신판매신고번호 00-000-00
-            <span className="mx-3 text-neutral-300">|</span>
-            부산광역시 남구 전포대로 133, 11층 101(DD-17)
+            <span className="mx-3">통신판매신고번호 00-000-00</span>
+            <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
           </p>
 
           <p className="text-neutral-500">2026 © All rights reserved</p>
