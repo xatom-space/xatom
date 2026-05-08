@@ -441,7 +441,7 @@ export default function VerumeProductPage() {
                 <div className="border border-black/10 bg-black/[0.02] p-4 text-sm leading-relaxed text-black/65">
                   <p className="font-medium text-black">주문 전 안내</p>
                   <p className="mt-2">
-                    본 제품은 주문 접수 후 제작이 진행되는 주문제작 상품으로, 입금 및 주문 확인 이후에는 단순 변심에 의한 주문 취소와 환불이 어려운 점 양해 부탁드립니다. 주문 수량, 옵션, 배송 정보를 신중히 확인하신 후 주문해 주세요.
+                    본 제품은 주문 접수 후 제작이 진행되는 수제작 오브제로, 입금 및 주문 확인 이후에는 단순 변심에 의한 주문 취소와 환불이 어려운 점 양해 부탁드립니다.
                   </p>
                 </div>
 
