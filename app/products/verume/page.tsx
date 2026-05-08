@@ -12,6 +12,16 @@ const BANK_ACCOUNT = '891237-00-004097';
 const ACCOUNT_HOLDER = '엑스아톰 (XATOM)';
 const CONTACT_TO = 'xatom.space@gmail.com';
 
+const initialBankOrderForm = {
+  name: '',
+  phone: '',
+  email: '',
+  address: '',
+  addressDetail: '',
+  depositorName: '',
+  memo: '',
+};
+
 const imageItems = [
   { src: '/p7.jpg', alt: 'verume detail 1' },
   { src: '/p8.jpg', alt: 'verume detail 2' },
@@ -137,6 +147,10 @@ export default function VerumeProductPage() {
   const [lightModule, setLightModule] = useState(false);
   const [lightQty, setLightQty] = useState(1);
   const [status, setStatus] = useState('');
+  const [bankOrderOpen, setBankOrderOpen] = useState(false);
+  const [bankOrderForm, setBankOrderForm] = useState(initialBankOrderForm);
+  const [bankOrderStatus, setBankOrderStatus] = useState('');
+  const [bankOrderSubmitting, setBankOrderSubmitting] = useState(false);
 
   useEffect(() => {
     setLightQty((current) => Math.min(current, qty));
@@ -158,6 +172,13 @@ export default function VerumeProductPage() {
     if (checked) {
       setLightQty((current) => Math.min(Math.max(current, 1), qty));
     }
+  };
+
+  const updateBankOrderForm = (
+    field: keyof typeof initialBankOrderForm,
+    value: string
+  ) => {
+    setBankOrderForm((current) => ({ ...current, [field]: value }));
   };
 
   const handleCopy = async (value: string, label: string) => {
@@ -185,6 +206,48 @@ export default function VerumeProductPage() {
     url.searchParams.set('totalAmount', String(total));
 
     window.location.href = url.toString();
+  };
+
+  const handleBankOrderSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setBankOrderStatus('');
+    setBankOrderSubmitting(true);
+
+    try {
+      const res = await fetch('/api/bank-transfer-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...bankOrderForm,
+          productName: 'verumé',
+          qty,
+          lightModule,
+          lightQty: lightModule ? lightQty : 0,
+          totalAmount: total,
+          bankName: BANK_NAME,
+          bankAccount: BANK_ACCOUNT,
+          accountHolder: ACCOUNT_HOLDER,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data?.error || 'Failed to submit order.');
+      }
+
+      setBankOrderStatus('주문 정보가 접수되었습니다. 입금 확인 후 안내드리겠습니다.');
+      setStatus('Bank transfer order submitted.');
+      setBankOrderForm(initialBankOrderForm);
+    } catch (error) {
+      setBankOrderStatus(
+        error instanceof Error
+          ? error.message
+          : '주문 접수에 실패했습니다. 이메일로 문의해 주세요.'
+      );
+    } finally {
+      setBankOrderSubmitting(false);
+    }
   };
 
   return (
@@ -288,12 +351,16 @@ export default function VerumeProductPage() {
                   Naver Pay
                 </button>
 
-                <a
-                  href="#bank-transfer"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setBankOrderOpen(true);
+                    setBankOrderStatus('');
+                  }}
                   className="block w-full border border-black/20 px-8 py-3 text-center text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
                 >
-                  Bank Transfer Guide
-                </a>
+                  Bank Transfer Order
+                </button>
 
                 {status ? <p className="text-sm text-black/60">{status}</p> : null}
               </div>
@@ -301,70 +368,132 @@ export default function VerumeProductPage() {
           </div>
         </div>
 
-        <section id="bank-transfer" className="mt-20 border-t border-black/10 pt-10 md:mt-28">
-          <div className="grid gap-10 md:grid-cols-[1fr_1fr]">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Bank Transfer</p>
-              <h2 className="mt-4 text-lg font-semibold tracking-[0.04em]">Manual Transfer Guide</h2>
-              <div className="mt-6 space-y-4 text-sm leading-relaxed text-black/70">
-                <p>계좌이체로 주문하실 경우 아래 계좌로 입금해 주세요.</p>
-                <p>입금자명은 주문자명과 동일하게 맞춰 주세요.</p>
-                <p>입금 후 확인이 필요할 경우 아래 이메일로 주문 정보와 함께 연락해 주세요.</p>
-              </div>
-            </div>
-
-            <div className="space-y-4 border border-black/10 p-6">
-              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
+        {bankOrderOpen ? (
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 px-4 py-6 backdrop-blur-sm md:py-10">
+            <div className="mx-auto max-w-2xl bg-white p-6 shadow-2xl md:p-8">
+              <div className="flex items-start justify-between gap-6 border-b border-black/10 pb-5">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Bank</p>
-                  <p className="mt-1 text-sm font-medium">{BANK_NAME}</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-black/50">
+                    Bank Transfer Order
+                  </p>
+                  <h2 className="mt-3 text-lg font-semibold tracking-[0.04em]">
+                    계좌이체 주문
+                  </h2>
                 </div>
                 <button
                   type="button"
-                  onClick={() => handleCopy(BANK_NAME, 'Bank name')}
-                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
+                  onClick={() => setBankOrderOpen(false)}
+                  className="border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.2em]"
                 >
-                  Copy
+                  Close
                 </button>
               </div>
 
-              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Account</p>
-                  <p className="mt-1 text-sm font-medium">{BANK_ACCOUNT}</p>
+              <form onSubmit={handleBankOrderSubmit} className="mt-6 space-y-6">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="block text-sm">
+                    <span className="text-black/60">이름 *</span>
+                    <input
+                      required
+                      value={bankOrderForm.name}
+                      onChange={(e) => updateBankOrderForm('name', e.target.value)}
+                      className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
+
+                  <label className="block text-sm">
+                    <span className="text-black/60">연락처 *</span>
+                    <input
+                      required
+                      value={bankOrderForm.phone}
+                      onChange={(e) => updateBankOrderForm('phone', e.target.value)}
+                      className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(BANK_ACCOUNT, 'Account number')}
-                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
-                >
-                  Copy
-                </button>
-              </div>
 
-              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Account Holder</p>
-                  <p className="mt-1 text-sm font-medium">{ACCOUNT_HOLDER}</p>
+                <label className="block text-sm">
+                  <span className="text-black/60">이메일</span>
+                  <input
+                    type="email"
+                    value={bankOrderForm.email}
+                    onChange={(e) => updateBankOrderForm('email', e.target.value)}
+                    className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                  />
+                </label>
+
+                <label className="block text-sm">
+                  <span className="text-black/60">주소 *</span>
+                  <input
+                    required
+                    value={bankOrderForm.address}
+                    onChange={(e) => updateBankOrderForm('address', e.target.value)}
+                    className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                  />
+                </label>
+
+                <label className="block text-sm">
+                  <span className="text-black/60">상세 주소</span>
+                  <input
+                    value={bankOrderForm.addressDetail}
+                    onChange={(e) => updateBankOrderForm('addressDetail', e.target.value)}
+                    className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                  />
+                </label>
+
+                <label className="block text-sm">
+                  <span className="text-black/60">입금자명 *</span>
+                  <input
+                    required
+                    value={bankOrderForm.depositorName}
+                    onChange={(e) => updateBankOrderForm('depositorName', e.target.value)}
+                    className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                  />
+                </label>
+
+                <label className="block text-sm">
+                  <span className="text-black/60">요청사항</span>
+                  <textarea
+                    rows={4}
+                    value={bankOrderForm.memo}
+                    onChange={(e) => updateBankOrderForm('memo', e.target.value)}
+                    className="mt-2 w-full resize-none border border-black/15 px-3 py-3 outline-none focus:border-black"
+                  />
+                </label>
+
+                <div className="grid gap-4 border-t border-black/10 pt-5 text-sm md:grid-cols-2">
+                  <div className="space-y-2 text-black/70">
+                    <p className="font-medium text-black">주문 상품</p>
+                    <p>verumé × {qty}</p>
+                    <p>Light Module × {lightModule ? lightQty : 0}</p>
+                    <p className="font-medium text-black">₩ {formatKRW(total)}</p>
+                  </div>
+
+                  <div className="space-y-2 text-black/70">
+                    <p className="font-medium text-black">판매자 계좌정보</p>
+                    <p>{BANK_NAME}</p>
+                    <p>{BANK_ACCOUNT}</p>
+                    <p>{ACCOUNT_HOLDER}</p>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(ACCOUNT_HOLDER, 'Account holder')}
-                  className="border border-black/20 px-4 py-2 text-[10px] uppercase tracking-[0.2em]"
-                >
-                  Copy
-                </button>
-              </div>
 
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.25em] text-black/50">Contact</p>
-                <a href={`mailto:${CONTACT_TO}`} className="mt-1 block text-sm font-medium text-emerald-700">
-                  {CONTACT_TO}
-                </a>
-              </div>
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={bankOrderSubmitting}
+                    className="w-full border border-black bg-black px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {bankOrderSubmitting ? 'Submitting...' : 'Submit Bank Transfer Order'}
+                  </button>
+
+                  {bankOrderStatus ? (
+                    <p className="text-sm leading-relaxed text-black/60">{bankOrderStatus}</p>
+                  ) : null}
+                </div>
+              </form>
             </div>
           </div>
-        </section>
+        ) : null}
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
           <GalleryImage src={imageItems[0].src} alt={imageItems[0].alt} eager />
