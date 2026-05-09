@@ -45,7 +45,7 @@ function InstagramIcon() {
 function HandwrittenThankYou() {
   return (
     <div
-      className="thank-you-script mt-4 text-xl font-light italic text-black md:mt-5 md:text-2xl"
+      className="thank-you-script mt-4 text-2xl font-light italic text-black md:mt-5 md:text-3xl"
       aria-label={thankYouText}
     >
       <span aria-hidden="true">
@@ -59,66 +59,47 @@ function HandwrittenThankYou() {
           </span>
         ))}
       </span>
-      <span className="thank-you-script__line" aria-hidden="true" />
 
       <style jsx>{`
         .thank-you-script {
-          display: inline-flex;
+          display: inline-block;
           position: relative;
-          flex-direction: column;
-          align-items: center;
-          font-family: "Apple Chancery", "Bradley Hand", "Brush Script MT", cursive;
-          letter-spacing: 0.03em;
-          line-height: 1.2;
+          font-family: "Snell Roundhand", "Apple Chancery", "Baskerville Italic", "Times New Roman", cursive;
+          letter-spacing: 0.015em;
+          line-height: 1.1;
         }
 
         .thank-you-script__char {
           display: inline-block;
-          opacity: 0;
-          transform: translateY(0.35em) rotate(-3deg);
-          animation: write-char 0.38s ease-out forwards;
-        }
-
-        .thank-you-script__line {
-          display: block;
-          width: 100%;
-          height: 1px;
-          margin-top: 0.35rem;
-          transform: scaleX(0);
           transform-origin: left center;
-          background: currentColor;
-          opacity: 0.35;
-          animation: write-line 0.9s ease-out 2.15s forwards;
+          clip-path: inset(0 100% 0 0);
+          opacity: 0;
+          animation: write-char 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
         }
 
         @keyframes write-char {
           0% {
             opacity: 0;
-            transform: translateY(0.35em) rotate(-3deg);
-            filter: blur(1px);
+            clip-path: inset(0 100% 0 0);
+            transform: skewX(-8deg);
+            filter: blur(0.5px);
+          }
+          55% {
+            opacity: 1;
           }
           100% {
             opacity: 1;
-            transform: translateY(0) rotate(0deg);
+            clip-path: inset(0 0 0 0);
+            transform: skewX(0deg);
             filter: blur(0);
-          }
-        }
-
-        @keyframes write-line {
-          to {
-            transform: scaleX(1);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .thank-you-script__char {
             opacity: 1;
+            clip-path: inset(0 0 0 0);
             transform: none;
-            animation: none;
-          }
-
-          .thank-you-script__line {
-            transform: scaleX(1);
             animation: none;
           }
         }
