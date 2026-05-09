@@ -92,7 +92,13 @@ function HandwrittenThankYou() {
       <style jsx>{`
         .thank-you-script {
           display: inline-block;
-          width: min(88vw, 560px);
+          width: min(70vw, 360px);
+        }
+
+        @media (min-width: 768px) {
+          .thank-you-script {
+            width: min(78vw, 560px);
+          }
         }
 
         .thank-you-script__svg {
