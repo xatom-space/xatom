@@ -64,7 +64,7 @@ function InstagramIcon() {
 function HandwrittenThankYou() {
   return (
     <div
-      className="thank-you-script mt-4 text-black md:mt-5"
+      className="thank-you-script mt-4 md:mt-5"
       aria-label={thankYouText}
     >
       <svg
@@ -86,7 +86,7 @@ function HandwrittenThankYou() {
       <style jsx>{`
         .thank-you-script {
           display: inline-block;
-          width: min(82vw, 430px);
+          width: min(86vw, 520px);
         }
 
         .thank-you-script__svg {
@@ -98,13 +98,14 @@ function HandwrittenThankYou() {
 
         .thank-you-script__stroke {
           fill: transparent;
-          stroke: currentColor;
-          stroke-width: 2.2;
+          stroke: #111;
+          stroke-width: 4.2;
           stroke-linecap: round;
           stroke-linejoin: round;
+          opacity: 1;
           stroke-dasharray: 1;
           stroke-dashoffset: 1;
-          animation: draw-thank-you-letter 0.52s cubic-bezier(0.44, 0.03, 0.2, 1) forwards;
+          animation: draw-thank-you-letter 0.56s cubic-bezier(0.44, 0.03, 0.2, 1) forwards;
         }
 
         @keyframes draw-thank-you-letter {
