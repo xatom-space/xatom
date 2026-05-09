@@ -324,7 +324,7 @@ export default function VerumeProductPage() {
                     setBankOrderStatus('');
                     setBankOrderComplete(false);
                   }}
-                  className="block w-full border border-black/20 px-8 py-3 text-center text-xs uppercase tracking-[0.2em] text-black transition hover:bg-black hover:text-white"
+                  className="block w-full border border-black/20 px-4 py-3 text-center text-[11px] uppercase tracking-[0.14em] text-black transition hover:bg-black hover:text-white md:px-8 md:text-xs md:tracking-[0.2em]"
                 >
                   Bank Transfer Order
                 </button>
@@ -334,11 +334,11 @@ export default function VerumeProductPage() {
         </div>
 
         {bankOrderOpen ? (
-          <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 px-4 py-6 backdrop-blur-sm md:py-10">
-            <div className="relative mx-auto max-w-2xl bg-white p-6 shadow-2xl md:p-8">
-              <div className="flex items-start justify-between gap-6 border-b border-black/10 pb-5">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-black/50">
+          <div className="fixed inset-0 z-50 min-h-dvh overflow-y-auto bg-black/40 px-3 py-3 backdrop-blur-sm md:px-4 md:py-10">
+            <div className="relative mx-auto flex max-h-[calc(100dvh-1.5rem)] w-full max-w-2xl flex-col overflow-hidden bg-white shadow-2xl md:max-h-[calc(100dvh-5rem)]">
+              <div className="flex shrink-0 items-start justify-between gap-4 border-b border-black/10 p-5 pb-4 md:gap-6 md:p-8 md:pb-5">
+                <div className="min-w-0">
+                  <p className="break-words text-[10px] uppercase tracking-[0.24em] text-black/50 md:tracking-[0.35em]">
                     Bank Transfer Order
                   </p>
                   <h2 className="mt-3 text-lg font-semibold tracking-[0.04em]">
@@ -348,15 +348,15 @@ export default function VerumeProductPage() {
                 <button
                   type="button"
                   onClick={() => setBankOrderOpen(false)}
-                  className="border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.2em]"
+                  className="shrink-0 border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.16em] md:tracking-[0.2em]"
                 >
                   Close
                 </button>
               </div>
 
-              <form onSubmit={handleBankOrderSubmit} className="mt-6 space-y-6">
+              <form onSubmit={handleBankOrderSubmit} className="min-h-0 space-y-6 overflow-y-auto px-5 py-6 md:px-8">
                 <div className="grid gap-4 md:grid-cols-2">
-                  <label className="block text-sm">
+                  <label className="block min-w-0 text-sm">
                     <span className="text-black/60">이름 *</span>
                     <input
                       required
@@ -366,7 +366,7 @@ export default function VerumeProductPage() {
                     />
                   </label>
 
-                  <label className="block text-sm">
+                  <label className="block min-w-0 text-sm">
                     <span className="text-black/60">연락처 *</span>
                     <input
                       required
@@ -377,7 +377,7 @@ export default function VerumeProductPage() {
                   </label>
                 </div>
 
-                <label className="block text-sm">
+                <label className="block min-w-0 text-sm">
                   <span className="text-black/60">이메일</span>
                   <input
                     type="email"
@@ -387,7 +387,7 @@ export default function VerumeProductPage() {
                   />
                 </label>
 
-                <label className="block text-sm">
+                <label className="block min-w-0 text-sm">
                   <span className="text-black/60">주소 *</span>
                   <input
                     required
@@ -397,7 +397,7 @@ export default function VerumeProductPage() {
                   />
                 </label>
 
-                <label className="block text-sm">
+                <label className="block min-w-0 text-sm">
                   <span className="text-black/60">상세 주소</span>
                   <input
                     value={bankOrderForm.addressDetail}
@@ -406,7 +406,7 @@ export default function VerumeProductPage() {
                   />
                 </label>
 
-                <label className="block text-sm">
+                <label className="block min-w-0 text-sm">
                   <span className="text-black/60">입금자명 *</span>
                   <input
                     required
@@ -416,7 +416,7 @@ export default function VerumeProductPage() {
                   />
                 </label>
 
-                <label className="block text-sm">
+                <label className="block min-w-0 text-sm">
                   <span className="text-black/60">요청사항</span>
                   <textarea
                     rows={4}
@@ -426,15 +426,15 @@ export default function VerumeProductPage() {
                   />
                 </label>
 
-                <div className="grid gap-4 border-t border-black/10 pt-5 text-sm md:grid-cols-2">
-                  <div className="space-y-2 text-black/70">
+                <div className="grid min-w-0 gap-4 border-t border-black/10 pt-5 text-sm md:grid-cols-2">
+                  <div className="min-w-0 space-y-2 text-black/70">
                     <p className="font-medium text-black">주문 상품</p>
                     <p>verumé × {qty}</p>
                     <p>Light Module × {lightModule ? lightQty : 0}</p>
                     <p className="font-medium text-black">₩ {formatKRW(total)}</p>
                   </div>
 
-                  <div className="space-y-2 text-black/70">
+                  <div className="min-w-0 space-y-2 break-words text-black/70">
                     <p className="font-medium text-black">판매자 계좌정보</p>
                     <p>{BANK_NAME}</p>
                     <p>{BANK_ACCOUNT}</p>
@@ -453,7 +453,7 @@ export default function VerumeProductPage() {
                   <button
                     type="submit"
                     disabled={bankOrderSubmitting}
-                    className="w-full border border-black bg-black px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full border border-black bg-black px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 md:px-8 md:text-xs md:tracking-[0.2em]"
                   >
                     {bankOrderSubmitting ? 'Submitting...' : 'Submit Bank Transfer Order'}
                   </button>
@@ -473,7 +473,7 @@ export default function VerumeProductPage() {
                       setBankOrderComplete(false);
                       setBankOrderStatus('');
                     }}
-                    className="absolute right-6 top-6 border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.2em] md:right-8 md:top-8"
+                    className="absolute right-5 top-5 border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.16em] md:right-8 md:top-8 md:tracking-[0.2em]"
                   >
                     Close
                   </button>
@@ -507,7 +507,7 @@ export default function VerumeProductPage() {
         </div>
       </section>
 
-      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
+      <footer className="mx-auto mt-32 w-full max-w-[1200px] px-5 pb-16 text-center text-xs font-light leading-relaxed text-neutral-400 md:px-12 md:text-sm md:leading-tight">
         <div className="mb-5 flex justify-center">
           <Image
             src="/xatom-v3.png"
@@ -520,25 +520,25 @@ export default function VerumeProductPage() {
           />
         </div>
 
-        <div className="space-y-2">
-          <p>
-            © xatom - Contact.{' '}
+        <div className="mx-auto max-w-full space-y-2 [overflow-wrap:anywhere]">
+          <p className="flex flex-wrap justify-center gap-x-2 gap-y-1">
+            <span>© xatom - Contact.</span>
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
-            </a>{' '}
+            </a>
             <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
-          <p>
-            엑스아톰 xatom
-            <span className="mx-3">대표자 김대영</span>
-            <span className="mx-3">사업자등록번호 107-29-32712</span>
+          <p className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+            <span>엑스아톰 xatom</span>
+            <span>대표자 김대영</span>
+            <span>사업자등록번호 107-29-32712</span>
           </p>
 
-          <p>
-            <span className="mx-3">통신판매신고번호 제 2026-부산남구-0305 호</span>
-            <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
-            <Link href="/terms" className="mx-3">
+          <p className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+            <span>통신판매신고번호 제 2026-부산남구-0305 호</span>
+            <span>부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
+            <Link href="/terms">
               TERMS OF USE
             </Link>
           </p>
