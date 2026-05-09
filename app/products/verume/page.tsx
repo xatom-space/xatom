@@ -30,6 +30,8 @@ const imageItems = [
   { src: '/p11.jpg', alt: 'verume detail 5' },
 ] as const;
 
+const thankYouText = 'Thank You from xatom';
+
 function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -37,6 +39,91 @@ function InstagramIcon() {
       <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
       <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
     </svg>
+  );
+}
+
+function HandwrittenThankYou() {
+  return (
+    <div
+      className="thank-you-script mt-4 text-xl font-light italic text-black md:mt-5 md:text-2xl"
+      aria-label={thankYouText}
+    >
+      <span aria-hidden="true">
+        {thankYouText.split('').map((char, index) => (
+          <span
+            key={`${char}-${index}`}
+            className="thank-you-script__char"
+            style={{ animationDelay: `${0.7 + index * 0.075}s` }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        ))}
+      </span>
+      <span className="thank-you-script__line" aria-hidden="true" />
+
+      <style jsx>{`
+        .thank-you-script {
+          display: inline-flex;
+          position: relative;
+          flex-direction: column;
+          align-items: center;
+          font-family: "Apple Chancery", "Bradley Hand", "Brush Script MT", cursive;
+          letter-spacing: 0.03em;
+          line-height: 1.2;
+        }
+
+        .thank-you-script__char {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(0.35em) rotate(-3deg);
+          animation: write-char 0.38s ease-out forwards;
+        }
+
+        .thank-you-script__line {
+          display: block;
+          width: 100%;
+          height: 1px;
+          margin-top: 0.35rem;
+          transform: scaleX(0);
+          transform-origin: left center;
+          background: currentColor;
+          opacity: 0.35;
+          animation: write-line 0.9s ease-out 2.15s forwards;
+        }
+
+        @keyframes write-char {
+          0% {
+            opacity: 0;
+            transform: translateY(0.35em) rotate(-3deg);
+            filter: blur(1px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes write-line {
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .thank-you-script__char {
+            opacity: 1;
+            transform: none;
+            animation: none;
+          }
+
+          .thank-you-script__line {
+            transform: scaleX(1);
+            animation: none;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
 
@@ -490,9 +577,7 @@ export default function VerumeProductPage() {
                     <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
                       주문이 완료되었습니다
                     </p>
-                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.35em] text-black">
-                      xatom
-                    </p>
+                    <HandwrittenThankYou />
                   </div>
                 </div>
               ) : null}
