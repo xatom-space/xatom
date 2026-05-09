@@ -73,20 +73,26 @@ function HandwrittenThankYou() {
         aria-hidden="true"
       >
         {thankYouStrokes.map((stroke, index) => (
-          <path
-            key={stroke}
-            className="thank-you-script__stroke"
-            d={stroke}
-            pathLength={1}
-            style={{ animationDelay: `${0.55 + index * 0.13}s` }}
-          />
+          <g key={stroke}>
+            <path
+              className="thank-you-script__final"
+              d={stroke}
+              style={{ animationDelay: `${1.2 + index * 0.16}s` }}
+            />
+            <path
+              className="thank-you-script__stroke"
+              d={stroke}
+              pathLength={100}
+              style={{ animationDelay: `${0.5 + index * 0.16}s` }}
+            />
+          </g>
         ))}
       </svg>
 
       <style jsx>{`
         .thank-you-script {
           display: inline-block;
-          width: min(86vw, 520px);
+          width: min(88vw, 560px);
         }
 
         .thank-you-script__svg {
@@ -96,16 +102,26 @@ function HandwrittenThankYou() {
           overflow: visible;
         }
 
-        .thank-you-script__stroke {
+        .thank-you-script__stroke,
+        .thank-you-script__final {
           fill: transparent;
           stroke: #111;
-          stroke-width: 4.2;
+          stroke-width: 6;
           stroke-linecap: round;
           stroke-linejoin: round;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .thank-you-script__stroke {
           opacity: 1;
-          stroke-dasharray: 1;
-          stroke-dashoffset: 1;
-          animation: draw-thank-you-letter 0.56s cubic-bezier(0.44, 0.03, 0.2, 1) forwards;
+          stroke-dasharray: 100;
+          stroke-dashoffset: 100;
+          animation: draw-thank-you-letter 0.78s cubic-bezier(0.44, 0.03, 0.2, 1) forwards;
+        }
+
+        .thank-you-script__final {
+          opacity: 0;
+          animation: keep-thank-you-letter 0.01s linear forwards;
         }
 
         @keyframes draw-thank-you-letter {
@@ -114,9 +130,20 @@ function HandwrittenThankYou() {
           }
         }
 
+        @keyframes keep-thank-you-letter {
+          to {
+            opacity: 1;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .thank-you-script__stroke {
             stroke-dashoffset: 0;
+            animation: none;
+          }
+
+          .thank-you-script__final {
+            opacity: 1;
             animation: none;
           }
         }
