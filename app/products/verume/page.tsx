@@ -334,8 +334,8 @@ export default function VerumeProductPage() {
         </div>
 
         {bankOrderOpen ? (
-          <div className="fixed inset-0 z-50 min-h-dvh overflow-y-auto bg-black/40 px-3 py-3 backdrop-blur-sm md:px-4 md:py-10">
-            <div className="relative mx-auto flex max-h-[calc(100dvh-1.5rem)] w-full max-w-2xl flex-col overflow-hidden bg-white shadow-2xl md:max-h-[calc(100dvh-5rem)]">
+          <div className="fixed inset-0 z-50 flex min-h-dvh items-center justify-center overflow-y-auto bg-black/35 p-5 backdrop-blur-md md:p-10">
+            <div className="relative flex max-h-[82dvh] w-[88vw] max-w-2xl flex-col overflow-hidden bg-white shadow-2xl md:max-h-[calc(100dvh-5rem)] md:w-full">
               <div className="flex shrink-0 items-start justify-between gap-4 border-b border-black/10 p-5 pb-4 md:gap-6 md:p-8 md:pb-5">
                 <div className="min-w-0">
                   <p className="break-words text-[10px] uppercase tracking-[0.24em] text-black/50 md:tracking-[0.35em]">
@@ -354,7 +354,10 @@ export default function VerumeProductPage() {
                 </button>
               </div>
 
-              <form onSubmit={handleBankOrderSubmit} className="min-h-0 space-y-6 overflow-y-auto px-5 py-6 md:px-8">
+              <form
+                onSubmit={handleBankOrderSubmit}
+                className="min-h-0 space-y-6 overflow-y-auto px-5 py-6 [&_input]:text-base [&_textarea]:text-base md:px-8 md:[&_input]:text-sm md:[&_textarea]:text-sm"
+              >
                 <div className="grid gap-4 md:grid-cols-2">
                   <label className="block min-w-0 text-sm">
                     <span className="text-black/60">이름 *</span>
