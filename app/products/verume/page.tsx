@@ -31,6 +31,25 @@ const imageItems = [
 ] as const;
 
 const thankYouText = 'Thank You from xatom';
+const thankYouStrokes = [
+  'M10 18 C18 16 30 16 38 18 M24 18 C24 31 23 45 23 59',
+  'M50 18 C49 32 48 45 48 59 C51 49 56 38 64 38 C72 38 72 49 70 59',
+  'M98 40 C91 35 80 38 78 48 C76 60 90 63 97 51 C97 57 100 60 105 58',
+  'M116 59 C117 50 118 43 119 38 C121 47 128 36 136 39 C143 42 142 51 140 59',
+  'M154 18 C153 32 152 45 152 59 M153 49 C162 42 168 35 173 28 M160 45 C165 50 171 56 178 59',
+  'M212 20 C218 31 224 38 229 42 C234 35 239 27 243 20 M229 42 C228 49 227 55 226 61',
+  'M269 46 C269 38 255 36 252 46 C249 58 265 63 270 51 C271 49 271 47 269 46',
+  'M284 38 C283 46 281 56 288 58 C295 60 301 49 303 38 C302 47 302 55 307 58',
+  'M358 20 C348 18 345 28 346 39 C347 49 346 56 342 63 M337 39 C346 38 354 38 362 39',
+  'M374 59 C375 50 376 43 377 38 C379 45 384 37 391 39',
+  'M416 46 C416 38 402 36 399 46 C396 58 412 63 417 51 C418 49 418 47 416 46',
+  'M431 59 C432 50 433 43 434 38 C437 47 442 38 447 39 C453 40 451 50 451 59 C454 47 459 38 465 39 C471 40 471 50 469 59',
+  'M516 39 C523 45 530 53 537 59 M537 39 C530 45 523 53 516 59',
+  'M566 40 C559 35 548 38 546 48 C544 60 558 63 565 51 C565 57 568 60 573 58',
+  'M588 24 C587 37 586 50 586 60 M579 39 C588 38 597 38 605 39',
+  'M629 46 C629 38 615 36 612 46 C609 58 625 63 630 51 C631 49 631 47 629 46',
+  'M644 59 C645 50 646 43 647 38 C650 47 655 38 660 39 C666 40 664 50 664 59 C667 47 672 38 678 39 C684 40 684 50 682 59',
+] as const;
 
 function InstagramIcon() {
   return (
@@ -50,21 +69,24 @@ function HandwrittenThankYou() {
     >
       <svg
         className="thank-you-script__svg"
-        viewBox="0 0 460 72"
+        viewBox="0 0 692 78"
         aria-hidden="true"
       >
-        <text className="thank-you-script__stroke" x="230" y="45" textAnchor="middle">
-          {thankYouText}
-        </text>
-        <text className="thank-you-script__fill" x="230" y="45" textAnchor="middle">
-          {thankYouText}
-        </text>
+        {thankYouStrokes.map((stroke, index) => (
+          <path
+            key={stroke}
+            className="thank-you-script__stroke"
+            d={stroke}
+            pathLength={1}
+            style={{ animationDelay: `${0.55 + index * 0.13}s` }}
+          />
+        ))}
       </svg>
 
       <style jsx>{`
         .thank-you-script {
           display: inline-block;
-          width: min(78vw, 360px);
+          width: min(82vw, 430px);
         }
 
         .thank-you-script__svg {
@@ -74,52 +96,26 @@ function HandwrittenThankYou() {
           overflow: visible;
         }
 
-        .thank-you-script__stroke,
-        .thank-you-script__fill {
-          font-family: "Bradley Hand", "Noteworthy", "Segoe Print", "Comic Sans MS", cursive;
-          font-size: 34px;
-          font-style: normal;
-          font-weight: 400;
-          letter-spacing: 0.01em;
-        }
-
         .thank-you-script__stroke {
           fill: transparent;
           stroke: currentColor;
-          stroke-width: 1.1;
+          stroke-width: 2.2;
           stroke-linecap: round;
           stroke-linejoin: round;
-          stroke-dasharray: 980;
-          stroke-dashoffset: 980;
-          animation: draw-thank-you 2.15s ease-in-out 0.65s forwards;
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          animation: draw-thank-you-letter 0.52s cubic-bezier(0.44, 0.03, 0.2, 1) forwards;
         }
 
-        .thank-you-script__fill {
-          fill: currentColor;
-          opacity: 0;
-          animation: settle-thank-you 0.35s ease-out 2.55s forwards;
-        }
-
-        @keyframes draw-thank-you {
+        @keyframes draw-thank-you-letter {
           to {
             stroke-dashoffset: 0;
-          }
-        }
-
-        @keyframes settle-thank-you {
-          to {
-            opacity: 1;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .thank-you-script__stroke {
             stroke-dashoffset: 0;
-            animation: none;
-          }
-
-          .thank-you-script__fill {
-            opacity: 1;
             animation: none;
           }
         }
