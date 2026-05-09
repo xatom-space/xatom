@@ -585,19 +585,16 @@ export default function VerumeProductPage() {
               </form>
 
               {bankOrderComplete ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-white px-6 text-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setBankOrderOpen(false);
-                      setBankOrderComplete(false);
-                      setBankOrderStatus('');
-                    }}
-                    className="absolute right-5 top-5 border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.16em] md:right-8 md:top-8 md:tracking-[0.2em]"
-                  >
-                    Close
-                  </button>
-
+                <button
+                  type="button"
+                  aria-label="주문 완료 창 닫기"
+                  onClick={() => {
+                    setBankOrderOpen(false);
+                    setBankOrderComplete(false);
+                    setBankOrderStatus('');
+                  }}
+                  className="absolute inset-0 flex cursor-pointer items-center justify-center bg-white px-6 text-center"
+                >
                   <div>
                     <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
                       <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
@@ -609,7 +606,7 @@ export default function VerumeProductPage() {
                     </p>
                     <HandwrittenThankYou />
                   </div>
-                </div>
+                </button>
               ) : null}
             </div>
           </div>
