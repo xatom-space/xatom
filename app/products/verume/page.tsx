@@ -45,61 +45,81 @@ function InstagramIcon() {
 function HandwrittenThankYou() {
   return (
     <div
-      className="thank-you-script mt-4 text-2xl font-light italic text-black md:mt-5 md:text-3xl"
+      className="thank-you-script mt-4 text-black md:mt-5"
       aria-label={thankYouText}
     >
-      <span aria-hidden="true">
-        {thankYouText.split('').map((char, index) => (
-          <span
-            key={`${char}-${index}`}
-            className="thank-you-script__char"
-            style={{ animationDelay: `${0.7 + index * 0.075}s` }}
-          >
-            {char === ' ' ? '\u00A0' : char}
-          </span>
-        ))}
-      </span>
+      <svg
+        className="thank-you-script__svg"
+        viewBox="0 0 460 72"
+        aria-hidden="true"
+      >
+        <text className="thank-you-script__stroke" x="230" y="45" textAnchor="middle">
+          {thankYouText}
+        </text>
+        <text className="thank-you-script__fill" x="230" y="45" textAnchor="middle">
+          {thankYouText}
+        </text>
+      </svg>
 
       <style jsx>{`
         .thank-you-script {
           display: inline-block;
-          position: relative;
-          font-family: "Snell Roundhand", "Apple Chancery", "Baskerville Italic", "Times New Roman", cursive;
-          letter-spacing: 0.015em;
-          line-height: 1.1;
+          width: min(78vw, 360px);
         }
 
-        .thank-you-script__char {
-          display: inline-block;
-          transform-origin: left center;
-          clip-path: inset(0 100% 0 0);
+        .thank-you-script__svg {
+          display: block;
+          width: 100%;
+          height: auto;
+          overflow: visible;
+        }
+
+        .thank-you-script__stroke,
+        .thank-you-script__fill {
+          font-family: "Bradley Hand", "Noteworthy", "Segoe Print", "Comic Sans MS", cursive;
+          font-size: 34px;
+          font-style: normal;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+        }
+
+        .thank-you-script__stroke {
+          fill: transparent;
+          stroke: currentColor;
+          stroke-width: 1.1;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-dasharray: 980;
+          stroke-dashoffset: 980;
+          animation: draw-thank-you 2.15s ease-in-out 0.65s forwards;
+        }
+
+        .thank-you-script__fill {
+          fill: currentColor;
           opacity: 0;
-          animation: write-char 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+          animation: settle-thank-you 0.35s ease-out 2.55s forwards;
         }
 
-        @keyframes write-char {
-          0% {
-            opacity: 0;
-            clip-path: inset(0 100% 0 0);
-            transform: skewX(-8deg);
-            filter: blur(0.5px);
+        @keyframes draw-thank-you {
+          to {
+            stroke-dashoffset: 0;
           }
-          55% {
+        }
+
+        @keyframes settle-thank-you {
+          to {
             opacity: 1;
-          }
-          100% {
-            opacity: 1;
-            clip-path: inset(0 0 0 0);
-            transform: skewX(0deg);
-            filter: blur(0);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .thank-you-script__char {
+          .thank-you-script__stroke {
+            stroke-dashoffset: 0;
+            animation: none;
+          }
+
+          .thank-you-script__fill {
             opacity: 1;
-            clip-path: inset(0 0 0 0);
-            transform: none;
             animation: none;
           }
         }
