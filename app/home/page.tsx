@@ -325,7 +325,7 @@ export default function HomePage() {
         </form>
       </section>
 
-      <footer className="mt-32 pb-16 text-center text-sm font-light leading-tight text-neutral-400">
+      <footer className="mx-auto mt-32 w-full max-w-[1200px] px-5 pb-16 text-center text-xs font-light leading-snug text-neutral-400 md:px-12 md:text-sm md:leading-tight">
         <div className="mb-5 flex justify-center">
           <Image
             src="/xatom-v3.png"
@@ -338,25 +338,25 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="space-y-2">
-          <p>
-            © xatom - Contact.{' '}
+        <div className="mx-auto max-w-full space-y-1 [overflow-wrap:anywhere]">
+          <p className="flex flex-wrap justify-center gap-x-2 gap-y-0.5">
+            <span>© xatom - Contact.</span>
             <a className="text-emerald-600" href={`mailto:${CONTACT_TO}`}>
               {CONTACT_TO}
-            </a>{' '}
+            </a>
             <span className="text-emerald-600">+82 10-4894-8030</span>
           </p>
 
-          <p>
-            엑스아톰 xatom
-            <span className="mx-3">대표자 김대영</span>
-            <span className="mx-3">사업자등록번호 107-29-32712</span>
+          <p className="flex flex-wrap justify-center gap-x-4 gap-y-0.5">
+            <span>엑스아톰 xatom</span>
+            <span>대표자 김대영</span>
+            <span>사업자등록번호 107-29-32712</span>
           </p>
 
-          <p>
-            <span className="mx-3">통신판매신고번호 제 2026-부산남구-0305 호</span>
-            <span className="mx-3">부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
-            <Link href="/terms" className="mx-3">
+          <p className="flex flex-wrap justify-center gap-x-4 gap-y-0.5">
+            <span>통신판매신고번호 제 2026-부산남구-0305 호</span>
+            <span>부산광역시 남구 전포대로 133, 11층 101(DD-17)</span>
+            <Link href="/terms">
               TERMS OF USE
             </Link>
           </p>
