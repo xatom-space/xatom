@@ -115,7 +115,6 @@ function HandwrittenThankYou() {
           stroke-width: 6;
           stroke-linecap: round;
           stroke-linejoin: round;
-          vector-effect: non-scaling-stroke;
         }
 
         .thank-you-script__stroke {
