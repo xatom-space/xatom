@@ -52,20 +52,20 @@ const thankYouStrokes = [
 ] as const;
 
 const confettiPieces = [
-  { left: '8%', color: '#2563eb', delay: '0s', duration: '2.4s', size: 9, drift: '-18px' },
-  { left: '15%', color: '#a21caf', delay: '0.42s', duration: '2.7s', size: 7, drift: '14px' },
-  { left: '22%', color: '#22c55e', delay: '0.18s', duration: '2.5s', size: 8, drift: '-10px' },
-  { left: '29%', color: '#0ea5e9', delay: '0.72s', duration: '2.85s', size: 6, drift: '18px' },
-  { left: '36%', color: '#7c3aed', delay: '0.28s', duration: '2.45s', size: 9, drift: '-14px' },
-  { left: '43%', color: '#16a34a', delay: '0.9s', duration: '2.9s', size: 7, drift: '12px' },
-  { left: '51%', color: '#db2777', delay: '0.52s', duration: '2.6s', size: 8, drift: '-16px' },
-  { left: '58%', color: '#1d4ed8', delay: '1.05s', duration: '2.75s', size: 6, drift: '10px' },
-  { left: '64%', color: '#22c55e', delay: '0.1s', duration: '2.55s', size: 7, drift: '-12px' },
-  { left: '70%', color: '#9333ea', delay: '0.64s', duration: '2.82s', size: 9, drift: '16px' },
-  { left: '76%', color: '#0284c7', delay: '0.36s', duration: '2.48s', size: 6, drift: '-8px' },
-  { left: '82%', color: '#16a34a', delay: '1.18s', duration: '2.92s', size: 8, drift: '13px' },
-  { left: '88%', color: '#be185d', delay: '0.78s', duration: '2.66s', size: 7, drift: '-15px' },
-  { left: '93%', color: '#2563eb', delay: '1.32s', duration: '2.86s', size: 8, drift: '9px' },
+  { left: '8%', color: '#2563eb', delay: '0s', duration: '2.88s', size: 9, drift: '-18px' },
+  { left: '15%', color: '#a21caf', delay: '0.42s', duration: '3.24s', size: 7, drift: '14px' },
+  { left: '22%', color: '#22c55e', delay: '0.18s', duration: '3s', size: 8, drift: '-10px' },
+  { left: '29%', color: '#0ea5e9', delay: '0.72s', duration: '3.42s', size: 6, drift: '18px' },
+  { left: '36%', color: '#7c3aed', delay: '0.28s', duration: '2.94s', size: 9, drift: '-14px' },
+  { left: '43%', color: '#16a34a', delay: '0.9s', duration: '3.48s', size: 7, drift: '12px' },
+  { left: '51%', color: '#db2777', delay: '0.52s', duration: '3.12s', size: 8, drift: '-16px' },
+  { left: '58%', color: '#1d4ed8', delay: '1.05s', duration: '3.3s', size: 6, drift: '10px' },
+  { left: '64%', color: '#22c55e', delay: '0.1s', duration: '3.06s', size: 7, drift: '-12px' },
+  { left: '70%', color: '#9333ea', delay: '0.64s', duration: '3.38s', size: 9, drift: '16px' },
+  { left: '76%', color: '#0284c7', delay: '0.36s', duration: '2.98s', size: 6, drift: '-8px' },
+  { left: '82%', color: '#16a34a', delay: '1.18s', duration: '3.5s', size: 8, drift: '13px' },
+  { left: '88%', color: '#be185d', delay: '0.78s', duration: '3.19s', size: 7, drift: '-15px' },
+  { left: '93%', color: '#2563eb', delay: '1.32s', duration: '3.43s', size: 8, drift: '9px' },
 ] as const;
 
 function InstagramIcon() {
@@ -176,8 +176,8 @@ function HandwrittenThankYou() {
 
 function CompleteCheckIcon() {
   return (
-    <div className="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#4eea18] shadow-[0_0_18px_rgba(78,234,24,0.45)] md:h-24 md:w-24">
-      <svg className="h-11 w-12 md:h-14 md:w-14" viewBox="0 0 64 54" fill="none" aria-hidden="true">
+    <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#4eea18] shadow-[0_0_18px_rgba(78,234,24,0.45)] md:h-24 md:w-24">
+      <svg className="h-9 w-10 md:h-14 md:w-14" viewBox="0 0 64 54" fill="none" aria-hidden="true">
         <path
           d="M8 28 L23 43 L56 12"
           stroke="#050505"
@@ -238,7 +238,7 @@ function CelebrationConfetti() {
           }
           100% {
             opacity: 1;
-            transform: translate3d(var(--confetti-drift), min(86vh, 620px), 0) rotate(var(--confetti-spin));
+            transform: translate3d(var(--confetti-drift), 100dvh, 0) rotate(var(--confetti-spin));
           }
         }
 
@@ -258,7 +258,7 @@ function CelebrationConfetti() {
             }
             100% {
               opacity: 1;
-              transform: translate3d(calc(var(--confetti-drift) * 0.7), min(78vh, 500px), 0) rotate(var(--confetti-spin));
+              transform: translate3d(calc(var(--confetti-drift) * 0.7), 100dvh, 0) rotate(var(--confetti-spin));
             }
           }
         }
