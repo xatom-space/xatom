@@ -52,20 +52,20 @@ const thankYouStrokes = [
 ] as const;
 
 const confettiPieces = [
-  { left: '8%', color: '#2563eb', delay: '0s', duration: '2.88s', size: 9, drift: '-18px' },
-  { left: '15%', color: '#a21caf', delay: '0.42s', duration: '3.24s', size: 7, drift: '14px' },
-  { left: '22%', color: '#22c55e', delay: '0.18s', duration: '3s', size: 8, drift: '-10px' },
-  { left: '29%', color: '#0ea5e9', delay: '0.72s', duration: '3.42s', size: 6, drift: '18px' },
-  { left: '36%', color: '#7c3aed', delay: '0.28s', duration: '2.94s', size: 9, drift: '-14px' },
-  { left: '43%', color: '#16a34a', delay: '0.9s', duration: '3.48s', size: 7, drift: '12px' },
-  { left: '51%', color: '#db2777', delay: '0.52s', duration: '3.12s', size: 8, drift: '-16px' },
-  { left: '58%', color: '#1d4ed8', delay: '1.05s', duration: '3.3s', size: 6, drift: '10px' },
-  { left: '64%', color: '#22c55e', delay: '0.1s', duration: '3.06s', size: 7, drift: '-12px' },
-  { left: '70%', color: '#9333ea', delay: '0.64s', duration: '3.38s', size: 9, drift: '16px' },
-  { left: '76%', color: '#0284c7', delay: '0.36s', duration: '2.98s', size: 6, drift: '-8px' },
-  { left: '82%', color: '#16a34a', delay: '1.18s', duration: '3.5s', size: 8, drift: '13px' },
-  { left: '88%', color: '#be185d', delay: '0.78s', duration: '3.19s', size: 7, drift: '-15px' },
-  { left: '93%', color: '#2563eb', delay: '1.32s', duration: '3.43s', size: 8, drift: '9px' },
+  { left: '8%', color: '#2563eb', delay: '0s', duration: '3.74s', size: 9, drift: '-18px' },
+  { left: '15%', color: '#a21caf', delay: '0.42s', duration: '4.21s', size: 7, drift: '14px' },
+  { left: '22%', color: '#22c55e', delay: '0.18s', duration: '3.9s', size: 8, drift: '-10px' },
+  { left: '29%', color: '#0ea5e9', delay: '0.72s', duration: '4.45s', size: 6, drift: '18px' },
+  { left: '36%', color: '#7c3aed', delay: '0.28s', duration: '3.82s', size: 9, drift: '-14px' },
+  { left: '43%', color: '#16a34a', delay: '0.9s', duration: '4.52s', size: 7, drift: '12px' },
+  { left: '51%', color: '#db2777', delay: '0.52s', duration: '4.06s', size: 8, drift: '-16px' },
+  { left: '58%', color: '#1d4ed8', delay: '1.05s', duration: '4.29s', size: 6, drift: '10px' },
+  { left: '64%', color: '#22c55e', delay: '0.1s', duration: '3.98s', size: 7, drift: '-12px' },
+  { left: '70%', color: '#9333ea', delay: '0.64s', duration: '4.39s', size: 9, drift: '16px' },
+  { left: '76%', color: '#0284c7', delay: '0.36s', duration: '3.87s', size: 6, drift: '-8px' },
+  { left: '82%', color: '#16a34a', delay: '1.18s', duration: '4.55s', size: 8, drift: '13px' },
+  { left: '88%', color: '#be185d', delay: '0.78s', duration: '4.15s', size: 7, drift: '-15px' },
+  { left: '93%', color: '#2563eb', delay: '1.32s', duration: '4.46s', size: 8, drift: '9px' },
 ] as const;
 
 function InstagramIcon() {
