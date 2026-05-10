@@ -221,8 +221,8 @@ function CelebrationConfetti() {
           position: absolute;
           left: var(--confetti-left);
           top: -16px;
-          width: calc(var(--confetti-size) * 1.2);
-          height: calc(var(--confetti-size) * 1.2);
+          width: calc(var(--confetti-size) * 1.56);
+          height: calc(var(--confetti-size) * 1.56);
           background: var(--confetti-color);
           opacity: 0;
           animation: confetti-fall var(--confetti-duration) linear var(--confetti-delay) infinite;
