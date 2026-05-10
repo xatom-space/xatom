@@ -159,7 +159,7 @@ function HandwrittenThankYou() {
 
 function CompleteCheckIcon() {
   return (
-    <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#4eea18] shadow-[0_0_18px_rgba(78,234,24,0.45)] md:h-24 md:w-24">
+    <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#4eea18] md:h-24 md:w-24">
       <svg className="h-9 w-10 md:h-14 md:w-14" viewBox="0 0 64 54" fill="none" aria-hidden="true">
         <path
           d="M8 28 L23 43 L56 12"
