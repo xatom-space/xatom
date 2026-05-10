@@ -51,6 +51,17 @@ const thankYouStrokes = [
   'M644 59 C645 50 646 43 647 38 C650 47 655 38 660 39 C666 40 664 50 664 59 C667 47 672 38 678 39 C684 40 684 50 682 59',
 ] as const;
 
+const confettiPieces = [
+  { left: '12%', color: '#2563eb', delay: '0.02s', duration: '1.45s', size: 9, drift: '-18px' },
+  { left: '23%', color: '#a21caf', delay: '0.16s', duration: '1.65s', size: 7, drift: '14px' },
+  { left: '36%', color: '#22c55e', delay: '0.06s', duration: '1.55s', size: 8, drift: '-10px' },
+  { left: '47%', color: '#0ea5e9', delay: '0.22s', duration: '1.72s', size: 6, drift: '18px' },
+  { left: '58%', color: '#7c3aed', delay: '0.1s', duration: '1.5s', size: 9, drift: '-14px' },
+  { left: '69%', color: '#16a34a', delay: '0.28s', duration: '1.78s', size: 7, drift: '12px' },
+  { left: '79%', color: '#db2777', delay: '0.14s', duration: '1.62s', size: 8, drift: '-16px' },
+  { left: '88%', color: '#1d4ed8', delay: '0.24s', duration: '1.7s', size: 6, drift: '10px' },
+] as const;
+
 function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -149,6 +160,105 @@ function HandwrittenThankYou() {
 
           .thank-you-script__final {
             opacity: 1;
+            animation: none;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function CompleteCheckIcon() {
+  return (
+    <div className="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#7cff39] shadow-[0_0_18px_rgba(124,255,57,0.45)] md:h-24 md:w-24">
+      <svg className="h-11 w-12 md:h-14 md:w-14" viewBox="0 0 64 54" fill="none" aria-hidden="true">
+        <path
+          d="M8 28 L23 43 L56 12"
+          stroke="#050505"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function CelebrationConfetti() {
+  return (
+    <div className="complete-confetti" aria-hidden="true">
+      {confettiPieces.map((piece, index) => (
+        <span
+          key={`${piece.left}-${piece.color}`}
+          className="complete-confetti__piece"
+          style={{
+            '--confetti-left': piece.left,
+            '--confetti-color': piece.color,
+            '--confetti-delay': piece.delay,
+            '--confetti-duration': piece.duration,
+            '--confetti-size': `${piece.size}px`,
+            '--confetti-drift': piece.drift,
+            '--confetti-spin': `${index % 2 === 0 ? 180 : -180}deg`,
+          } as React.CSSProperties}
+        />
+      ))}
+
+      <style jsx>{`
+        .complete-confetti {
+          pointer-events: none;
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        .complete-confetti__piece {
+          position: absolute;
+          left: var(--confetti-left);
+          top: -16px;
+          width: var(--confetti-size);
+          height: var(--confetti-size);
+          background: var(--confetti-color);
+          opacity: 0;
+          animation: confetti-fall var(--confetti-duration) ease-in var(--confetti-delay) forwards;
+        }
+
+        @keyframes confetti-fall {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, -18px, 0) rotate(0deg);
+          }
+          12% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(var(--confetti-drift), min(58vh, 430px), 0) rotate(var(--confetti-spin));
+          }
+        }
+
+        @media (max-width: 767px) {
+          .complete-confetti__piece {
+            width: calc(var(--confetti-size) * 0.85);
+            height: calc(var(--confetti-size) * 0.85);
+          }
+
+          @keyframes confetti-fall {
+            0% {
+              opacity: 0;
+              transform: translate3d(0, -16px, 0) rotate(0deg);
+            }
+            12% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+              transform: translate3d(calc(var(--confetti-drift) * 0.7), min(54vh, 360px), 0) rotate(var(--confetti-spin));
+            }
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .complete-confetti__piece {
             animation: none;
           }
         }
@@ -595,12 +705,9 @@ export default function VerumeProductPage() {
                   }}
                   className="absolute inset-0 flex cursor-pointer items-center justify-center bg-white px-6 text-center"
                 >
+                  <CelebrationConfetti />
                   <div>
-                    <div className="relative mx-auto h-20 w-20 rounded-full border border-black/20 bg-white">
-                      <span className="absolute left-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
-                      <span className="absolute right-[24px] top-[28px] h-2 w-2 rounded-full bg-black" />
-                      <span className="absolute left-1/2 top-[43px] h-5 w-9 -translate-x-1/2 rounded-b-full border-b-2 border-l-2 border-r-2 border-black" />
-                    </div>
+                    <CompleteCheckIcon />
                     <p className="mt-6 text-lg font-medium tracking-[0.04em] text-black">
                       주문이 완료되었습니다
                     </p>
