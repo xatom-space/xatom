@@ -389,7 +389,7 @@ export default function VerumeProductPage() {
           <div>
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
               <Image
-                src="/p6.jpg"
+                src="/p6-1.jpg"
                 alt="verumé"
                 fill
                 priority
