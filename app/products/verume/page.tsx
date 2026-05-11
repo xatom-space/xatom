@@ -392,7 +392,7 @@ export default function VerumeProductPage() {
 
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
           <div>
-            <div className="relative aspect-[2/3] w-full overflow-hidden bg-black/[0.03]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
               <Image
                 src="/p6-1.jpg"
                 alt="verumé"
