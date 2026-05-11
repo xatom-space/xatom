@@ -23,11 +23,11 @@ const initialBankOrderForm = {
 };
 
 const imageItems = [
-  { src: '/p7.jpg', alt: 'verume detail 1' },
-  { src: '/p8.jpg', alt: 'verume detail 2' },
-  { src: '/p9.jpg', alt: 'verume detail 3' },
-  { src: '/p10.jpg', alt: 'verume detail 4' },
-  { src: '/p11.jpg', alt: 'verume detail 5' },
+  { desktopSrc: '/p7-desktop.jpg?v=20260511', mobileSrc: '/p7-mobile.jpg?v=20260511', alt: 'verume detail 1' },
+  { desktopSrc: '/p8-desktop.jpg?v=20260511', mobileSrc: '/p8-mobile.jpg?v=20260511', alt: 'verume detail 2' },
+  { desktopSrc: '/p9-desktop.jpg?v=20260511', mobileSrc: '/p9-mobile.jpg?v=20260511', alt: 'verume detail 3' },
+  { desktopSrc: '/p10-desktop.jpg?v=20260511', mobileSrc: '/p10-mobile.jpg?v=20260511', alt: 'verume detail 4' },
+  { desktopSrc: '/p11-desktop.jpg?v=20260511', mobileSrc: '/p11-mobile.jpg?v=20260511', alt: 'verume detail 5' },
 ] as const;
 
 const thankYouText = 'Thank You from xatom';
@@ -178,24 +178,29 @@ function formatKRW(n: number) {
 }
 
 function GalleryImage({
-  src,
+  desktopSrc,
+  mobileSrc,
   alt,
   eager = false,
 }: {
-  src: string;
+  desktopSrc: string;
+  mobileSrc: string;
   alt: string;
   eager?: boolean;
 }) {
   return (
     <div className="w-full overflow-hidden bg-white">
-      <img
-        src={src}
-        alt={alt}
-        loading={eager ? 'eager' : 'lazy'}
-        decoding="async"
-        fetchPriority={eager ? 'high' : 'auto'}
-        className="block h-auto w-full"
-      />
+      <picture>
+        <source media="(max-width: 767px)" srcSet={mobileSrc} />
+        <img
+          src={desktopSrc}
+          alt={alt}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={eager ? 'high' : 'auto'}
+          className="block h-auto w-full"
+        />
+      </picture>
     </div>
   );
 }
@@ -625,12 +630,12 @@ export default function VerumeProductPage() {
         ) : null}
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
-          <GalleryImage src={imageItems[0].src} alt={imageItems[0].alt} eager />
-          <GalleryImage src={imageItems[1].src} alt={imageItems[1].alt} />
-          <ManagedVideoBlock src="/m1.mp4" poster="/p8.jpg" />
-          <GalleryImage src={imageItems[2].src} alt={imageItems[2].alt} />
-          <GalleryImage src={imageItems[3].src} alt={imageItems[3].alt} />
-          <GalleryImage src={imageItems[4].src} alt={imageItems[4].alt} />
+          <GalleryImage desktopSrc={imageItems[0].desktopSrc} mobileSrc={imageItems[0].mobileSrc} alt={imageItems[0].alt} eager />
+          <GalleryImage desktopSrc={imageItems[1].desktopSrc} mobileSrc={imageItems[1].mobileSrc} alt={imageItems[1].alt} />
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260511" />
+          <GalleryImage desktopSrc={imageItems[2].desktopSrc} mobileSrc={imageItems[2].mobileSrc} alt={imageItems[2].alt} />
+          <GalleryImage desktopSrc={imageItems[3].desktopSrc} mobileSrc={imageItems[3].mobileSrc} alt={imageItems[3].alt} />
+          <GalleryImage desktopSrc={imageItems[4].desktopSrc} mobileSrc={imageItems[4].mobileSrc} alt={imageItems[4].alt} />
         </div>
       </section>
 
