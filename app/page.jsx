@@ -19,41 +19,56 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center md:-translate-y-[54px]">
-        {/* 로고 */}
-        <Link href="/home" aria-label="Go to home">
+      <div className="relative z-20 flex h-full w-full items-center justify-center px-8 md:-translate-y-[54px] md:px-16">
+        <Link
+          href="/home"
+          aria-label="Go to home"
+          className="flex items-center gap-7 md:gap-24"
+        >
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[162px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[216px]"
+            className="block h-[136px] w-auto max-w-[42vw] object-contain opacity-100 brightness-100 md:h-[250px] md:max-w-none"
           />
-        </Link>
 
-        {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
-        <div className="intro-tagline -mt-5 flex flex-col items-start gap-1 text-left text-[19px] font-bold leading-none tracking-wide text-black md:-mt-8 md:text-[22px]">
-          <span>DESIGN</span>
-          <span>IP</span>
-          <span>BUSINESS</span>
-        </div>
+          <div className="intro-tagline flex flex-col items-start text-left text-black">
+            <span className="intro-word intro-word-brand mb-5 text-[38px] font-medium leading-none tracking-[0.16em] md:mb-9 md:text-[72px] md:tracking-[0.15em]">
+              xatom
+            </span>
+            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+              DESIGN
+            </span>
+            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+              IP
+            </span>
+            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+              BUSINESS
+            </span>
+          </div>
+        </Link>
       </div>
 
       <style>{`
-        .intro-tagline span {
+        .intro-word {
           opacity: 0;
           transform: translateY(8px);
           animation: intro-word-in 520ms ease-out forwards;
         }
 
-        .intro-tagline span:nth-child(1) {
-          animation-delay: 2s;
+        .intro-word:nth-child(1) {
+          animation-delay: 1.7s;
         }
 
-        .intro-tagline span:nth-child(2) {
-          animation-delay: 2.45s;
+        .intro-word:nth-child(2) {
+          animation-delay: 2.15s;
         }
 
-        .intro-tagline span:nth-child(3) {
-          animation-delay: 2.9s;
+        .intro-word:nth-child(3) {
+          animation-delay: 2.6s;
+        }
+
+        .intro-word:nth-child(4) {
+          animation-delay: 3.05s;
         }
 
         @keyframes intro-word-in {
