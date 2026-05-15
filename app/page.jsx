@@ -19,11 +19,11 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 -translate-y-[27px] md:-translate-y-[54px] md:px-16">
+      <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 translate-y-0 md:-translate-y-[54px] md:px-16">
         <Link
           href="/home"
           aria-label="Go to home"
-          className="flex flex-col items-center gap-4 md:flex-row md:gap-[60px]"
+          className="flex flex-col items-center gap-3 md:flex-row md:gap-[60px]"
         >
           <img
             src="/xatom-v1.png?v=20260515-2"
