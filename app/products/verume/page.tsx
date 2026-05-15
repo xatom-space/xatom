@@ -365,7 +365,7 @@ export default function VerumeProductPage() {
   };
 
   return (
-    <main className="overflow-x-hidden bg-white text-black">
+    <main className="overflow-x-clip bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between py-5 md:py-0">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
