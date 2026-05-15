@@ -18,6 +18,7 @@ export default function IntroPage() {
 
     video.muted = true;
     video.defaultMuted = true;
+    video.loop = false;
     video.playsInline = true;
     video.preload = 'auto';
     video.load();
@@ -50,7 +51,6 @@ export default function IntroPage() {
         ref={videoRef}
         className="absolute inset-0 z-0 h-full w-full object-cover object-bottom opacity-100 brightness-100 md:origin-bottom md:scale-125 md:object-bottom"
         autoPlay
-        loop
         muted
         playsInline
         preload="auto"
