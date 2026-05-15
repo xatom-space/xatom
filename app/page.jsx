@@ -23,7 +23,7 @@ export default function IntroPage() {
         preload="auto"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source src="/intro-v2.mp4?v=2" type="video/mp4" />
+        <source src="/intro-v2.mp4?v=20260515" type="video/mp4" />
       </video>
 
       {/* 어두운 오버레이 */}
@@ -34,7 +34,7 @@ export default function IntroPage() {
         {/* 로고 */}
         <Link href="/home" aria-label="Go to home">
           <img
-            src="/xatomlogo-v2.png"
+            src="/xatom-v1.png"
             alt="xatom logo"
             className="h-[80px] w-auto object-contain"
           />
