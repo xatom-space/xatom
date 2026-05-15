@@ -393,7 +393,7 @@ export default function VerumeProductPage() {
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Product</p>
 
         <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
-          <div>
+          <div className="relative left-1/2 w-screen -translate-x-1/2 md:static md:w-full md:translate-x-0">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
               <Image
                 src="/p6-1.jpg"
@@ -631,7 +631,7 @@ export default function VerumeProductPage() {
           </div>
         ) : null}
 
-        <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
+        <div className="relative left-1/2 mt-20 w-screen -translate-x-1/2 space-y-6 md:static md:mt-32 md:w-full md:translate-x-0 md:space-y-8">
           {imageItems.slice(0, 2).map((item, index) => (
             <GalleryImage
               key={item.desktopSrc}
