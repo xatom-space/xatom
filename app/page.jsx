@@ -1,16 +1,6 @@
-'use client';
-
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 export default function IntroPage() {
-  const [showText, setShowText] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setShowText(true), 2000);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
@@ -40,16 +30,23 @@ export default function IntroPage() {
         </Link>
 
         {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
-        <p
-          className={[
-            '-mt-6 text-[16px] text-black tracking-wide md:-mt-9 md:text-lg',
-            'transition-all duration-700 ease-out',
-            showText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-          ].join(' ')}
-        >
+        <p className="intro-tagline -mt-6 translate-y-2 text-[16px] tracking-wide text-black opacity-0 md:-mt-9 md:text-lg">
           Objects for Spatial Density
         </p>
       </div>
+
+      <style>{`
+        .intro-tagline {
+          animation: intro-tagline-in 700ms ease-out 2s forwards;
+        }
+
+        @keyframes intro-tagline-in {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }
