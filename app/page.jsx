@@ -30,7 +30,7 @@ export default function IntroPage() {
         </Link>
 
         {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
-        <div className="intro-tagline -mt-5 flex translate-y-2 flex-col items-center gap-1 text-[19px] font-bold leading-none tracking-wide text-black opacity-0 md:-mt-8 md:text-[22px]">
+        <div className="intro-tagline -mt-5 flex flex-col items-start gap-1 text-left text-[19px] font-bold leading-none tracking-wide text-black md:-mt-8 md:text-[22px]">
           <span>DESIGN</span>
           <span>IP</span>
           <span>BUSINESS</span>
@@ -38,11 +38,25 @@ export default function IntroPage() {
       </div>
 
       <style>{`
-        .intro-tagline {
-          animation: intro-tagline-in 700ms ease-out 2s forwards;
+        .intro-tagline span {
+          opacity: 0;
+          transform: translateY(8px);
+          animation: intro-word-in 520ms ease-out forwards;
         }
 
-        @keyframes intro-tagline-in {
+        .intro-tagline span:nth-child(1) {
+          animation-delay: 2s;
+        }
+
+        .intro-tagline span:nth-child(2) {
+          animation-delay: 2.45s;
+        }
+
+        .intro-tagline span:nth-child(3) {
+          animation-delay: 2.9s;
+        }
+
+        @keyframes intro-word-in {
           to {
             opacity: 1;
             transform: translateY(0);
