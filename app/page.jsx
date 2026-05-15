@@ -19,7 +19,7 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="relative z-20 flex h-full w-full items-center justify-center px-8 md:-translate-y-[54px] md:px-16">
+      <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 md:-translate-y-[54px] md:px-16">
         <Link
           href="/home"
           aria-label="Go to home"
@@ -51,6 +51,10 @@ export default function IntroPage() {
       </div>
 
       <style>{`
+        .intro-lockup {
+          animation: intro-lockup-in 360ms ease-out 0.85s forwards;
+        }
+
         .intro-word {
           opacity: 0;
           transform: translateY(8px);
@@ -58,19 +62,25 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(1) {
-          animation-delay: 3s;
+          animation-delay: 5s;
         }
 
         .intro-word:nth-child(2) {
-          animation-delay: 3.45s;
+          animation-delay: 5.45s;
         }
 
         .intro-word:nth-child(3) {
-          animation-delay: 3.9s;
+          animation-delay: 5.9s;
         }
 
         .intro-word:nth-child(4) {
-          animation-delay: 4.35s;
+          animation-delay: 6.35s;
+        }
+
+        @keyframes intro-lockup-in {
+          to {
+            opacity: 1;
+          }
         }
 
         @keyframes intro-word-in {
