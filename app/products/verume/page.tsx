@@ -365,7 +365,7 @@ export default function VerumeProductPage() {
   };
 
   return (
-    <main className="bg-white text-black">
+    <main className="overflow-x-hidden bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -393,8 +393,8 @@ export default function VerumeProductPage() {
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Product</p>
 
         <div className="mt-8 grid min-w-0 gap-12 md:grid-cols-2 md:items-start">
-          <div className="relative left-1/2 w-screen -translate-x-1/2 justify-self-center md:static md:w-full md:translate-x-0">
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
+          <div className="min-w-0 w-full">
+            <div className="relative left-1/2 aspect-[4/5] w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden bg-black/[0.03] md:static md:w-full md:translate-x-0">
               <Image
                 src="/p6-1.jpg"
                 alt="verumé"
@@ -464,7 +464,7 @@ export default function VerumeProductPage() {
                     setBankOrderStatus('');
                     setBankOrderComplete(false);
                   }}
-                  className="block w-full max-w-full border border-black/20 px-3 py-3 text-center text-[10px] uppercase tracking-[0.1em] text-black transition hover:bg-black hover:text-white md:px-8 md:text-xs md:tracking-[0.2em]"
+                  className="block w-full max-w-full whitespace-nowrap border border-black/20 px-3 py-3 text-center text-[10px] uppercase tracking-[0.08em] text-black transition hover:bg-black hover:text-white md:px-8 md:text-xs md:tracking-[0.2em]"
                 >
                   Bank Transfer Order
                 </button>
