@@ -33,7 +33,7 @@ export default function IntroPage() {
 
           <div className="intro-tagline flex flex-col items-start text-left text-black">
             <img
-              src="/xatom-v3-20260515.png"
+              src="/xatom-v3-trimmed.png?v=20260515"
               alt="xatom"
               className="intro-word mb-6 block w-[105px] self-start object-contain object-left md:mb-10 md:w-[231px]"
             />
