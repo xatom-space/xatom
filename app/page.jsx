@@ -54,10 +54,11 @@ export default function IntroPage() {
         muted
         playsInline
         preload="auto"
+        poster="/intro-mobile-poster.jpg?v=20260515"
         fetchPriority="high"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-8" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-9" type="video/mp4" />
         <source src="/intro-v2.mp4?v=20260515-11" type="video/mp4" />
       </video>
 
