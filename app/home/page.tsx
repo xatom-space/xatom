@@ -143,11 +143,11 @@ export default function HomePage() {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const productImages = [
-    { desktopSrc: '/p1.jpg', mobileSrc: '/p1-home-mobile.jpg?v=20260515' },
-    { desktopSrc: '/p2.jpg', mobileSrc: '/p2-home-mobile.jpg?v=20260515' },
-    { desktopSrc: '/p3.jpg', mobileSrc: '/p3-home-mobile.jpg?v=20260515' },
-    { desktopSrc: '/p4.jpg', mobileSrc: '/p4-home-mobile.jpg?v=20260515' },
-    { desktopSrc: '/p5.jpg', mobileSrc: '/p5-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p1-home-desktop.jpg?v=20260515', mobileSrc: '/p1-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p2-home-desktop.jpg?v=20260515', mobileSrc: '/p2-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p3-home-desktop.jpg?v=20260515', mobileSrc: '/p3-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p4-home-desktop.jpg?v=20260515', mobileSrc: '/p4-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p5-home-desktop.jpg?v=20260515', mobileSrc: '/p5-home-mobile.jpg?v=20260515' },
   ];
   const CONTACT_TO = 'xatom.space@gmail.com';
 
