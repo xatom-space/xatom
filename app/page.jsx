@@ -5,18 +5,24 @@ export default function IntroPage() {
     <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
       <video
-        className="absolute inset-0 z-0 h-full w-full object-cover object-bottom opacity-100 brightness-100 md:origin-bottom md:scale-125 md:object-bottom"
+        className="absolute inset-0 z-0 block h-full w-full object-cover object-bottom opacity-100 brightness-100 md:hidden"
         autoPlay
         muted
         playsInline
         preload="auto"
         poster="/intro-mobile-poster.jpg?v=20260515"
         fetchPriority="high"
-      >
-        {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-11" type="video/mp4" />
-        <source src="/intro-v2.mp4?v=20260515-11" type="video/mp4" />
-      </video>
+        src="/intro-v3.mp4?v=20260515-12"
+      />
+      <video
+        className="absolute inset-0 z-0 hidden h-full w-full origin-bottom scale-125 object-cover object-bottom opacity-100 brightness-100 md:block"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        fetchPriority="high"
+        src="/intro-v2.mp4?v=20260515-12"
+      />
 
       {/* 중앙 영역 (로고 + 문구) */}
       <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 translate-y-[21px] md:-translate-y-[54px] md:px-16">
