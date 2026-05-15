@@ -35,15 +35,15 @@ export default function IntroPage() {
             <img
               src="/xatom-v3-20260515.png"
               alt="xatom"
-              className="intro-word mb-6 block w-[105px] object-contain md:mb-10 md:w-[231px]"
+              className="intro-word mb-6 block w-[105px] self-start object-contain object-left md:mb-10 md:w-[231px]"
             />
-            <span className="intro-word text-[19px] font-medium leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
+            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
               DESIGN
             </span>
-            <span className="intro-word text-[19px] font-medium leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
+            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
               IP
             </span>
-            <span className="intro-word text-[19px] font-medium leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
+            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
               BUSINESS
             </span>
           </div>
