@@ -23,7 +23,7 @@ export default function IntroPage() {
         preload="auto"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source src="/intro-v2.mp4?v=20260515" type="video/mp4" />
+        <source src="/intro-v2.mp4?v=20260515-3" type="video/mp4" />
       </video>
 
       {/* 어두운 오버레이 */}
@@ -36,14 +36,14 @@ export default function IntroPage() {
           <img
             src="/xatom-v1.png"
             alt="xatom logo"
-            className="h-[80px] w-auto object-contain"
+            className="h-[320px] w-auto max-w-[86vw] object-contain"
           />
         </Link>
 
         {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
         <p
           className={[
-            'mt-6 text-white text-2xl tracking-wide',
+            'mt-6 text-black text-2xl tracking-wide',
             'transition-all duration-700 ease-out',
             showText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
           ].join(' ')}
