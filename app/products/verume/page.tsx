@@ -656,7 +656,7 @@ export default function VerumeProductPage() {
       <footer className="mx-auto mt-32 w-full max-w-[1200px] px-5 pb-16 text-center text-xs font-light leading-snug text-neutral-400 md:px-12 md:text-sm md:leading-tight">
         <div className="mb-5 flex justify-center">
           <Image
-            src="/xatom-v3.png?v=20260515-1"
+            src="/xatom-v3-20260515.png"
             alt="xatom footer logo"
             width={220}
             height={80}
