@@ -1,29 +1,50 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function IntroPage() {
   const [showText, setShowText] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setShowText(true), 2000); // 2초 후 문구 표시
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+
+    const playVideo = () => {
+      video.play().catch(() => {});
+    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+      return;
+    }
+
+    video.addEventListener('canplay', playVideo, { once: true });
+    return () => video.removeEventListener('canplay', playVideo);
+  }, []);
+
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-white">
       {/* 배경 영상 */}
       <video
-        className="absolute inset-0 z-0 h-full w-full object-cover md:scale-125"
+        ref={videoRef}
+        className="absolute inset-0 z-0 h-full w-full object-cover object-center md:origin-bottom md:scale-125 md:object-bottom"
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="auto"\n        poster="/intro-bg.jpg"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source src="/intro-v2.mp4?v=20260515-6" type="video/mp4" />
+        <source src="/intro-v2.mp4?v=20260515-7" type="video/mp4" />
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
