@@ -68,14 +68,14 @@ export default function IntroPage() {
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[320px]"
+            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[240px]"
           />
         </Link>
 
         {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
         <p
           className={[
-            '-mt-6 text-[17px] text-black tracking-wide md:-mt-12 md:text-2xl',
+            '-mt-6 text-[17px] text-black tracking-wide md:-mt-9 md:text-lg',
             'transition-all duration-700 ease-out',
             showText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
           ].join(' ')}
