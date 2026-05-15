@@ -23,11 +23,13 @@ const initialBankOrderForm = {
 };
 
 const imageItems = [
-  { desktopSrc: '/p7-desktop.jpg?v=20260511', mobileSrc: '/p7-mobile.jpg?v=20260511', alt: 'verume detail 1' },
-  { desktopSrc: '/p8-desktop.jpg?v=20260511', mobileSrc: '/p8-mobile.jpg?v=20260511', alt: 'verume detail 2' },
-  { desktopSrc: '/p9-desktop.jpg?v=20260511', mobileSrc: '/p9-mobile.jpg?v=20260511', alt: 'verume detail 3' },
-  { desktopSrc: '/p10-desktop.jpg?v=20260511', mobileSrc: '/p10-mobile.jpg?v=20260511', alt: 'verume detail 4' },
-  { desktopSrc: '/p11-desktop.jpg?v=20260511', mobileSrc: '/p11-mobile.jpg?v=20260511', alt: 'verume detail 5' },
+  { desktopSrc: '/p7.jpg?v=20260515', mobileSrc: '/p7-mobile.jpg?v=20260515', alt: 'verume detail 1' },
+  { desktopSrc: '/p8.jpg?v=20260515', mobileSrc: '/p8-mobile.jpg?v=20260515', alt: 'verume detail 2' },
+  { desktopSrc: '/p9.jpg?v=20260515', mobileSrc: '/p9-mobile.jpg?v=20260515', alt: 'verume detail 3' },
+  { desktopSrc: '/p10.jpg?v=20260515', mobileSrc: '/p10-mobile.jpg?v=20260515', alt: 'verume detail 4' },
+  { desktopSrc: '/p11.jpg?v=20260515', mobileSrc: '/p11-mobile.jpg?v=20260515', alt: 'verume detail 5' },
+  { desktopSrc: '/p12.jpg?v=20260515', mobileSrc: '/p12-mobile.jpg?v=20260515', alt: 'verume detail 6' },
+  { desktopSrc: '/p13.jpg?v=20260515', mobileSrc: '/p13-mobile.jpg?v=20260515', alt: 'verume detail 7' },
 ] as const;
 
 const thankYouText = 'Thank You from xatom';
@@ -630,12 +632,24 @@ export default function VerumeProductPage() {
         ) : null}
 
         <div className="mt-20 space-y-6 md:mt-32 md:space-y-8">
-          <GalleryImage desktopSrc={imageItems[0].desktopSrc} mobileSrc={imageItems[0].mobileSrc} alt={imageItems[0].alt} eager />
-          <GalleryImage desktopSrc={imageItems[1].desktopSrc} mobileSrc={imageItems[1].mobileSrc} alt={imageItems[1].alt} />
-          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260511" />
-          <GalleryImage desktopSrc={imageItems[2].desktopSrc} mobileSrc={imageItems[2].mobileSrc} alt={imageItems[2].alt} />
-          <GalleryImage desktopSrc={imageItems[3].desktopSrc} mobileSrc={imageItems[3].mobileSrc} alt={imageItems[3].alt} />
-          <GalleryImage desktopSrc={imageItems[4].desktopSrc} mobileSrc={imageItems[4].mobileSrc} alt={imageItems[4].alt} />
+          {imageItems.slice(0, 2).map((item, index) => (
+            <GalleryImage
+              key={item.desktopSrc}
+              desktopSrc={item.desktopSrc}
+              mobileSrc={item.mobileSrc}
+              alt={item.alt}
+              eager={index === 0}
+            />
+          ))}
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260515" />
+          {imageItems.slice(2).map((item) => (
+            <GalleryImage
+              key={item.desktopSrc}
+              desktopSrc={item.desktopSrc}
+              mobileSrc={item.mobileSrc}
+              alt={item.alt}
+            />
+          ))}
         </div>
       </section>
 
