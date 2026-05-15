@@ -91,19 +91,19 @@ export default function IntroPage() {
 
         @media (min-width: 768px) {
           .intro-word:nth-child(1) {
-            animation-delay: 1.5s;
+            animation-delay: 2.5s;
           }
 
           .intro-word:nth-child(2) {
-            animation-delay: 1.95s;
+            animation-delay: 2.95s;
           }
 
           .intro-word:nth-child(3) {
-            animation-delay: 2.4s;
+            animation-delay: 3.4s;
           }
 
           .intro-word:nth-child(4) {
-            animation-delay: 2.85s;
+            animation-delay: 3.85s;
           }
         }
 
