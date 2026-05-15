@@ -62,19 +62,19 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(1) {
-          animation-delay: 5s;
+          animation-delay: 2s;
         }
 
         .intro-word:nth-child(2) {
-          animation-delay: 5.45s;
+          animation-delay: 2.45s;
         }
 
         .intro-word:nth-child(3) {
-          animation-delay: 5.9s;
+          animation-delay: 2.9s;
         }
 
         .intro-word:nth-child(4) {
-          animation-delay: 6.35s;
+          animation-delay: 3.35s;
         }
 
         @keyframes intro-lockup-in {
