@@ -62,7 +62,7 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center md:-translate-y-[108px]">
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center md:-translate-y-[54px]">
         {/* 로고 */}
         <Link href="/home" aria-label="Go to home">
           <img
