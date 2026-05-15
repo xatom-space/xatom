@@ -23,25 +23,27 @@ export default function IntroPage() {
         <Link
           href="/home"
           aria-label="Go to home"
-          className="flex items-center gap-7 md:gap-24"
+          className="flex items-center gap-6 md:gap-[86px]"
         >
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[136px] w-auto max-w-[42vw] object-contain opacity-100 brightness-100 md:h-[250px] md:max-w-none"
+            className="block h-[136px] w-auto max-w-[42vw] object-contain opacity-100 brightness-100 md:h-[258px] md:max-w-none"
           />
 
           <div className="intro-tagline flex flex-col items-start text-left text-black">
-            <span className="intro-word intro-word-brand mb-5 text-[38px] font-medium leading-none tracking-[0.16em] md:mb-9 md:text-[72px] md:tracking-[0.15em]">
-              xatom
-            </span>
-            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+            <img
+              src="/xatom-v3-20260515.png"
+              alt="xatom"
+              className="intro-word mb-6 block w-[150px] object-contain md:mb-10 md:w-[330px]"
+            />
+            <span className="intro-word text-[19px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
               DESIGN
             </span>
-            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+            <span className="intro-word text-[19px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
               IP
             </span>
-            <span className="intro-word text-[20px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[34px]">
+            <span className="intro-word text-[19px] font-semibold leading-[1.28] tracking-[0.24em] md:text-[31px] md:tracking-[0.25em]">
               BUSINESS
             </span>
           </div>
@@ -56,19 +58,19 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(1) {
-          animation-delay: 1.7s;
+          animation-delay: 3s;
         }
 
         .intro-word:nth-child(2) {
-          animation-delay: 2.15s;
+          animation-delay: 3.45s;
         }
 
         .intro-word:nth-child(3) {
-          animation-delay: 2.6s;
+          animation-delay: 3.9s;
         }
 
         .intro-word:nth-child(4) {
-          animation-delay: 3.05s;
+          animation-delay: 4.35s;
         }
 
         @keyframes intro-word-in {
