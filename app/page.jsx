@@ -19,19 +19,19 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="relative z-20 flex h-full w-full items-center justify-center px-8 md:-translate-y-[54px] md:px-16">
+      <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 -translate-y-[42px] md:-translate-y-[54px] md:px-16">
         <Link
           href="/home"
           aria-label="Go to home"
-          className="flex items-center gap-4 md:gap-[60px]"
+          className="flex flex-col items-center gap-5 md:flex-row md:gap-[60px]"
         >
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[136px] w-auto max-w-[42vw] object-contain opacity-100 brightness-100 md:h-[258px] md:max-w-none"
+            className="block h-[136px] w-auto max-w-[52vw] object-contain opacity-100 brightness-100 md:h-[258px] md:max-w-none"
           />
 
-          <div className="intro-tagline flex flex-col items-start text-left text-black">
+          <div className="intro-tagline flex flex-col items-start self-center text-left text-black md:self-auto">
             <img
               src="/xatom-v3-trimmed.png?v=20260515"
               alt="xatom"
@@ -51,6 +51,10 @@ export default function IntroPage() {
       </div>
 
       <style>{`
+        .intro-lockup {
+          animation: intro-lockup-in 360ms ease-out 0.85s forwards;
+        }
+
         .intro-word {
           opacity: 0;
           transform: translateY(8px);
@@ -71,6 +75,12 @@ export default function IntroPage() {
 
         .intro-word:nth-child(4) {
           animation-delay: 4.85s;
+        }
+
+        @keyframes intro-lockup-in {
+          to {
+            opacity: 1;
+          }
         }
 
         @keyframes intro-word-in {
