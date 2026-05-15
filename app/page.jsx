@@ -16,19 +16,31 @@ export default function IntroPage() {
     const video = videoRef.current;
     if (!video) return;
 
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
     video.load();
 
     const playVideo = () => {
       video.play().catch(() => {});
     };
 
+    playVideo();
+
     if (video.readyState >= 2) {
       playVideo();
       return;
     }
 
+    video.addEventListener('loadedmetadata', playVideo, { once: true });
+    video.addEventListener('loadeddata', playVideo, { once: true });
     video.addEventListener('canplay', playVideo, { once: true });
-    return () => video.removeEventListener('canplay', playVideo);
+    return () => {
+      video.removeEventListener('loadedmetadata', playVideo);
+      video.removeEventListener('loadeddata', playVideo);
+      video.removeEventListener('canplay', playVideo);
+    };
   }, []);
 
   return (
@@ -36,16 +48,17 @@ export default function IntroPage() {
       {/* 배경 영상 */}
       <video
         ref={videoRef}
-        className="absolute inset-0 z-0 h-full w-full object-cover object-bottom md:origin-bottom md:scale-125 md:object-bottom"
+        className="absolute inset-0 z-0 h-full w-full object-cover object-bottom opacity-100 brightness-100 md:origin-bottom md:scale-125 md:object-bottom"
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        fetchPriority="high"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-5" type="video/mp4" />
-        <source src="/intro-v2.mp4?v=20260515-10" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-6" type="video/mp4" />
+        <source src="/intro-v2.mp4?v=20260515-11" type="video/mp4" />
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
@@ -55,7 +68,7 @@ export default function IntroPage() {
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[180px] w-auto max-w-[86vw] object-contain md:h-[320px]"
+            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[320px]"
           />
         </Link>
 
