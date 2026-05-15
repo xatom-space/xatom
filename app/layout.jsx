@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
-        <link rel="preload" as="video" href="/intro-v3.mp4?v=20260515-4" type="video/mp4" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="video" href="/intro-v3.mp4?v=20260515-5" type="video/mp4" media="(max-width: 767px)" fetchPriority="high" />
         <link rel="preload" as="video" href="/intro-v2.mp4?v=20260515-10" type="video/mp4" media="(min-width: 768px)" fetchPriority="high" />
       </head>
       <body>

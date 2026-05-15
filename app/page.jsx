@@ -44,7 +44,7 @@ export default function IntroPage() {
         preload="auto"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-4" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-5" type="video/mp4" />
         <source src="/intro-v2.mp4?v=20260515-10" type="video/mp4" />
       </video>
 
