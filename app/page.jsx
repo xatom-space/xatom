@@ -57,7 +57,7 @@ export default function IntroPage() {
         fetchPriority="high"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-6" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-7" type="video/mp4" />
         <source src="/intro-v2.mp4?v=20260515-11" type="video/mp4" />
       </video>
 
