@@ -185,7 +185,7 @@ export default function HomePage() {
   return (
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex h-50 items-center justify-between">
+        <nav className="section-shell flex h-50 items-center justify-between py-5 md:py-0">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
