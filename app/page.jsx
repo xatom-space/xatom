@@ -62,13 +62,13 @@ export default function IntroPage() {
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
-      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center">
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center md:-translate-y-[108px]">
         {/* 로고 */}
         <Link href="/home" aria-label="Go to home">
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[240px]"
+            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[216px]"
           />
         </Link>
 
