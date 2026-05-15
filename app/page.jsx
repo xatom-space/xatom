@@ -57,7 +57,7 @@ export default function IntroPage() {
         fetchPriority="high"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-7" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-8" type="video/mp4" />
         <source src="/intro-v2.mp4?v=20260515-11" type="video/mp4" />
       </video>
 
@@ -68,14 +68,14 @@ export default function IntroPage() {
           <img
             src="/xatom-v1.png?v=20260515-2"
             alt="xatom logo"
-            className="block h-[180px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[216px]"
+            className="block h-[162px] w-auto max-w-[86vw] object-contain opacity-100 brightness-100 md:h-[216px]"
           />
         </Link>
 
         {/* 2초 후 나타나는 문구 (크기 키움, 마침표 없음) */}
         <p
           className={[
-            '-mt-6 text-[17px] text-black tracking-wide md:-mt-9 md:text-lg',
+            '-mt-6 text-[16px] text-black tracking-wide md:-mt-9 md:text-lg',
             'transition-all duration-700 ease-out',
             showText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
           ].join(' ')}
