@@ -36,15 +36,17 @@ export default function IntroPage() {
       {/* 배경 영상 */}
       <video
         ref={videoRef}
-        className="absolute inset-0 z-0 h-full w-full object-cover object-center md:origin-bottom md:scale-125 md:object-bottom"
+        className="absolute inset-0 z-0 h-full w-full object-cover object-bottom md:origin-bottom md:scale-125 md:object-bottom"
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"\n        poster="/intro-bg.jpg"
+        preload="auto"
+        poster="/intro-bg.jpg"
       >
         {/* 캐시 방지용 버전 파라미터 */}
-        <source src="/intro-v2.mp4?v=20260515-7" type="video/mp4" />
+        <source media="(max-width: 767px)" src="/intro-v3.mp4?v=20260515-3" type="video/mp4" />
+        <source src="/intro-v2.mp4?v=20260515-9" type="video/mp4" />
       </video>
 
       {/* 중앙 영역 (로고 + 문구) */}
