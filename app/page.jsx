@@ -55,6 +55,12 @@ export default function IntroPage() {
           animation: intro-lockup-in 360ms ease-out 0.85s forwards;
         }
 
+        @media (min-width: 768px) {
+          .intro-lockup {
+            animation-delay: 1.35s;
+          }
+        }
+
         .intro-word {
           opacity: 0;
           transform: translateY(8px);
