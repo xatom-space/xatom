@@ -23,7 +23,7 @@ export default function IntroPage() {
         <Link
           href="/home"
           aria-label="Go to home"
-          className="flex items-center gap-6 md:gap-[86px]"
+          className="flex items-center gap-4 md:gap-[60px]"
         >
           <img
             src="/xatom-v1.png?v=20260515-2"
