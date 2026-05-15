@@ -44,7 +44,7 @@ export default function IntroPage() {
   }, []);
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-white">
+    <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
       <video
         ref={videoRef}

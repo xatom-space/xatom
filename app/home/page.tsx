@@ -14,7 +14,7 @@ function InstagramIcon() {
   );
 }
 
-function ProductCarousel({ images }: { images: string[] }) {
+function ProductCarousel({ images }: { images: { desktopSrc: string; mobileSrc: string }[] }) {
   const slides = useMemo(() => images.slice(0, 5), [images]);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -103,15 +103,18 @@ function ProductCarousel({ images }: { images: string[] }) {
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {slides.map((src, i) => (
-            <div key={`${src}-${i}`} className="relative h-full w-full shrink-0">
-              <Image
-                src={src}
-                alt={`product-${i + 1}`}
-                fill
-                sizes="100vw"
-                priority={i === 0}
-                className="object-cover"
-              />
+            <div key={`${src.desktopSrc}-${i}`} className="relative h-full w-full shrink-0">
+              <picture>
+                <source media="(max-width: 767px)" srcSet={src.mobileSrc} />
+                <img
+                  src={src.desktopSrc}
+                  alt={`product-${i + 1}`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </picture>
             </div>
           ))}
         </div>
@@ -139,7 +142,13 @@ export default function HomePage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const productImages = ['/p1.jpg', '/p2.jpg', '/p3.jpg', '/p4.jpg', '/p5.jpg'];
+  const productImages = [
+    { desktopSrc: '/p1.jpg', mobileSrc: '/p1-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p2.jpg', mobileSrc: '/p2-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p3.jpg', mobileSrc: '/p3-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p4.jpg', mobileSrc: '/p4-home-mobile.jpg?v=20260515' },
+    { desktopSrc: '/p5.jpg', mobileSrc: '/p5-home-mobile.jpg?v=20260515' },
+  ];
   const CONTACT_TO = 'xatom.space@gmail.com';
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {

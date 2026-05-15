@@ -11,6 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <head>
         <link rel="preload" as="image" href="/xatom-v1.png?v=20260515-2" fetchPriority="high" />
+        <link rel="preload" as="image" href="/p1-home-mobile.jpg?v=20260515" media="(max-width: 767px)" fetchPriority="high" />
         <link rel="preload" as="video" href="/intro-v3.mp4?v=20260515-7" type="video/mp4" media="(max-width: 767px)" fetchPriority="high" />
         <link rel="preload" as="video" href="/intro-v2.mp4?v=20260515-11" type="video/mp4" media="(min-width: 768px)" fetchPriority="high" />
       </head>
