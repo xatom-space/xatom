@@ -392,8 +392,8 @@ export default function VerumeProductPage() {
       <section className="section-shell py-12 md:py-24">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Product</p>
 
-        <div className="mt-8 grid gap-12 md:grid-cols-2 md:items-start">
-          <div className="relative left-1/2 w-screen -translate-x-1/2 md:static md:w-full md:translate-x-0">
+        <div className="mt-8 grid min-w-0 gap-12 md:grid-cols-2 md:items-start">
+          <div className="relative left-1/2 w-screen -translate-x-1/2 justify-self-center md:static md:w-full md:translate-x-0">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/[0.03]">
               <Image
                 src="/p6-1.jpg"
@@ -401,12 +401,12 @@ export default function VerumeProductPage() {
                 fill
                 priority
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-contain"
+                className="object-contain object-center"
               />
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0 w-full">
             <h1 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">
               verumé
             </h1>
@@ -464,7 +464,7 @@ export default function VerumeProductPage() {
                     setBankOrderStatus('');
                     setBankOrderComplete(false);
                   }}
-                  className="block w-full border border-black/20 px-4 py-3 text-center text-[11px] uppercase tracking-[0.14em] text-black transition hover:bg-black hover:text-white md:px-8 md:text-xs md:tracking-[0.2em]"
+                  className="block w-full max-w-full border border-black/20 px-3 py-3 text-center text-[10px] uppercase tracking-[0.1em] text-black transition hover:bg-black hover:text-white md:px-8 md:text-xs md:tracking-[0.2em]"
                 >
                   Bank Transfer Order
                 </button>
