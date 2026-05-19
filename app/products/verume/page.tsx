@@ -26,7 +26,7 @@ const imageItems = [
   { desktopSrc: '/p7.jpg?v=20260519-3', mobileSrc: '/p7-mobile.jpg?v=20260519-3', alt: 'verume detail 1' },
   { desktopSrc: '/p8.jpg?v=20260519-3', mobileSrc: '/p8-mobile.jpg?v=20260519-3', alt: 'verume detail 2' },
   { desktopSrc: '/p9.jpg?v=20260519-3', mobileSrc: '/p9-mobile.jpg?v=20260519-3', alt: 'verume detail 3' },
-  { desktopSrc: '/p10.jpg?v=20260519-3', mobileSrc: '/p10-mobile.jpg?v=20260519-3', alt: 'verume detail 4' },
+  { desktopSrc: '/p10.jpg?v=20260519-4', mobileSrc: '/p10-mobile.jpg?v=20260519-4', alt: 'verume detail 4' },
   { desktopSrc: '/p11.jpg?v=20260519-3', mobileSrc: '/p11-mobile.jpg?v=20260519-3', alt: 'verume detail 5' },
   { desktopSrc: '/p12.jpg?v=20260519-3', mobileSrc: '/p12-mobile.jpg?v=20260519-3', alt: 'verume detail 6' },
   { desktopSrc: '/p13.jpg?v=20260519-3', mobileSrc: '/p13-mobile.jpg?v=20260519-3', alt: 'verume detail 7' },
