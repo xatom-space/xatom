@@ -24,7 +24,7 @@ const initialBankOrderForm = {
 
 const imageItems = [
   { desktopSrc: '/p7.jpg?v=20260515', mobileSrc: '/p7-mobile.jpg?v=20260515', alt: 'verume detail 1' },
-  { desktopSrc: '/p8.jpg?v=20260515', mobileSrc: '/p8-mobile.jpg?v=20260515', alt: 'verume detail 2' },
+  { desktopSrc: '/p8.jpg?v=20260519', mobileSrc: '/p8-mobile.jpg?v=20260519', alt: 'verume detail 2' },
   { desktopSrc: '/p9.jpg?v=20260515', mobileSrc: '/p9-mobile.jpg?v=20260515', alt: 'verume detail 3' },
   { desktopSrc: '/p10.jpg?v=20260515', mobileSrc: '/p10-mobile.jpg?v=20260515', alt: 'verume detail 4' },
   { desktopSrc: '/p11.jpg?v=20260515', mobileSrc: '/p11-mobile.jpg?v=20260515', alt: 'verume detail 5' },
@@ -641,7 +641,7 @@ export default function VerumeProductPage() {
               eager={index === 0}
             />
           ))}
-          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260515" />
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260519" />
           {imageItems.slice(2).map((item) => (
             <GalleryImage
               key={item.desktopSrc}
