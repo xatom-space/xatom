@@ -23,13 +23,13 @@ const initialBankOrderForm = {
 };
 
 const imageItems = [
-  { desktopSrc: '/p7.jpg?v=20260526', mobileSrc: '/p7-mobile.jpg?v=20260526', alt: 'verume detail 1' },
-  { desktopSrc: '/p8.jpg?v=20260526', mobileSrc: '/p8-mobile.jpg?v=20260526', alt: 'verume detail 2' },
-  { desktopSrc: '/p9.jpg?v=20260526', mobileSrc: '/p9-mobile.jpg?v=20260526', alt: 'verume detail 3' },
-  { desktopSrc: '/p10.jpg?v=20260526', mobileSrc: '/p10-mobile.jpg?v=20260526', alt: 'verume detail 4' },
-  { desktopSrc: '/p11.jpg?v=20260526', mobileSrc: '/p11-mobile.jpg?v=20260526', alt: 'verume detail 5' },
-  { desktopSrc: '/p12.jpg?v=20260526', mobileSrc: '/p12-mobile.jpg?v=20260526', alt: 'verume detail 6' },
-  { desktopSrc: '/p13.jpg?v=20260526', mobileSrc: '/p13-mobile.jpg?v=20260526', alt: 'verume detail 7' },
+  { desktopSrc: '/p7.jpg?v=20260526-1', mobileSrc: '/p7-mobile.jpg?v=20260526-1', alt: 'verume detail 1' },
+  { desktopSrc: '/p8.jpg?v=20260526-1', mobileSrc: '/p8-mobile.jpg?v=20260526-1', alt: 'verume detail 2' },
+  { desktopSrc: '/p9.jpg?v=20260526-1', mobileSrc: '/p9-mobile.jpg?v=20260526-1', alt: 'verume detail 3' },
+  { desktopSrc: '/p10.jpg?v=20260526-1', mobileSrc: '/p10-mobile.jpg?v=20260526-1', alt: 'verume detail 4' },
+  { desktopSrc: '/p11.jpg?v=20260526-1', mobileSrc: '/p11-mobile.jpg?v=20260526-1', alt: 'verume detail 5' },
+  { desktopSrc: '/p12.jpg?v=20260526-1', mobileSrc: '/p12-mobile.jpg?v=20260526-1', alt: 'verume detail 6' },
+  { desktopSrc: '/p13.jpg?v=20260526-1', mobileSrc: '/p13-mobile.jpg?v=20260526-1', alt: 'verume detail 7' },
 ] as const;
 
 const thankYouText = 'Thank You from xatom';
@@ -641,7 +641,7 @@ export default function VerumeProductPage() {
               eager={index === 0}
             />
           ))}
-          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260526" />
+          <ManagedVideoBlock src="/m1.mp4" poster="/p8-mobile.jpg?v=20260526-1" />
           {imageItems.slice(2).map((item) => (
             <GalleryImage
               key={item.desktopSrc}
