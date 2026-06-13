@@ -28,32 +28,32 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-[50.4%] top-[47.3%] z-20 flex flex-col items-start text-left text-black opacity-0 md:left-[50.4%] md:top-[47.3%]"
+        className="intro-lockup absolute left-[50.7%] top-[41.3%] z-20 flex flex-col items-start text-left text-black opacity-0 md:left-[50.7%] md:top-[41.3%]"
       >
         <img
           src="/xatom-v3-trimmed.png?v=20260515"
           alt="xatom"
-          className="intro-word mb-5 block w-[114px] self-start object-contain object-left md:mb-7 md:w-[205px]"
+          className="intro-word mb-4 block w-[96px] self-start object-contain object-left md:mb-6 md:w-[164px]"
         />
-        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
           DESIGN
         </span>
-        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
           IP
         </span>
-        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
           BUSINESS
         </span>
       </Link>
 
       <style>{`
         .intro-lockup {
-          animation: intro-lockup-in 360ms ease-out 0.85s forwards;
+          animation: intro-lockup-in 360ms ease-out 6s forwards;
         }
 
         @media (min-width: 768px) {
           .intro-lockup {
-            animation-delay: 1.35s;
+            animation-delay: 6s;
           }
         }
 
@@ -64,36 +64,36 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(1) {
-          animation-delay: 2s;
+          animation-delay: 6.15s;
         }
 
         .intro-word:nth-child(2) {
-          animation-delay: 2.45s;
+          animation-delay: 6.55s;
         }
 
         .intro-word:nth-child(3) {
-          animation-delay: 2.9s;
+          animation-delay: 6.95s;
         }
 
         .intro-word:nth-child(4) {
-          animation-delay: 3.35s;
+          animation-delay: 7.35s;
         }
 
         @media (min-width: 768px) {
           .intro-word:nth-child(1) {
-            animation-delay: 2.5s;
+            animation-delay: 6.15s;
           }
 
           .intro-word:nth-child(2) {
-            animation-delay: 2.95s;
+            animation-delay: 6.55s;
           }
 
           .intro-word:nth-child(3) {
-            animation-delay: 3.4s;
+            animation-delay: 6.95s;
           }
 
           .intro-word:nth-child(4) {
-            animation-delay: 3.85s;
+            animation-delay: 7.35s;
           }
         }
 
