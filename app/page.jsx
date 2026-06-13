@@ -15,7 +15,7 @@ export default function IntroPage() {
         src="/intro-v2.mp4?v=20260516-1"
       />
       <video
-        className="absolute inset-0 z-0 hidden h-full w-full origin-bottom scale-125 object-cover object-bottom opacity-100 brightness-100 md:block"
+        className="absolute inset-0 z-0 hidden h-full w-full object-contain object-center opacity-100 brightness-100 md:block"
         autoPlay
         muted
         playsInline
