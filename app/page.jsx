@@ -5,7 +5,7 @@ export default function IntroPage() {
     <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
       <video
-        className="absolute inset-0 z-0 block h-full w-full object-cover object-bottom opacity-100 brightness-100 md:hidden"
+        className="absolute inset-0 z-0 block h-full w-full object-contain object-center opacity-100 brightness-100 md:hidden"
         autoPlay
         muted
         playsInline
@@ -28,21 +28,21 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-[40.6%] top-[41.3%] z-20 block h-[22%] w-[31%] text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%]"
+        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[76%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
       >
-        <span className="block pl-[10.1vw]">
+        <span className="block pl-[42%] md:pl-[10.1vw]">
           <img
             src="/xatom-v3-trimmed.png?v=20260515"
             alt="xatom"
-            className="intro-word mb-4 block w-[96px] object-contain object-left md:mb-6 md:w-[164px]"
+            className="intro-word mb-3 block w-[82px] object-contain object-left md:mb-6 md:w-[164px]"
           />
-          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
             DESIGN
           </span>
-          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
             IP
           </span>
-          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
             BUSINESS
           </span>
         </span>
