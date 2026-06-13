@@ -28,21 +28,23 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-[50.7%] top-[41.3%] z-20 flex flex-col items-start text-left text-black opacity-0 md:left-[50.7%] md:top-[41.3%]"
+        className="intro-lockup absolute left-[40.6%] top-[41.3%] z-20 block h-[22%] w-[31%] text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%]"
       >
-        <img
-          src="/xatom-v3-trimmed.png?v=20260515"
-          alt="xatom"
-          className="intro-word mb-4 block w-[96px] self-start object-contain object-left md:mb-6 md:w-[164px]"
-        />
-        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
-          DESIGN
-        </span>
-        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
-          IP
-        </span>
-        <span className="intro-word block self-start text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
-          BUSINESS
+        <span className="block pl-[10.1vw]">
+          <img
+            src="/xatom-v3-trimmed.png?v=20260515"
+            alt="xatom"
+            className="intro-word mb-4 block w-[96px] object-contain object-left md:mb-6 md:w-[164px]"
+          />
+          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+            DESIGN
+          </span>
+          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+            IP
+          </span>
+          <span className="intro-word block text-[11px] font-medium leading-[1.36] tracking-[0.24em] md:text-[17px] md:tracking-[0.25em]">
+            BUSINESS
+          </span>
         </span>
       </Link>
 
