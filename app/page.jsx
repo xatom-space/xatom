@@ -48,8 +48,8 @@ export default function IntroPage() {
         </span>
       </Link>
 
-      <p className="intro-earthrise pointer-events-none absolute right-[6%] bottom-[36%] z-20 text-right text-[10px] font-medium tracking-[0.22em] text-white opacity-100 md:hidden">
-        1968_earthrise
+      <p className="intro-earthrise pointer-events-none absolute right-[6%] bottom-[12%] z-20 text-right text-[10px] font-medium tracking-[0.22em] text-white opacity-100 [font-family:Apple_SD_Gothic_Neo,Arial,sans-serif] md:hidden">
+        1968_Earthrise
       </p>
 
       <style>{`
