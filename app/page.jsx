@@ -5,7 +5,7 @@ export default function IntroPage() {
     <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
       <video
-        className="absolute inset-0 z-0 block h-full w-full object-cover object-bottom opacity-100 brightness-100 md:hidden"
+        className="absolute inset-0 z-0 block h-full w-full object-cover object-center opacity-100 brightness-100 md:hidden"
         autoPlay
         muted
         playsInline
@@ -15,7 +15,7 @@ export default function IntroPage() {
         src="/intro-v2.mp4?v=20260516-1"
       />
       <video
-        className="absolute inset-0 z-0 hidden h-full w-full object-contain object-center opacity-100 brightness-100 md:block"
+        className="absolute inset-0 z-0 hidden h-full w-full object-cover object-center opacity-100 brightness-100 md:block"
         autoPlay
         muted
         playsInline
@@ -48,7 +48,7 @@ export default function IntroPage() {
         </span>
       </Link>
 
-      <p className="intro-earthrise pointer-events-none absolute right-[6%] bottom-[12%] z-20 text-right text-[10px] font-medium tracking-[0.22em] text-white opacity-100 [font-family:Apple_SD_Gothic_Neo,Arial,sans-serif] md:hidden">
+      <p className="intro-earthrise pointer-events-none absolute right-[6%] bottom-[10%] z-20 text-right text-[10px] font-medium tracking-[0.22em] text-white opacity-100 [font-family:Apple_SD_Gothic_Neo,Arial,sans-serif] md:right-[5%] md:bottom-[7%] md:text-[13px] md:tracking-[0.24em]">
         1968_Earthrise
       </p>
 
