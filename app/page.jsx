@@ -28,27 +28,27 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[78%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
+        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[82%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
       >
-        <span className="block pl-[42%] md:pl-[10.1vw]">
+        <span className="block pl-[48%] md:pl-[10.1vw]">
           <img
             src="/xatom-v3-trimmed.png?v=20260515"
             alt="xatom"
-            className="intro-word mb-3 block w-[82px] object-contain object-left md:mb-6 md:w-[164px]"
+            className="intro-word mb-[18px] block w-[96px] object-contain object-left md:mb-6 md:w-[164px]"
           />
-          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             DESIGN
           </span>
-          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             IP
           </span>
-          <span className="intro-word block text-[9px] font-medium leading-[1.36] tracking-[0.2em] md:text-[17px] md:tracking-[0.25em]">
+          <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             BUSINESS
           </span>
         </span>
       </Link>
 
-      <p className="intro-earthrise pointer-events-none absolute left-1/2 bottom-[22%] z-20 -translate-x-1/2 text-[10px] font-medium tracking-[0.22em] text-black opacity-0 md:hidden">
+      <p className="intro-earthrise pointer-events-none absolute left-1/2 bottom-[22%] z-20 -translate-x-1/2 text-[10px] font-medium tracking-[0.22em] text-white opacity-100 md:hidden">
         1968_earthrise
       </p>
 
@@ -64,7 +64,7 @@ export default function IntroPage() {
         }
 
         .intro-earthrise {
-          animation: intro-lockup-in 360ms ease-out 6s forwards;
+          animation: intro-earthrise-out 360ms ease-out 5.7s forwards;
         }
 
         .intro-word {
@@ -110,6 +110,12 @@ export default function IntroPage() {
         @keyframes intro-lockup-in {
           to {
             opacity: 1;
+          }
+        }
+
+        @keyframes intro-earthrise-out {
+          to {
+            opacity: 0;
           }
         }
 
