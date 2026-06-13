@@ -5,7 +5,7 @@ export default function IntroPage() {
     <main className="relative h-screen w-screen overflow-hidden bg-[#f5f5f2]">
       {/* 배경 영상 */}
       <video
-        className="absolute inset-0 z-0 block h-full w-full object-contain object-center opacity-100 brightness-100 md:hidden"
+        className="absolute inset-0 z-0 block h-full w-full object-cover object-bottom opacity-100 brightness-100 md:hidden"
         autoPlay
         muted
         playsInline
@@ -28,7 +28,7 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[76%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
+        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[78%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
       >
         <span className="block pl-[42%] md:pl-[10.1vw]">
           <img
@@ -48,6 +48,10 @@ export default function IntroPage() {
         </span>
       </Link>
 
+      <p className="intro-earthrise pointer-events-none absolute left-1/2 bottom-[22%] z-20 -translate-x-1/2 text-[10px] font-medium tracking-[0.22em] text-black opacity-0 md:hidden">
+        1968_earthrise
+      </p>
+
       <style>{`
         .intro-lockup {
           animation: intro-lockup-in 360ms ease-out 6s forwards;
@@ -57,6 +61,10 @@ export default function IntroPage() {
           .intro-lockup {
             animation-delay: 6s;
           }
+        }
+
+        .intro-earthrise {
+          animation: intro-lockup-in 360ms ease-out 6s forwards;
         }
 
         .intro-word {
