@@ -24,37 +24,27 @@ export default function IntroPage() {
         src="/intro-v2.mp4?v=20260515-12"
       />
 
-      {/* 중앙 영역 (로고 + 문구) */}
-      <div className="intro-lockup relative z-20 flex h-full w-full items-center justify-center px-8 opacity-0 translate-y-[21px] md:-translate-y-[54px] md:px-16">
-        <Link
-          href="/home"
-          aria-label="Go to home"
-          className="flex flex-col items-center gap-2 md:flex-row md:gap-[60px]"
-        >
-          <img
-            src="/xatom-v1.png?v=20260515-2"
-            alt="xatom logo"
-            className="block h-[136px] w-auto max-w-[52vw] object-contain opacity-100 brightness-100 md:h-[258px] md:max-w-none"
-          />
-
-          <div className="intro-tagline flex flex-col items-start self-center text-left text-black md:self-auto">
-            <img
-              src="/xatom-v3-trimmed.png?v=20260515"
-              alt="xatom"
-              className="intro-word mb-6 block w-[105px] self-start object-contain object-left md:mb-10 md:w-[231px]"
-            />
-            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
-              DESIGN
-            </span>
-            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
-              IP
-            </span>
-            <span className="intro-word block self-start text-[13px] font-medium leading-[1.28] tracking-[0.24em] md:text-[22px] md:tracking-[0.25em]">
-              BUSINESS
-            </span>
-          </div>
-        </Link>
-      </div>
+      {/* 영상 속 X 로고 오른쪽 문구 */}
+      <Link
+        href="/home"
+        aria-label="Go to home"
+        className="intro-lockup absolute left-[50.4%] top-[47.3%] z-20 flex flex-col items-start text-left text-black opacity-0 md:left-[50.4%] md:top-[47.3%]"
+      >
+        <img
+          src="/xatom-v3-trimmed.png?v=20260515"
+          alt="xatom"
+          className="intro-word mb-5 block w-[114px] self-start object-contain object-left md:mb-7 md:w-[205px]"
+        />
+        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+          DESIGN
+        </span>
+        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+          IP
+        </span>
+        <span className="intro-word block self-start text-[12px] font-medium leading-[1.36] tracking-[0.24em] md:text-[20px] md:tracking-[0.25em]">
+          BUSINESS
+        </span>
+      </Link>
 
       <style>{`
         .intro-lockup {
