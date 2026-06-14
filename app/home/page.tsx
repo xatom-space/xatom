@@ -242,7 +242,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             style={{ textAlign: 'justify', textJustify: 'inter-word' }}
           >
             <p
-              className={aboutExpanded ? '' : 'overflow-hidden'}
+              className={aboutExpanded ? 'whitespace-pre-line' : 'overflow-hidden whitespace-pre-line'}
               style={
                 aboutExpanded
                   ? undefined
@@ -269,7 +269,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             {!aboutExpanded ? (
               <div className="relative mt-4">
                 <p
-                  className="overflow-hidden text-black/35 blur-[0.6px]"
+                  className="overflow-hidden whitespace-pre-line text-black/35 blur-[0.6px]"
                   style={{
                     display: '-webkit-box',
                     WebkitBoxOrient: 'vertical',
