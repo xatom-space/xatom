@@ -28,7 +28,7 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[82%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.3%] md:h-[22%] md:w-[31%] md:translate-x-0"
+        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[82%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[39.8%] md:h-[22%] md:w-[31%] md:translate-x-0"
       >
         <span className="block pl-[48%] md:pl-[10.1vw]">
           <img
