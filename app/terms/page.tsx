@@ -252,6 +252,7 @@ export default function TermsPage() {
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
             <Link href="/home#shop">Shop</Link>
+            <Link href="/home#ip">IP</Link>
             <Link href="/home#contact">Contact</Link>
           </div>
         </nav>

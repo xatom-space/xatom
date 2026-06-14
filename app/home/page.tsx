@@ -220,6 +220,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
+            <a href="#ip">IP</a>
             <a href="#contact">Contact</a>
             <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
@@ -290,6 +291,17 @@ xatom은 새로운 차원을 디자인합니다.`;
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      <section id="ip" className="section-shell py-20 md:py-28">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">IP</p>
+
+        <div className="mt-8 max-w-4xl md:max-w-7xl">
+          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Intellectual Property</h2>
+          <p className="mt-6 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
+            xatom develops product concepts, design systems, and intellectual property that can expand from a single object into broader industrial possibilities.
+          </p>
         </div>
       </section>
 
