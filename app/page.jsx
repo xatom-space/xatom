@@ -45,8 +45,9 @@ export default function IntroPage() {
           <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             BUSINESS
           </span>
-          <span className="intro-word mt-4 block whitespace-nowrap text-[9px] font-medium leading-[1.45] tracking-[0.08em] md:mt-6 md:text-[14px] md:tracking-[0.08em]">
-            xatom은 새로운 차원을 디자인합니다.
+          <span className="intro-word intro-slogan-swap relative mt-4 block h-[1.6em] whitespace-nowrap text-[9px] font-medium leading-[1.45] tracking-[0.08em] md:mt-6 md:text-[14px] md:tracking-[0.08em]">
+            <span className="intro-slogan-ko absolute left-0 top-0 block">xatom은 새로운 차원을 디자인합니다.</span>
+            <span className="intro-slogan-en absolute left-0 top-0 block">xatom designs a new dimension.</span>
           </span>
         </span>
       </Link>
@@ -74,6 +75,16 @@ export default function IntroPage() {
           opacity: 0;
           transform: translateY(8px);
           animation: intro-word-in 520ms ease-out forwards;
+        }
+
+        .intro-slogan-ko {
+          opacity: 1;
+          animation: intro-slogan-ko-out 360ms ease-out 9.75s forwards;
+        }
+
+        .intro-slogan-en {
+          opacity: 0;
+          animation: intro-slogan-en-in 360ms ease-out 9.75s forwards;
         }
 
         .intro-word:nth-child(1) {
@@ -127,6 +138,18 @@ export default function IntroPage() {
         @keyframes intro-earthrise-out {
           to {
             opacity: 0;
+          }
+        }
+
+        @keyframes intro-slogan-ko-out {
+          to {
+            opacity: 0;
+          }
+        }
+
+        @keyframes intro-slogan-en-in {
+          to {
+            opacity: 1;
           }
         }
 
