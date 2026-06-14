@@ -256,9 +256,9 @@ export default function TermsPage() {
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex min-h-[112px] items-center justify-between py-5 md:h-50 md:min-h-0 md:py-0">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
-            <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
+            <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} className="h-auto w-[120px] md:w-[160px]" priority />
           </Link>
-          <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
+          <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
             <Link href="/home#ip">IP</Link>
@@ -266,7 +266,7 @@ export default function TermsPage() {
               <InstagramIcon />
             </a>
             <Link href="/home#shop" className="col-start-1 row-start-2">Shop</Link>
-            <Link href="/home#contact" className="col-start-3 row-start-2">Contact</Link>
+            <Link href="/home#contact" className="col-start-2 row-start-2">Contact</Link>
           </div>
 
           <div className="hidden items-center gap-8 text-xs uppercase tracking-[0.22em] md:flex">
