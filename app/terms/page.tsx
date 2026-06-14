@@ -1,6 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+function InstagramIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.25" y="2.25" width="19.5" height="19.5" rx="5.5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+
 const terms = `제1조(목적) 이 약관은 xatom (엑스아톰) 회사(전자상거래 사업자)가 운영하는 xatom (엑스아톰) 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
 
 ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
@@ -243,17 +254,30 @@ export default function TermsPage() {
   return (
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex h-50 items-center justify-between">
-          <Link href="/" aria-label="Go to intro" className="flex shrink-0 items-center">
+        <nav className="section-shell flex min-h-[112px] items-center justify-between py-5 md:h-50 md:min-h-0 md:py-0">
+          <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
-
-          <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
+          <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
-            <Link href="/home#shop">Shop</Link>
             <Link href="/home#ip">IP</Link>
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <InstagramIcon />
+            </a>
+            <Link href="/home#shop" className="col-start-1 row-start-2">Shop</Link>
+            <Link href="/home#contact" className="col-start-3 row-start-2">Contact</Link>
+          </div>
+
+          <div className="hidden items-center gap-8 text-xs uppercase tracking-[0.22em] md:flex">
+            <Link href="/home#hero">Home</Link>
+            <Link href="/home#about">About</Link>
+            <Link href="/home#ip">IP</Link>
+            <Link href="/home#shop">Shop</Link>
             <Link href="/home#contact">Contact</Link>
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <InstagramIcon />
+            </a>
           </div>
         </nav>
       </header>

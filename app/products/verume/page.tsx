@@ -367,23 +367,28 @@ export default function VerumeProductPage() {
   return (
     <main className="overflow-x-clip bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex min-h-[104px] items-center justify-between py-6 md:h-50 md:min-h-0 md:py-0">
-          <Link href="/" aria-label="Go to intro" className="flex shrink-0 items-center">
+        <nav className="section-shell flex min-h-[112px] items-center justify-between py-5 md:h-50 md:min-h-0 md:py-0">
+          <Link href="/" aria-label="Go to intro" className="flex items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
-
-          <div className="flex items-center gap-5 text-xs tracking-[0.22em] uppercase md:gap-8">
+          <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
-            <Link href="/home#shop">Shop</Link>
             <Link href="/home#ip">IP</Link>
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <InstagramIcon />
+            </a>
+            <Link href="/home#shop" className="col-start-1 row-start-2">Shop</Link>
+            <Link href="/home#contact" className="col-start-3 row-start-2">Contact</Link>
+          </div>
+
+          <div className="hidden items-center gap-8 text-xs uppercase tracking-[0.22em] md:flex">
+            <Link href="/home#hero">Home</Link>
+            <Link href="/home#about">About</Link>
+            <Link href="/home#ip">IP</Link>
+            <Link href="/home#shop">Shop</Link>
             <Link href="/home#contact">Contact</Link>
-            <a
-              href="https://instagram.com/xatom.space"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
+            <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
             </a>
           </div>
