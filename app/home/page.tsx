@@ -188,7 +188,7 @@ export default function HomePage() {
   }
 
   const aboutEn = `xatom is a company that creates new value and possibilities through design.
-We design objects and furniture for spaces while also developing products and intellectual property across diverse industries.
+We design objects and furniture for spaces while also developing products and intellectual property that play a key role in future industries.
 
 We believe that good design is more than creating beautiful forms. It is a process of solving problems, improving experiences, and creating new opportunities. Guided by this philosophy, xatom focuses on transforming ideas into tangible value—from product planning and design to the development of intellectual property.
 
@@ -198,7 +198,7 @@ So that an idea that begins with a single object can become a product, an intell
 xatom designs a new dimension.`;
 
   const aboutKo = `xatom은 디자인을 통해 새로운 가치와 가능성을 만들어가는 기업입니다.
-우리는 공간을 위한 오브제와 가구를 디자인하는 동시에, 다양한 산업 분야의 제품과 지식재산(IP)을 개발합니다.
+우리는 공간을 위한 오브제와 가구를 디자인하는 동시에, 미래산업분야에서 핵심적인 역할을 하는 제품과 지식재산(IP)을 개발합니다.
 
 좋은 디자인은 단순히 아름다운 형태를 만드는 것이 아니라 문제를 해결하고, 경험을 개선하며, 새로운 기회를 창출하는 과정이라고 믿습니다.
 이러한 생각을 바탕으로 xatom은 제품 기획부터 디자인, 지식재산 개발에 이르기까지 아이디어를 실질적인 가치로 발전시키는 데 집중합니다.
