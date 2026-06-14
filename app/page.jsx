@@ -28,7 +28,7 @@ export default function IntroPage() {
       <Link
         href="/home"
         aria-label="Go to home"
-        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[82%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[39.8%] md:h-[22%] md:w-[31%] md:translate-x-0"
+        className="intro-lockup absolute left-1/2 top-[41.3%] z-20 block h-[24%] w-[82%] -translate-x-1/2 text-left text-black opacity-0 md:left-[40.6%] md:top-[41.0%] md:h-[22%] md:w-[31%] md:translate-x-0"
       >
         <span className="block pl-[48%] md:pl-[10.1vw]">
           <img
@@ -79,12 +79,12 @@ export default function IntroPage() {
 
         .intro-slogan-ko {
           opacity: 1;
-          animation: intro-slogan-ko-out 360ms ease-out 21.375s forwards;
+          animation: intro-slogan-ko-out 360ms ease-out 10.85s forwards;
         }
 
         .intro-slogan-en {
           opacity: 0;
-          animation: intro-slogan-en-in 360ms ease-out 21.375s forwards;
+          animation: intro-slogan-en-in 360ms ease-out 10.85s forwards;
         }
 
         .intro-word:nth-child(1) {
@@ -104,7 +104,7 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(5) {
-          animation-delay: 19.375s;
+          animation-delay: 8.85s;
         }
 
         @media (min-width: 768px) {
@@ -125,7 +125,7 @@ export default function IntroPage() {
           }
 
           .intro-word:nth-child(5) {
-            animation-delay: 19.375s;
+            animation-delay: 8.85s;
           }
         }
 
