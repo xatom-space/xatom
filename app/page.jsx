@@ -45,6 +45,9 @@ export default function IntroPage() {
           <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             BUSINESS
           </span>
+          <span className="intro-word mt-4 block whitespace-nowrap text-[9px] font-medium leading-[1.45] tracking-[0.08em] md:mt-6 md:text-[14px] md:tracking-[0.08em]">
+            xatom은 새로운 차원을 디자인합니다.
+          </span>
         </span>
       </Link>
 
@@ -89,6 +92,10 @@ export default function IntroPage() {
           animation-delay: 7.35s;
         }
 
+        .intro-word:nth-child(5) {
+          animation-delay: 7.75s;
+        }
+
         @media (min-width: 768px) {
           .intro-word:nth-child(1) {
             animation-delay: 6.15s;
@@ -104,6 +111,10 @@ export default function IntroPage() {
 
           .intro-word:nth-child(4) {
             animation-delay: 7.35s;
+          }
+
+          .intro-word:nth-child(5) {
+            animation-delay: 7.75s;
           }
         }
 

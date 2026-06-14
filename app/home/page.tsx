@@ -187,9 +187,29 @@ export default function HomePage() {
     }
   }
 
-  const aboutEn = `Space is never empty; it carries tension, light, silence, and density, and xatom approaches that invisibility as material rather than absence. We do not treat a room as a passive container for objects, but as a textured field whose character is shaped by balance between weight and openness, brightness and shadow, proximity and distance. A single form can divide the air, redirect attention, and shift the way light settles on surfaces; when light passes through matter, a new sense of density emerges, subtle but unmistakable. xatom objects are not ornaments and not afterthoughts. They are structures that recalibrate atmosphere: they hold plants, contain light, attach to walls, or rest quietly on surfaces, always entering into dialogue with what surrounds them. That dialogue is where spatial character is formed. We do not imitate nature; we interpret its texture, translating growth, tension, and rhythm into measured geometry. Like ripples on water, fine, controlled, and undeniable, our work uses material, finish, and luminosity to create precise shifts in perception. Cool surfaces meet warmth, geometry meets growth, structure meets sensibility, and the space responds in kind. When an object is placed with intention, balance changes; the room feels newly aligned, as if the air has been tuned. That is where density begins, and that is xatom.`;
+  const aboutEn = `xatom is a company that creates new value and possibilities through design.
 
-  const aboutKo = `공간은 결코 비어 있지 않습니다. 그 안에는 긴장, 빛, 침묵, 그리고 밀도가 함께 존재합니다. xatom은 공간을 단순한 배경이 아니라 물성과 감도가 겹겹이 쌓인 장으로 바라봅니다. 우리는 공간의 분위기가 보이지 않는 공기와 빛, 재료의 균형으로 만들어진다고 믿으며, 그 균형은 때로 하나의 오브제로부터 시작될 수 있다고 생각합니다. 하나의 형태는 공기를 가르고 시선을 정렬하며, 빛은 물성을 통과하거나 머금는 방식으로 표면 위에 새로운 질서를 남깁니다. 그 순간 공간은 이전과 다른 밀도를 갖게 됩니다. xatom의 오브제는 장식이 아닙니다. 기능을 넘어, 공간의 분위기를 조율하는 구조체입니다. 식물을 담고, 빛을 품고, 벽에 고정되거나 테이블 위에 놓이며, 오브제는 언제나 주변의 공기와 관계를 맺습니다. 우리는 그 관계가 공간의 인상을 결정한다고 믿습니다. 우리는 자연을 모방하지 않습니다. 대신 자연이 가진 결, 성장과 긴장, 흐름과 리듬을 이해하고, 그것을 형태로 번역합니다. 물의 파동처럼 미세하지만 분명한 변화를 만들기 위해, 재료의 온도와 표면의 마감, 빛의 방향과 투과를 정교하게 다룹니다. 차가운 재료 속에 온도를 남기고, 구조적인 형태 위에 감각을 얹으며, 과장하지 않고 설명하지 않고 존재로 말합니다. 하나의 오브제가 놓이는 순간 공간의 균형은 다시 정의되고, 그때 비로소 밀도는 드러납니다. That is where density begins.`;
+We design objects and furniture for spaces while also developing products and intellectual property across diverse industries.
+
+We believe that good design is more than creating beautiful forms. It is a process of solving problems, improving experiences, and creating new opportunities. Guided by this philosophy, xatom focuses on transforming ideas into tangible value—from product planning and design to the development of intellectual property.
+
+We explore ways to expand the possibilities of design by connecting form and function, technology and market.
+
+So that an idea that begins with a single object can become a product, an intellectual property, and ultimately a new possibility for industry.
+
+xatom designs a new dimension.`;
+
+  const aboutKo = `xatom은 디자인을 통해 새로운 가치와 가능성을 만들어가는 기업입니다.
+
+우리는 공간을 위한 오브제와 가구를 디자인하는 동시에, 다양한 산업 분야의 제품과 지식재산(IP)을 개발합니다.
+
+좋은 디자인은 단순히 아름다운 형태를 만드는 것이 아니라 문제를 해결하고, 경험을 개선하며, 새로운 기회를 창출하는 과정이라고 믿습니다. 이러한 생각을 바탕으로 xatom은 제품 기획부터 디자인, 지식재산 개발에 이르기까지 아이디어를 실질적인 가치로 발전시키는 데 집중합니다.
+
+우리는 형태와 기능, 기술과 시장을 연결하며 디자인이 더 넓은 가능성으로 확장될 수 있는 방법을 탐구합니다.
+
+하나의 오브제에서 시작된 아이디어가 제품이 되고, 지식재산이 되고, 새로운 산업의 가능성으로 이어질 수 있도록.
+
+xatom은 새로운 차원을 디자인합니다.`;
 
   return (
     <main className="bg-white text-black">
