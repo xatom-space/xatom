@@ -45,7 +45,7 @@ export default function IntroPage() {
           <span className="intro-word block text-[10px] font-medium leading-[1.36] tracking-[0.25em] md:text-[17px] md:tracking-[0.25em]">
             BUSINESS
           </span>
-          <span className="intro-word intro-slogan-swap relative mt-4 block h-[1.6em] whitespace-nowrap text-[9px] font-medium leading-[1.45] tracking-[0.08em] md:mt-6 md:text-[14px] md:tracking-[0.08em]">
+          <span className="intro-word intro-slogan-swap relative mt-4 block h-[1.6em] whitespace-nowrap text-[11px] font-medium leading-[1.45] tracking-[0.08em] md:mt-6 md:text-[14px] md:tracking-[0.08em]">
             <span className="intro-slogan-ko absolute left-0 top-0 block">xatom은 새로운 차원을 디자인합니다.</span>
             <span className="intro-slogan-en absolute left-0 top-0 block">xatom designs a new dimension.</span>
           </span>
