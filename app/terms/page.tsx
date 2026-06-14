@@ -244,7 +244,7 @@ export default function TermsPage() {
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
         <nav className="section-shell flex h-50 items-center justify-between">
-          <Link href="/" aria-label="Go to intro" className="flex items-center">
+          <Link href="/" aria-label="Go to intro" className="flex shrink-0 items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 

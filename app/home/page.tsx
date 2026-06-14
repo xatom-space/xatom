@@ -211,12 +211,12 @@ xatom은 새로운 차원을 디자인합니다.`;
   return (
     <main className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur">
-        <nav className="section-shell flex h-50 items-center justify-between py-5 md:py-0">
-          <Link href="/" aria-label="Go to intro" className="flex items-center">
+        <nav className="section-shell flex min-h-[104px] items-center justify-between py-6 md:h-50 md:min-h-0 md:py-0">
+          <Link href="/" aria-label="Go to intro" className="flex shrink-0 items-center">
             <Image src="/xatom-v1.png" alt="xatom logo" width={160} height={60} priority />
           </Link>
 
-          <div className="flex items-center gap-5 text-xs uppercase tracking-[0.22em] md:gap-8">
+          <div className="flex max-w-[220px] flex-wrap items-center justify-end gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:max-w-none md:flex-nowrap md:gap-8 md:text-xs md:tracking-[0.22em]">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#shop">Shop</a>
