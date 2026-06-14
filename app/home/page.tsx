@@ -239,11 +239,11 @@ xatom은 새로운 차원을 디자인합니다.`;
         </nav>
       </header>
 
-      <section id="hero" className="w-full py-14 md:py-24">
+      <section id="hero" className="w-full scroll-mt-[96px] py-14 md:scroll-mt-[120px] md:py-24">
         <ProductCarousel images={productImages} />
       </section>
 
-      <section id="about" className="section-shell py-20 md:py-28">
+      <section id="about" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">About</p>
 
         <div className="mt-8 max-w-4xl md:max-w-7xl">
@@ -304,7 +304,7 @@ xatom은 새로운 차원을 디자인합니다.`;
         </div>
       </section>
 
-      <section id="ip" className="section-shell py-20 md:py-28">
+      <section id="ip" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">IP</p>
 
         <div className="mt-8 max-w-4xl md:max-w-7xl">
@@ -315,7 +315,7 @@ xatom은 새로운 차원을 디자인합니다.`;
         </div>
       </section>
 
-      <section id="shop" className="section-shell py-20 md:py-28">
+      <section id="shop" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Shop</p>
 
         <div className="mt-8 grid gap-8 p-6 md:grid-cols-2 md:p-10">
@@ -337,7 +337,7 @@ xatom은 새로운 차원을 디자인합니다.`;
         </div>
       </section>
 
-      <section id="contact" className="section-shell py-20 md:py-28">
+      <section id="contact" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
 
         <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 p-6 md:p-10">
