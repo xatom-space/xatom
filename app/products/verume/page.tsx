@@ -374,7 +374,7 @@ export default function VerumeProductPage() {
           <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
             <Link href="/home#hero">Home</Link>
             <Link href="/home#about">About</Link>
-            <Link href="/home#ip">IP</Link>
+            <Link href="/home#ip" className="-ml-2">IP</Link>
             <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
             </a>

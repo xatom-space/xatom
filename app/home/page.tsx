@@ -219,7 +219,7 @@ xatom은 새로운 차원을 디자인합니다.`;
           <div className="grid grid-cols-[auto_auto_auto_auto] grid-rows-2 items-center justify-items-start gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.18em] md:hidden">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
-            <a href="#ip">IP</a>
+            <a href="#ip" className="-ml-2">IP</a>
             <a href="https://instagram.com/xatom.space" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
             </a>
