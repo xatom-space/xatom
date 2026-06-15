@@ -355,7 +355,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">model 6</h2>
-              <p className="mt-2 text-sm text-black/60">Design study for future industrial product development.</p>
+              <p className="mt-2 text-sm text-black/60">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
             </div>
           </div>
         </div>
