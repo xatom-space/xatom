@@ -318,21 +318,25 @@ xatom은 새로운 차원을 디자인합니다.`;
       <section id="shop" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Shop</p>
 
-        <div className="mt-8 grid gap-8 p-6 md:grid-cols-2 md:p-10">
-          <img src="/p6.jpg" alt="verumé" className="h-[320px] w-full object-cover" />
-
-          <div className="flex flex-col justify-between">
-            <div>
-              <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
-              <p className="mt-4 text-black/60">Precision-built centerpiece in anodized finish.</p>
+        <div className="mt-8 grid gap-8 md:grid-cols-2">
+          <Link href="/products/verume" className="group block">
+            <div className="relative h-[320px] w-full overflow-hidden bg-black/[0.03]">
+              <img src="/p6.jpg" alt="verumé" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
             </div>
+            <div className="mt-4 text-left">
+              <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
+              <p className="mt-2 text-sm text-black/60">Precision-built centerpiece in anodized finish.</p>
+            </div>
+          </Link>
 
-            <Link
-              href="/products/verume"
-              className="mt-10 w-fit border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] text-emerald-700 transition hover:bg-black hover:text-white"
-            >
-              Order
-            </Link>
+          <div className="block">
+            <div className="relative h-[320px] w-full overflow-hidden bg-black/[0.03]">
+              <img src="/p14.jpg" alt="model 6" className="h-full w-full object-cover" />
+            </div>
+            <div className="mt-4 text-left">
+              <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">model 6</h2>
+              <p className="mt-2 text-sm text-black/60">Design study for future industrial product development.</p>
+            </div>
           </div>
         </div>
       </section>
