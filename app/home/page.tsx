@@ -313,6 +313,7 @@ xatom은 새로운 차원을 디자인합니다.`;
           <div className="mt-6 max-w-4xl text-justify text-sm font-light leading-relaxed text-black/70 [text-align-last:left] md:text-base">
             <p>XATOM은 새로운 산업으로 확장될 수 있는 제품 컨셉, 디자인 시스템, 그리고 독자적인 IP를 개발합니다.</p>
             <p className="mt-5">기업과의 기술협력 및 라이선싱 파트너십을 통해 혁신적인 아이디어를 시장으로 연결합니다. 우리는 IP의 가치를 확장하여 새로운 산업과 비즈니스를 창출합니다.</p>
+            <p className="mt-5 text-xs font-medium tracking-[0.18em] text-black/60 md:text-sm">특허 | 디자인권 | 라이선싱 | 파트너십</p>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-[280px_1fr] md:items-start">
