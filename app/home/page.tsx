@@ -342,7 +342,7 @@ xatom은 새로운 차원을 디자인합니다.`;
 
                 {ipExpanded ? (
                   <div>
-                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인/기술을 제안합니다.</p>
+                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인을 제안합니다.</p>
                     <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
                     <p>독자적인 IP를 기반으로 미래 산업의 새로운 기준을 만들어갑니다.</p>
                   </div>
@@ -371,7 +371,7 @@ xatom은 새로운 차원을 디자인합니다.`;
                       maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
                     }}
                   >
-                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인/기술을 제안합니다.</p>
+                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인을 제안합니다.</p>
                     <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
                   </div>
                 </div>
@@ -414,7 +414,7 @@ xatom은 새로운 차원을 디자인합니다.`;
       <section id="contact" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
         <p className="mt-8 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
-          xatom과의 기술 협력 및 제안 사항이 있으시다면 편하게 내용을 남겨주세요.
+          라이선싱, 기술협력, 제조 파트너십 문의를 기다립니다.
         </p>
 
         <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 md:p-10">
