@@ -412,6 +412,9 @@ xatom은 새로운 차원을 디자인합니다.`;
 
       <section id="contact" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
+        <p className="mt-8 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
+          xatom과의 기술 협력 및 제안 사항이 있으시다면 편하게 내용을 남겨주세요.
+        </p>
 
         <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 md:p-10">
           <input
