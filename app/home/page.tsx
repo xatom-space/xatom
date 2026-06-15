@@ -309,11 +309,9 @@ xatom은 새로운 차원을 디자인합니다.`;
 
         <div className="mt-8 max-w-4xl md:max-w-7xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Intellectual Property</h2>
-          <div className="mt-6 max-w-4xl whitespace-pre-line text-sm font-light leading-relaxed text-black/70 md:text-base">
-            XATOM은 새로운 산업으로 확장될 수 있는 제품 컨셉, 디자인 시스템, 그리고 독자적인 IP를 개발합니다.
-
-기업과의 기술협력 및 라이선싱 파트너십을 통해 혁신적인 아이디어를 시장으로 연결합니다.
-우리는 IP의 가치를 확장하여 새로운 산업과 비즈니스를 창출합니다.
+          <div className="mt-6 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
+            <p>XATOM은 새로운 산업으로 확장될 수 있는 제품 컨셉, 디자인 시스템, 그리고 독자적인 IP를 개발합니다.</p>
+            <p className="mt-5">기업과의 기술협력 및 라이선싱 파트너십을 통해 혁신적인 아이디어를 시장으로 연결합니다. 우리는 IP의 가치를 확장하여 새로운 산업과 비즈니스를 창출합니다.</p>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-[280px_1fr] md:items-start">
@@ -371,7 +369,7 @@ xatom은 새로운 차원을 디자인합니다.`;
       <section id="contact" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
 
-        <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 p-6 md:p-10">
+        <form ref={formRef} onSubmit={handleContactSubmit} className="mt-8 grid gap-5 md:p-10">
           <input
             name="name"
             required
