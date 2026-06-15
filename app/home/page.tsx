@@ -340,6 +340,10 @@ xatom은 새로운 차원을 디자인합니다.`;
       <section id="shop" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Shop</p>
 
+        <div className="mt-8 max-w-4xl md:max-w-7xl">
+          <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Design Works</h2>
+        </div>
+
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           <Link href="/products/verume" className="group block">
             <div className="relative h-[320px] w-full overflow-hidden bg-black/[0.03]">
