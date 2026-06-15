@@ -251,7 +251,7 @@ xatom은 새로운 차원을 디자인합니다.`;
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 text-left text-sm font-light leading-relaxed text-black/80 md:text-justify md:!text-[21px] md:font-extralight"
+            className="mt-6 text-justify text-sm font-light leading-relaxed text-black/80 [text-align-last:left] md:!text-[21px] md:font-extralight"
             style={{ textAlign: undefined, textJustify: undefined }}
           >
             <p
@@ -310,7 +310,7 @@ xatom은 새로운 차원을 디자인합니다.`;
 
         <div className="mt-8 max-w-4xl md:max-w-7xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Intellectual Property</h2>
-          <div className="mt-6 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
+          <div className="mt-6 max-w-4xl text-justify text-sm font-light leading-relaxed text-black/70 [text-align-last:left] md:text-base">
             <p>XATOM은 새로운 산업으로 확장될 수 있는 제품 컨셉, 디자인 시스템, 그리고 독자적인 IP를 개발합니다.</p>
             <p className="mt-5">기업과의 기술협력 및 라이선싱 파트너십을 통해 혁신적인 아이디어를 시장으로 연결합니다. 우리는 IP의 가치를 확장하여 새로운 산업과 비즈니스를 창출합니다.</p>
           </div>
@@ -320,7 +320,7 @@ xatom은 새로운 차원을 디자인합니다.`;
               Smart Farm Unit
             </div>
 
-            <div className="text-sm font-light leading-relaxed text-black/75 md:text-base">
+            <div className="text-justify text-sm font-light leading-relaxed text-black/75 [text-align-last:left] md:text-base">
               <div
                 className={ipExpanded ? 'space-y-5' : 'overflow-hidden'}
                 style={
@@ -394,7 +394,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
-              <p className="mt-2 text-sm text-black/60">Handcrafted with precision, designed to be the centerpiece of any space.</p>
+              <p className="mt-2 text-justify text-sm text-black/60 [text-align-last:left]">Handcrafted with precision, designed to be the centerpiece of any space.</p>
             </div>
           </Link>
 
@@ -404,7 +404,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">model 6</h2>
-              <p className="mt-2 text-sm text-black/60">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
+              <p className="mt-2 text-justify text-sm text-black/60 [text-align-last:left]">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
             </div>
           </div>
         </div>
