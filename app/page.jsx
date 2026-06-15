@@ -10,9 +10,9 @@ export default function IntroPage() {
         muted
         playsInline
         preload="auto"
-        poster="/intro-mobile-poster.jpg?v=20260615-hq1"
+        poster="/intro-mobile-poster.jpg?v=20260615-hq2"
         fetchPriority="high"
-        src="/intro-mobile-hq.mp4?v=20260615-hq1"
+        src="/intro-mobile-hq.mp4?v=20260615-hq2"
       />
       <video
         className="absolute inset-0 z-0 hidden h-full w-full object-cover object-center opacity-100 brightness-100 md:block"
