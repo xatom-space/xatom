@@ -318,10 +318,18 @@ xatom은 새로운 차원을 디자인합니다.`;
               Smart Farm Unit
             </div>
 
-            <div className="text-sm font-light leading-relaxed text-black/75 md:text-base">
-              <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인을 제안합니다.</p>
-              <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
-              <p>독자적인 IP를 기반으로 미래 산업의 새로운 기준을 만들어갑니다.</p>
+            <div className="space-y-5 text-sm font-light leading-relaxed text-black/75 md:text-base">
+              <div>
+                <p>XATOM presents smart farm designs that set new standards for future industries.</p>
+                <p>By seamlessly connecting space and technology through innovative design, we unlock new opportunities across both consumer and commercial markets.</p>
+                <p>Built on proprietary intellectual property, XATOM is shaping the next generation of industry standards.</p>
+              </div>
+
+              <div>
+                <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인을 제안합니다.</p>
+                <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
+                <p>독자적인 IP를 기반으로 미래 산업의 새로운 기준을 만들어갑니다.</p>
+              </div>
             </div>
           </div>
         </div>
