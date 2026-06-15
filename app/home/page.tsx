@@ -320,7 +320,7 @@ xatom은 새로운 차원을 디자인합니다.`;
               Smart Farm Unit
             </div>
 
-            <div className="text-justify text-sm font-light leading-relaxed text-black/75 [text-align-last:left] md:text-base">
+            <div className="text-left text-sm font-light leading-relaxed text-black/75 md:text-base">
               <div
                 className={ipExpanded ? 'space-y-5' : 'overflow-hidden'}
                 style={
