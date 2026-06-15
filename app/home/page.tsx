@@ -250,8 +250,8 @@ xatom은 새로운 차원을 디자인합니다.`;
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 text-justify font-extralight !text-[12px] leading-relaxed text-black/80 md:!text-[21px]"
-            style={{ textAlign: 'justify', textJustify: 'inter-word' }}
+            className="mt-6 text-left text-sm font-light leading-relaxed text-black/80 md:text-justify md:!text-[21px] md:font-extralight"
+            style={{ textAlign: undefined, textJustify: undefined }}
           >
             <p
               className={aboutExpanded ? 'whitespace-pre-line' : 'overflow-hidden whitespace-pre-line'}
@@ -288,8 +288,8 @@ xatom은 새로운 차원을 디자인합니다.`;
                     WebkitLineClamp: 2,
                     WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
                     maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
-                    textAlign: 'justify',
-                    textJustify: 'inter-word',
+                    textAlign: 'left',
+                    textJustify: 'auto',
                   }}
                 >
                   {aboutKo}
