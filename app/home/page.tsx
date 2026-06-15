@@ -210,7 +210,7 @@ xatom designs a new dimension.`;
 xatom은 새로운 차원을 디자인합니다.`;
 
   return (
-    <main className="bg-white text-black">
+    <main lang="ko" className="bg-white text-black">
       <header className="sticky top-0 z-30 bg-white/80 backdrop-blur">
         <nav className="section-shell flex min-h-[64px] items-center justify-between py-2 md:h-50 md:min-h-0 md:py-0">
           <Link href="/" aria-label="Go to intro" className="flex items-center">
@@ -251,7 +251,7 @@ xatom은 새로운 차원을 디자인합니다.`;
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 text-justify text-sm font-light leading-relaxed text-black/80 [text-align-last:left] md:!text-[21px] md:font-extralight"
+            className="mt-6 text-justify text-sm font-light leading-relaxed text-black/80 [hyphens:auto] [text-align-last:left] md:!text-[21px] md:font-extralight"
             style={{ textAlign: undefined, textJustify: undefined }}
           >
             <p
@@ -310,7 +310,7 @@ xatom은 새로운 차원을 디자인합니다.`;
 
         <div className="mt-8 max-w-4xl md:max-w-7xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Intellectual Property</h2>
-          <div className="mt-6 max-w-4xl text-justify text-sm font-light leading-relaxed text-black/70 [text-align-last:left] md:text-base">
+          <div className="mt-6 max-w-4xl text-justify text-sm font-light leading-relaxed text-black/70 [hyphens:auto] [text-align-last:left] md:text-base">
             <p>XATOM은 새로운 산업으로 확장될 수 있는 제품 컨셉, 디자인 시스템, 그리고 독자적인 IP를 개발합니다.</p>
             <p className="mt-5">기업과의 기술협력 및 라이선싱 파트너십을 통해 혁신적인 아이디어를 시장으로 연결합니다. 우리는 IP의 가치를 확장하여 새로운 산업과 비즈니스를 창출합니다.</p>
             <p className="mt-5 text-xs font-medium tracking-[0.18em] text-black/60 md:text-sm">특허 | 디자인권 | 라이선싱 | 파트너십</p>
@@ -321,7 +321,7 @@ xatom은 새로운 차원을 디자인합니다.`;
               Smart Farm Unit
             </div>
 
-            <div className="text-left text-sm font-light leading-relaxed text-black/75 md:text-base">
+            <div className="text-justify text-sm font-light leading-relaxed text-black/75 [hyphens:auto] [text-align-last:left] md:text-base">
               <div
                 className={ipExpanded ? 'space-y-5' : 'overflow-hidden'}
                 style={
@@ -335,10 +335,10 @@ xatom은 새로운 차원을 디자인합니다.`;
                 }
               >
                 <div>
-                  <p>XATOM presents smart farm designs that set new standards for future industries.</p>
-                  <p>By seamlessly connecting space and technology through innovative design, we unlock new opportunities across both consumer and commercial markets.</p>
-                  <p>Built on proprietary intellectual property, XATOM is shaping the next generation of industry standards.</p>
-                  <p>Beyond agricultural equipment, XATOM's smart farm technology is proposed as design objects, furniture, and spatial products.</p>
+                  <p lang="en">XATOM presents smart farm designs that set new standards for future industries.</p>
+                  <p lang="en">By seamlessly connecting space and technology through innovative design, we unlock new opportunities across both consumer and commercial markets.</p>
+                  <p lang="en">Built on proprietary intellectual property, XATOM is shaping the next generation of industry standards.</p>
+                  <p lang="en">Beyond agricultural equipment, XATOM's smart farm technology is proposed as design objects, furniture, and spatial products.</p>
                 </div>
 
                 {ipExpanded ? (
@@ -397,7 +397,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
-              <p className="mt-2 text-justify text-sm text-black/60 [text-align-last:left]">Handcrafted with precision, designed to be the centerpiece of any space.</p>
+              <p className="mt-2 text-justify text-sm text-black/60 [hyphens:auto] [text-align-last:left]" lang="en">Handcrafted with precision, designed to be the centerpiece of any space.</p>
             </div>
           </Link>
 
@@ -407,7 +407,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">model 6</h2>
-              <p className="mt-2 text-justify text-sm text-black/60 [text-align-last:left]">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
+              <p className="mt-2 text-justify text-sm text-black/60 [hyphens:auto] [text-align-last:left]" lang="en">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
             </div>
           </div>
         </div>
@@ -415,7 +415,7 @@ xatom은 새로운 차원을 디자인합니다.`;
 
       <section id="contact" className="section-shell scroll-mt-[96px] py-20 md:scroll-mt-[120px] md:py-28">
         <p className="text-[10px] uppercase tracking-[0.35em] text-black/60">Contact</p>
-        <p className="mt-8 max-w-4xl text-sm font-light leading-relaxed text-black/70 md:text-base">
+        <p className="mt-8 max-w-4xl text-justify text-sm font-light leading-relaxed text-black/70 [hyphens:auto] [text-align-last:left] md:text-base">
           라이선싱, 기술협력, 제조 파트너십 문의를 기다립니다.
         </p>
 
