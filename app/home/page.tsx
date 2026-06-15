@@ -139,6 +139,7 @@ export default function HomePage() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
   const [aboutExpanded, setAboutExpanded] = useState(false);
+  const [ipExpanded, setIpExpanded] = useState(false);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -319,18 +320,61 @@ xatom은 새로운 차원을 디자인합니다.`;
               Smart Farm Unit
             </div>
 
-            <div className="space-y-5 text-sm font-light leading-relaxed text-black/75 md:text-base">
-              <div>
-                <p>XATOM presents smart farm designs that set new standards for future industries.</p>
-                <p>By seamlessly connecting space and technology through innovative design, we unlock new opportunities across both consumer and commercial markets.</p>
-                <p>Built on proprietary intellectual property, XATOM is shaping the next generation of industry standards.</p>
+            <div className="text-sm font-light leading-relaxed text-black/75 md:text-base">
+              <div
+                className={ipExpanded ? 'space-y-5' : 'overflow-hidden'}
+                style={
+                  ipExpanded
+                    ? undefined
+                    : {
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 3,
+                      }
+                }
+              >
+                <div>
+                  <p>XATOM presents smart farm designs that set new standards for future industries.</p>
+                  <p>By seamlessly connecting space and technology through innovative design, we unlock new opportunities across both consumer and commercial markets.</p>
+                  <p>Built on proprietary intellectual property, XATOM is shaping the next generation of industry standards.</p>
+                </div>
+
+                {ipExpanded ? (
+                  <div>
+                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인/기술을 제안합니다.</p>
+                    <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
+                    <p>독자적인 IP를 기반으로 미래 산업의 새로운 기준을 만들어갑니다.</p>
+                  </div>
+                ) : null}
               </div>
 
-              <div>
-                <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인/기술을 제안합니다.</p>
-                <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
-                <p>독자적인 IP를 기반으로 미래 산업의 새로운 기준을 만들어갑니다.</p>
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={() => setIpExpanded((v) => !v)}
+                  className="text-xs uppercase tracking-[0.22em] text-emerald-700 transition hover:text-black"
+                >
+                  {ipExpanded ? 'Read less' : 'Read more'}
+                </button>
               </div>
+
+              {!ipExpanded ? (
+                <div className="relative mt-4">
+                  <div
+                    className="overflow-hidden text-black/35 blur-[0.6px]"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      WebkitLineClamp: 2,
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))',
+                    }}
+                  >
+                    <p>XATOM은 미래 산업의 표준이 될 스마트팜 디자인/기술을 제안합니다.</p>
+                    <p>공간과 기술을 연결하는 혁신적인 디자인으로 B2C와 B2B 시장의 새로운 가능성을 확장합니다.</p>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
