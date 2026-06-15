@@ -10,9 +10,9 @@ export default function IntroPage() {
         muted
         playsInline
         preload="auto"
-        poster="/intro-mobile-poster.jpg?v=20260615-1"
+        poster="/intro-mobile-poster.jpg?v=20260615-hq1"
         fetchPriority="high"
-        src="/intro-mobile.mp4?v=20260615-1"
+        src="/intro-mobile-hq.mp4?v=20260615-hq1"
       />
       <video
         className="absolute inset-0 z-0 hidden h-full w-full object-cover object-center opacity-100 brightness-100 md:block"
@@ -21,8 +21,8 @@ export default function IntroPage() {
         playsInline
         preload="auto"
         fetchPriority="high"
-        poster="/intro-desktop-poster.jpg?v=20260615-1"
-        src="/intro-desktop.mp4?v=20260615-1"
+        poster="/intro-desktop-poster.jpg?v=20260615-hq1"
+        src="/intro-desktop-hq.mp4?v=20260615-hq1"
       />
 
       {/* 영상 속 X 로고 오른쪽 문구 */}
