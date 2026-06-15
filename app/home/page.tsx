@@ -345,7 +345,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">verumé</h2>
-              <p className="mt-2 text-sm text-black/60">Precision-built centerpiece in anodized finish.</p>
+              <p className="mt-2 text-sm text-black/60">Handcrafted with precision, designed to be the centerpiece of any space.</p>
             </div>
           </Link>
 
