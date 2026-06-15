@@ -80,12 +80,12 @@ export default function IntroPage() {
 
         .intro-slogan-ko {
           opacity: 1;
-          animation: intro-slogan-ko-out 360ms ease-out 10.85s forwards;
+          animation: intro-slogan-ko-out 360ms ease-out 10.15s forwards;
         }
 
         .intro-slogan-en {
           opacity: 0;
-          animation: intro-slogan-en-in 360ms ease-out 10.85s forwards;
+          animation: intro-slogan-en-in 360ms ease-out 10.15s forwards;
         }
 
         .intro-word:nth-child(1) {
@@ -105,7 +105,7 @@ export default function IntroPage() {
         }
 
         .intro-word:nth-child(5) {
-          animation-delay: 8.85s;
+          animation-delay: 8.15s;
         }
 
         @media (min-width: 768px) {
@@ -126,7 +126,7 @@ export default function IntroPage() {
           }
 
           .intro-word:nth-child(5) {
-            animation-delay: 8.85s;
+            animation-delay: 8.15s;
           }
         }
 
