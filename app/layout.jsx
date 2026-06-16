@@ -1,5 +1,6 @@
 import './globals.css';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'xatom.space',
@@ -11,12 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         {children}
-
-        <Script
-          id="vercel-analytics"
-          src="/_vercel/insights/script.js"
-          strategy="afterInteractive"
-        />
+        <Analytics />
 
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
