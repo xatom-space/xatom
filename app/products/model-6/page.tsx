@@ -96,8 +96,7 @@ function GalleryImage({
 export default function Model6ProductPage() {
   const [model6Qty, setModel6Qty] = useState(1);
   const [model7Selected, setModel7Selected] = useState(false);
-  const [model6Color, setModel6Color] = useState('');
-  const [model7Color, setModel7Color] = useState('');
+  const [model7Qty, setModel7Qty] = useState(1);
   const [bankOrderOpen, setBankOrderOpen] = useState(false);
   const [bankOrderForm, setBankOrderForm] = useState(initialBankOrderForm);
   const [bankOrderStatus, setBankOrderStatus] = useState('');
@@ -106,12 +105,14 @@ export default function Model6ProductPage() {
 
   const total = useMemo(() => {
     const model6Total = MODEL_6_PRICE * model6Qty;
-    const model7Total = model7Selected ? MODEL_7_PRICE : 0;
+    const model7Total = model7Selected ? MODEL_7_PRICE * model7Qty : 0;
     return model6Total + model7Total;
-  }, [model6Qty, model7Selected]);
+  }, [model6Qty, model7Selected, model7Qty]);
 
   const decModel6Qty = () => setModel6Qty((v) => Math.max(1, v - 1));
   const incModel6Qty = () => setModel6Qty((v) => Math.min(99, v + 1));
+  const decModel7Qty = () => setModel7Qty((v) => Math.max(1, v - 1));
+  const incModel7Qty = () => setModel7Qty((v) => Math.min(99, v + 1));
 
   const updateBankOrderForm = (
     field: keyof typeof initialBankOrderForm,
@@ -135,8 +136,7 @@ export default function Model6ProductPage() {
           productName: 'model 6',
           model6Qty,
           model7Selected,
-          model6Color,
-          model7Color: model7Selected ? model7Color : '',
+          model7Qty: model7Selected ? model7Qty : 0,
           totalAmount: total,
           bankName: BANK_NAME,
           bankAccount: BANK_ACCOUNT,
@@ -153,8 +153,6 @@ export default function Model6ProductPage() {
       setBankOrderStatus('주문 정보가 접수되었습니다. 입금 확인 후 안내드리겠습니다.');
       setBankOrderComplete(true);
       setBankOrderForm(initialBankOrderForm);
-      setModel6Color('');
-      setModel7Color('');
     } catch (error) {
       setBankOrderStatus(
         error instanceof Error
@@ -250,32 +248,21 @@ export default function Model6ProductPage() {
                     />
                     <span>선택</span>
                   </label>
-                  <p className="mt-3 text-sm text-black/60">+ ₩ {formatKRW(MODEL_7_PRICE)}</p>
-                </div>
 
-                <div className="border-t border-black/10 pt-6">
-                  <p className="mb-3 text-black/60">· Custom Color</p>
-                  <div className="grid gap-4">
-                    <label className="block text-sm">
-                      <span className="text-black/60">model 6 color</span>
-                      <input
-                        value={model6Color}
-                        onChange={(e) => setModel6Color(e.target.value)}
-                        placeholder="원하는 색상을 적어주세요"
-                        className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
-                      />
-                    </label>
-
-                    <label className={`block text-sm ${model7Selected ? '' : 'pointer-events-none opacity-40'}`}>
-                      <span className="text-black/60">model 7 color</span>
-                      <input
-                        value={model7Color}
-                        onChange={(e) => setModel7Color(e.target.value)}
-                        placeholder="model 7 선택 시 입력"
-                        className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
-                      />
-                    </label>
+                  <div
+                    className={`mt-4 flex items-center gap-4 ${
+                      model7Selected ? '' : 'pointer-events-none opacity-40'
+                    }`}
+                  >
+                    <button type="button" onClick={decModel7Qty} className="border border-black/20 px-3 py-1">
+                      -
+                    </button>
+                    <span className="min-w-[24px] text-center">{model7Qty}</span>
+                    <button type="button" onClick={incModel7Qty} className="border border-black/20 px-3 py-1">
+                      +
+                    </button>
                   </div>
+                  <p className="mt-3 text-sm text-black/60">+ ₩ {formatKRW(MODEL_7_PRICE)} / piece</p>
                 </div>
 
                 <div className="border-t border-black/20 pt-6 text-base font-medium">
@@ -397,9 +384,7 @@ export default function Model6ProductPage() {
                   <div className="space-y-2 text-black/70">
                     <p className="font-medium text-black">주문 상품</p>
                     <p>model 6 × {model6Qty}</p>
-                    <p>model 7 × {model7Selected ? 1 : 0}</p>
-                    <p>model 6 color: {model6Color || '-'}</p>
-                    <p>model 7 color: {model7Selected ? model7Color || '-' : '-'}</p>
+                    <p>model 7 × {model7Selected ? model7Qty : 0}</p>
                     <p className="font-medium text-black">₩ {formatKRW(total)}</p>
                   </div>
 
