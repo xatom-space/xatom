@@ -401,15 +401,15 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
           </Link>
 
-          <div className="block">
+          <Link href="/products/model-6" className="group block">
             <div className="relative h-[320px] w-full overflow-hidden bg-black/[0.03]">
-              <img src="/p14.jpg" alt="model 6" className="h-full w-full object-cover" />
+              <img src="/p14.jpg" alt="model 6" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
             </div>
             <div className="mt-4 text-left">
               <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">model 6</h2>
               <p className="mt-2 text-justify text-sm text-black/60 [hyphens:auto] [text-align-last:left]" lang="en">A sculptural armchair that brings architectural presence and timeless elegance to interior spaces.</p>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
