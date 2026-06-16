@@ -12,6 +12,12 @@ export default function RootLayout({ children }) {
       <body>
         {children}
 
+        <Script
+          id="vercel-analytics"
+          src="/_vercel/insights/script.js"
+          strategy="afterInteractive"
+        />
+
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
