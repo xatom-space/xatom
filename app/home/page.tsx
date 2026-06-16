@@ -401,7 +401,7 @@ xatom은 새로운 차원을 디자인합니다.`;
             </div>
           </Link>
 
-          <Link href="/products/model-6" className="group block">
+          <Link href="/products/model-6" className="group block cursor-pointer">
             <div className="relative h-[320px] w-full overflow-hidden bg-black/[0.03]">
               <img src="/p14.jpg" alt="model 6" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
             </div>
