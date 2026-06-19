@@ -389,7 +389,10 @@ xatom은 새로운 차원을 디자인합니다.`;
         <div className="mt-8 max-w-4xl md:max-w-7xl">
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">Design Works</h2>
           <div className="mt-6 max-w-4xl space-y-2 text-justify text-sm font-light leading-relaxed text-black/70 [hyphens:auto] [text-align-last:left] md:text-base">
-            <p lang="en">XATOM design adds a distinctive atmosphere and a new sense of experience to your space.</p>
+            <p lang="en">
+              XATOM design adds a distinctive atmosphere to your space.<br />
+              It brings a new sense of experience into everyday surroundings.
+            </p>
             <p>엑스아톰의 디자인은 당신의 공간에 차별화된 분위기와 새로운 감각을 더합니다.</p>
           </div>
         </div>
