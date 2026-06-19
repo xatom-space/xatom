@@ -251,7 +251,7 @@ xatom은 새로운 차원을 디자인합니다.`;
           <h2 className="text-xl font-semibold tracking-[0.06em] text-black md:text-2xl">xatom</h2>
 
           <div
-            className="mt-6 text-justify text-sm font-light leading-relaxed text-black/80 [hyphens:auto] [text-align-last:left] md:!text-[21px] md:font-extralight"
+            className="mt-6 text-justify text-sm font-light leading-relaxed text-black/70 [hyphens:auto] [text-align-last:left] md:text-base"
             style={{ textAlign: undefined, textJustify: undefined }}
           >
             <p
