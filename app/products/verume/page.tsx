@@ -576,7 +576,7 @@ export default function VerumeProductPage() {
                     setTossPaymentOpen(true);
                     setTossPaymentStatus('');
                   }}
-                  className="block w-full max-w-full whitespace-nowrap border border-black bg-black px-3 py-3 text-center text-[10px] uppercase tracking-[0.08em] text-white transition hover:opacity-85 md:px-8 md:text-xs md:tracking-[0.2em]"
+                  className="block w-full max-w-full whitespace-nowrap border border-[#0064FF] bg-[#0064FF] px-3 py-3 text-center text-[10px] font-bold uppercase tracking-[0.08em] text-white transition hover:brightness-95 md:px-8 md:text-xs md:tracking-[0.2em]"
                 >
                   Card / Easy Pay
                 </button>
