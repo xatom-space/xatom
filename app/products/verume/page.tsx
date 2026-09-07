@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ANONYMOUS, loadTossPayments } from '@tosspayments/tosspayments-sdk';
 
 const OBJECT_PRICE = 248000;
 const LIGHT_MODULE_PRICE = 29000;
@@ -11,6 +12,11 @@ const BANK_NAME = '국민은행';
 const BANK_ACCOUNT = '891237-00-004097';
 const ACCOUNT_HOLDER = '엑스아톰 (XATOM)';
 const CONTACT_TO = 'xatom.space@gmail.com';
+
+type TossPaymentsInstance = Awaited<ReturnType<typeof loadTossPayments>>;
+type TossWidgets = ReturnType<TossPaymentsInstance['widgets']>;
+type TossPaymentMethodWidget = Awaited<ReturnType<TossWidgets['renderPaymentMethods']>>;
+type TossAgreementWidget = Awaited<ReturnType<TossWidgets['renderAgreement']>>;
 
 const initialBankOrderForm = {
   name: '',
@@ -291,6 +297,12 @@ export default function VerumeProductPage() {
   const [bankOrderStatus, setBankOrderStatus] = useState('');
   const [bankOrderSubmitting, setBankOrderSubmitting] = useState(false);
   const [bankOrderComplete, setBankOrderComplete] = useState(false);
+  const [tossPaymentOpen, setTossPaymentOpen] = useState(false);
+  const [tossPaymentReady, setTossPaymentReady] = useState(false);
+  const [tossPaymentStatus, setTossPaymentStatus] = useState('');
+  const tossWidgetsRef = useRef<TossWidgets | null>(null);
+  const tossPaymentMethodWidgetRef = useRef<TossPaymentMethodWidget | null>(null);
+  const tossAgreementWidgetRef = useRef<TossAgreementWidget | null>(null);
 
   useEffect(() => {
     setLightQty((current) => Math.min(current, qty));
@@ -319,6 +331,101 @@ export default function VerumeProductPage() {
     value: string
   ) => {
     setBankOrderForm((current) => ({ ...current, [field]: value }));
+  };
+
+  useEffect(() => {
+    if (!tossPaymentOpen) return;
+
+    let cancelled = false;
+
+    const mountTossPayment = async () => {
+      try {
+        setTossPaymentReady(false);
+        setTossPaymentStatus('');
+
+        const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
+        if (!clientKey) {
+          throw new Error('NEXT_PUBLIC_TOSS_CLIENT_KEY가 설정되지 않았습니다.');
+        }
+
+        const tossPayments = await loadTossPayments(clientKey);
+        if (cancelled) return;
+
+        const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
+        tossWidgetsRef.current = widgets;
+
+        await widgets.setAmount({
+          currency: 'KRW',
+          value: total,
+        });
+
+        if (cancelled) return;
+
+        const [paymentMethodWidget, agreementWidget] = await Promise.all([
+          widgets.renderPaymentMethods({
+            selector: '#toss-payment-method',
+            variantKey: 'DEFAULT',
+          }),
+          widgets.renderAgreement({
+            selector: '#toss-agreement',
+            variantKey: 'AGREEMENT',
+          }),
+        ]);
+
+        if (cancelled) {
+          paymentMethodWidget.destroy();
+          agreementWidget.destroy();
+          return;
+        }
+
+        tossPaymentMethodWidgetRef.current = paymentMethodWidget;
+        tossAgreementWidgetRef.current = agreementWidget;
+        setTossPaymentReady(true);
+      } catch (error) {
+        setTossPaymentStatus(
+          error instanceof Error
+            ? error.message
+            : '토스페이먼츠 결제 UI를 불러오지 못했습니다.'
+        );
+      }
+    };
+
+    mountTossPayment();
+
+    return () => {
+      cancelled = true;
+      tossPaymentMethodWidgetRef.current?.destroy();
+      tossAgreementWidgetRef.current?.destroy();
+      tossPaymentMethodWidgetRef.current = null;
+      tossAgreementWidgetRef.current = null;
+      tossWidgetsRef.current = null;
+      setTossPaymentReady(false);
+    };
+  }, [tossPaymentOpen, total]);
+
+  const handleTossPayment = async () => {
+    const widgets = tossWidgetsRef.current;
+    if (!widgets || !tossPaymentReady) return;
+
+    try {
+      setTossPaymentStatus('');
+
+      const orderId = `XATOM-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
+      const orderName = lightModule
+        ? `verumé ${qty}개 + Light Module ${lightQty}개`
+        : `verumé ${qty}개`;
+
+      await widgets.requestPayment({
+        orderId,
+        orderName,
+        successUrl: `${window.location.origin}/payment/success`,
+        failUrl: `${window.location.origin}/payment/fail`,
+      });
+    } catch (error) {
+      setTossPaymentStatus(
+        error instanceof Error ? error.message : '결제 요청에 실패했습니다.'
+      );
+    }
   };
 
   const handleBankOrderSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -466,6 +573,17 @@ export default function VerumeProductPage() {
                 <button
                   type="button"
                   onClick={() => {
+                    setTossPaymentOpen(true);
+                    setTossPaymentStatus('');
+                  }}
+                  className="block w-full max-w-full whitespace-nowrap border border-black bg-black px-3 py-3 text-center text-[10px] uppercase tracking-[0.08em] text-white transition hover:opacity-85 md:px-8 md:text-xs md:tracking-[0.2em]"
+                >
+                  Card / Easy Pay
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
                     setBankOrderOpen(true);
                     setBankOrderStatus('');
                     setBankOrderComplete(false);
@@ -478,6 +596,69 @@ export default function VerumeProductPage() {
             </div>
           </div>
         </div>
+
+        {tossPaymentOpen ? (
+          <div className="fixed inset-0 z-50 flex min-h-dvh items-center justify-center overflow-y-auto bg-black/35 p-5 backdrop-blur-md md:p-10">
+            <div className="relative flex max-h-[86dvh] w-[92vw] max-w-2xl flex-col overflow-hidden bg-white shadow-2xl md:max-h-[calc(100dvh-5rem)] md:w-full">
+              <div className="flex shrink-0 items-start justify-between gap-4 border-b border-black/10 p-5 pb-4 md:gap-6 md:p-8 md:pb-5">
+                <div className="min-w-0">
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-black/50 md:tracking-[0.35em]">
+                    Card / Easy Pay
+                  </p>
+                  <h2 className="mt-3 text-lg font-semibold tracking-[0.04em]">
+                    결제수단 선택
+                  </h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setTossPaymentOpen(false)}
+                  className="shrink-0 border border-black/20 px-3 py-1 text-xs uppercase tracking-[0.16em] md:tracking-[0.2em]"
+                >
+                  Close
+                </button>
+              </div>
+
+              <div className="min-h-0 overflow-y-auto px-4 py-5 md:px-8 md:py-7">
+                <div className="mb-5 border-b border-black/10 pb-5 text-sm">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-black/60">verumé × {qty}</span>
+                    <span>₩ {formatKRW(OBJECT_PRICE * qty)}</span>
+                  </div>
+                  {lightModule ? (
+                    <div className="mt-2 flex items-center justify-between gap-4">
+                      <span className="text-black/60">Light Module × {lightQty}</span>
+                      <span>₩ {formatKRW(LIGHT_MODULE_PRICE * lightQty)}</span>
+                    </div>
+                  ) : null}
+                  <div className="mt-4 flex items-center justify-between gap-4 text-base font-semibold">
+                    <span>Total</span>
+                    <span>₩ {formatKRW(total)}</span>
+                  </div>
+                </div>
+
+                <div id="toss-payment-method" />
+                <div id="toss-agreement" />
+
+                {tossPaymentStatus ? (
+                  <p className="mt-4 text-sm leading-relaxed text-red-600">
+                    {tossPaymentStatus}
+                  </p>
+                ) : null}
+
+                <button
+                  type="button"
+                  disabled={!tossPaymentReady}
+                  onClick={handleTossPayment}
+                  className="mt-5 w-full border border-black bg-black px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 md:px-8 md:text-xs md:tracking-[0.2em]"
+                >
+                  {tossPaymentReady
+                    ? `Pay ₩ ${formatKRW(total)}`
+                    : 'Loading Payment Methods...'}
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {bankOrderOpen ? (
           <div className="fixed inset-0 z-50 flex min-h-dvh items-center justify-center overflow-y-auto bg-black/35 p-5 backdrop-blur-md md:p-10">
