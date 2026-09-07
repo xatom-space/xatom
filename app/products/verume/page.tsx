@@ -28,6 +28,15 @@ const initialBankOrderForm = {
   memo: '',
 };
 
+const initialTossOrderForm = {
+  name: '',
+  phone: '',
+  email: '',
+  address: '',
+  addressDetail: '',
+  memo: '',
+};
+
 const imageItems = [
   { desktopSrc: '/p7.jpg?v=20260527', mobileSrc: '/p7-mobile.jpg?v=20260527', alt: 'verume detail 1' },
   { desktopSrc: '/p8.jpg?v=20260527', mobileSrc: '/p8-mobile.jpg?v=20260527', alt: 'verume detail 2' },
@@ -301,6 +310,7 @@ export default function VerumeProductPage() {
   const [tossPaymentReady, setTossPaymentReady] = useState(false);
   const [tossPaymentStatus, setTossPaymentStatus] = useState('');
   const [tossPaymentSubmitting, setTossPaymentSubmitting] = useState(false);
+  const [tossOrderForm, setTossOrderForm] = useState(initialTossOrderForm);
   const tossWidgetsRef = useRef<TossWidgets | null>(null);
   const tossPaymentMethodWidgetRef = useRef<TossPaymentMethodWidget | null>(null);
   const tossAgreementWidgetRef = useRef<TossAgreementWidget | null>(null);
@@ -332,6 +342,13 @@ export default function VerumeProductPage() {
     value: string
   ) => {
     setBankOrderForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const updateTossOrderForm = (
+    field: keyof typeof initialTossOrderForm,
+    value: string
+  ) => {
+    setTossOrderForm((current) => ({ ...current, [field]: value }));
   };
 
   useEffect(() => {
@@ -408,6 +425,15 @@ export default function VerumeProductPage() {
     const widgets = tossWidgetsRef.current;
     if (!widgets || !tossPaymentReady || tossPaymentSubmitting) return;
 
+    if (
+      !tossOrderForm.name.trim() ||
+      !tossOrderForm.phone.trim() ||
+      !tossOrderForm.address.trim()
+    ) {
+      setTossPaymentStatus('이름, 연락처, 배송주소를 입력해 주세요.');
+      return;
+    }
+
     try {
       setTossPaymentSubmitting(true);
       setTossPaymentStatus('');
@@ -416,6 +442,7 @@ export default function VerumeProductPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...tossOrderForm,
           qty,
           lightModule,
           lightQty: lightModule ? lightQty : 0,
@@ -666,6 +693,69 @@ export default function VerumeProductPage() {
                     <span>Total</span>
                     <span>₩ {formatKRW(total)}</span>
                   </div>
+                </div>
+
+                <div className="mb-6 space-y-4 border-b border-black/10 pb-6">
+                  <p className="text-sm font-semibold">배송 정보</p>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <label className="block text-sm">
+                      <span className="text-black/60">이름 *</span>
+                      <input
+                        value={tossOrderForm.name}
+                        onChange={(e) => updateTossOrderForm('name', e.target.value)}
+                        className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                      />
+                    </label>
+
+                    <label className="block text-sm">
+                      <span className="text-black/60">연락처 *</span>
+                      <input
+                        inputMode="tel"
+                        value={tossOrderForm.phone}
+                        onChange={(e) => updateTossOrderForm('phone', e.target.value)}
+                        className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                      />
+                    </label>
+                  </div>
+
+                  <label className="block text-sm">
+                    <span className="text-black/60">이메일</span>
+                    <input
+                      type="email"
+                      value={tossOrderForm.email}
+                      onChange={(e) => updateTossOrderForm('email', e.target.value)}
+                      className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
+
+                  <label className="block text-sm">
+                    <span className="text-black/60">배송주소 *</span>
+                    <input
+                      value={tossOrderForm.address}
+                      onChange={(e) => updateTossOrderForm('address', e.target.value)}
+                      className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
+
+                  <label className="block text-sm">
+                    <span className="text-black/60">상세주소</span>
+                    <input
+                      value={tossOrderForm.addressDetail}
+                      onChange={(e) => updateTossOrderForm('addressDetail', e.target.value)}
+                      className="mt-2 w-full border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
+
+                  <label className="block text-sm">
+                    <span className="text-black/60">요청사항</span>
+                    <textarea
+                      rows={3}
+                      value={tossOrderForm.memo}
+                      onChange={(e) => updateTossOrderForm('memo', e.target.value)}
+                      className="mt-2 w-full resize-none border border-black/15 px-3 py-3 outline-none focus:border-black"
+                    />
+                  </label>
                 </div>
 
                 <div id="toss-payment-method" />

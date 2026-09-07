@@ -10,10 +10,26 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    // 주문자 정보
+    const name = String(body?.name || '').trim();
+    const phone = String(body?.phone || '').trim();
+    const email = String(body?.email || '').trim();
+    const address = String(body?.address || '').trim();
+    const addressDetail = String(body?.addressDetail || '').trim();
+    const memo = String(body?.memo || '').trim();
+
+    // 상품 정보
     const qty = Number(body?.qty);
     const lightModule = body?.lightModule === true;
     const requestedLightQty = Number(body?.lightQty);
     const lightQty = lightModule ? requestedLightQty : 0;
+
+    if (!name || !phone || !address) {
+      return NextResponse.json(
+        { error: '이름, 연락처, 배송주소를 입력해 주세요.' },
+        { status: 400 }
+      );
+    }
 
     if (!Number.isInteger(qty) || qty < 1 || qty > 99) {
       return NextResponse.json(
@@ -41,7 +57,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 결제금액은 브라우저 값이 아니라 서버에서 다시 계산합니다.
+    // 결제금액은 반드시 서버에서 계산
     const amount =
       OBJECT_PRICE * qty +
       LIGHT_MODULE_PRICE * lightQty;
@@ -49,26 +65,65 @@ export async function POST(request: NextRequest) {
     const timestamp = Date.now();
     const nonce = randomBytes(4).toString('hex');
 
-    const payload =
+    const orderIdPayload =
       `XATOM-${qty}-${lightQty}-${timestamp}-${nonce}`;
 
-    // 주문번호 위조를 방지하기 위한 서버 서명
-    const signature = createHmac('sha256', secretKey)
-      .update(payload)
+    const orderIdSignature = createHmac('sha256', secretKey)
+      .update(orderIdPayload)
       .digest('hex')
       .slice(0, 16);
 
-    const orderId = `${payload}-${signature}`;
+    const orderId = `${orderIdPayload}-${orderIdSignature}`;
 
     const orderName = lightModule
       ? `verumé ${qty}개 + Light Module ${lightQty}개`
       : `verumé ${qty}개`;
 
-    return NextResponse.json({
+    /*
+     * 결제 완료 후 confirm API에서 주문자 정보를 사용할 수 있도록
+     * 서버 서명이 적용된 HttpOnly 쿠키에 임시 보관합니다.
+     */
+    const orderData = {
+      orderId,
+      orderName,
+      amount,
+      name,
+      phone,
+      email,
+      address,
+      addressDetail,
+      memo,
+      qty,
+      lightModule,
+      lightQty,
+      createdAt: timestamp,
+    };
+
+    const encodedOrderData = Buffer.from(
+      JSON.stringify(orderData)
+    ).toString('base64url');
+
+    const cookieSignature = createHmac('sha256', secretKey)
+      .update(encodedOrderData)
+      .digest('hex');
+
+    const response = NextResponse.json({
       orderId,
       orderName,
       amount,
     });
+
+    response.cookies.set({
+      name: 'xatom_payment_order',
+      value: `${encodedOrderData}.${cookieSignature}`,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 30,
+    });
+
+    return response;
   } catch (error) {
     console.error('Payment prepare error:', error);
 
