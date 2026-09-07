@@ -300,6 +300,7 @@ export default function VerumeProductPage() {
   const [tossPaymentOpen, setTossPaymentOpen] = useState(false);
   const [tossPaymentReady, setTossPaymentReady] = useState(false);
   const [tossPaymentStatus, setTossPaymentStatus] = useState('');
+  const [tossPaymentSubmitting, setTossPaymentSubmitting] = useState(false);
   const tossWidgetsRef = useRef<TossWidgets | null>(null);
   const tossPaymentMethodWidgetRef = useRef<TossPaymentMethodWidget | null>(null);
   const tossAgreementWidgetRef = useRef<TossAgreementWidget | null>(null);
@@ -405,15 +406,45 @@ export default function VerumeProductPage() {
 
   const handleTossPayment = async () => {
     const widgets = tossWidgetsRef.current;
-    if (!widgets || !tossPaymentReady) return;
+    if (!widgets || !tossPaymentReady || tossPaymentSubmitting) return;
 
     try {
+      setTossPaymentSubmitting(true);
       setTossPaymentStatus('');
 
-      const orderId = `XATOM-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
-      const orderName = lightModule
-        ? `verumé ${qty}개 + Light Module ${lightQty}개`
-        : `verumé ${qty}개`;
+      const prepareResponse = await fetch('/api/payment/prepare', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          qty,
+          lightModule,
+          lightQty: lightModule ? lightQty : 0,
+        }),
+      });
+
+      const preparedOrder = await prepareResponse.json().catch(() => ({}));
+
+      if (!prepareResponse.ok) {
+        throw new Error(
+          preparedOrder?.error || '결제 주문을 준비하지 못했습니다.'
+        );
+      }
+
+      const { orderId, orderName, amount } = preparedOrder;
+
+      if (
+        typeof orderId !== 'string' ||
+        typeof orderName !== 'string' ||
+        !Number.isFinite(Number(amount)) ||
+        Number(amount) <= 0
+      ) {
+        throw new Error('서버에서 올바른 주문 정보를 받지 못했습니다.');
+      }
+
+      await widgets.setAmount({
+        currency: 'KRW',
+        value: Number(amount),
+      });
 
       await widgets.requestPayment({
         orderId,
@@ -425,6 +456,7 @@ export default function VerumeProductPage() {
       setTossPaymentStatus(
         error instanceof Error ? error.message : '결제 요청에 실패했습니다.'
       );
+      setTossPaymentSubmitting(false);
     }
   };
 
@@ -647,13 +679,15 @@ export default function VerumeProductPage() {
 
                 <button
                   type="button"
-                  disabled={!tossPaymentReady}
+                  disabled={!tossPaymentReady || tossPaymentSubmitting}
                   onClick={handleTossPayment}
                   className="mt-5 w-full border border-black bg-black px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 md:px-8 md:text-xs md:tracking-[0.2em]"
                 >
-                  {tossPaymentReady
-                    ? `Pay ₩ ${formatKRW(total)}`
-                    : 'Loading Payment Methods...'}
+                  {tossPaymentSubmitting
+                    ? 'Preparing Payment...'
+                    : tossPaymentReady
+                      ? `Pay ₩ ${formatKRW(total)}`
+                      : 'Loading Payment Methods...'}
                 </button>
               </div>
             </div>
